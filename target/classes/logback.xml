@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <!-- AppName -->
+    <property name="APP_NAME" value="APAC1_Automation" />
+    <!-- If not configured -Dlog.dir, create a 'logs' folder and save log there -->
+    <property name="LOG_HOME" value="${log.dir:-logs}/${APP_NAME}" />
+    <!-- Log Pattern -->
+    <!--Console Log-->
+    <property name="STD_DEBUG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %boldGreen(%-5level) %blue(%logger{80}) - %msg%n" />
+
+    <property name="STD_ERROR_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %boldRed(%-5level) %blue(%logger{80}) - %msg%n" />
+
+    <property name="STD_WARN_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %boldYellow(%-5level) %blue(%logger{80}) - %yellow(%msg%n)" />
+
+
+    <property name="FILE_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{80} - %msg%n" />
+
+    <contextName>${APP_NAME}</contextName>
+
+    <!-- Console Log -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+            <!--<level>DEBUG</level>-->
+            <!--<onMatch>ACCEPT</onMatch>-->
+            <!--<onMismatch>DENY</onMismatch>-->
+        <!--</filter>-->
+        <encoder>
+            <Pattern>${STD_DEBUG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.err</Target>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <Pattern>${STD_ERROR_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+    <appender name="STDWRN" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.err</Target>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <Pattern>${STD_WARN_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- File Log -->
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/output.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDERR" />
+        <appender-ref ref="STDWRN" />
+        <!--<appender-ref ref="FILE" />-->
+    </root>
+
+</configuration>

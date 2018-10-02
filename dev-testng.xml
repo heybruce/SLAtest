@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="KR" verbose="1" parallel="tests" thread-count="1">
+    <listeners>
+        <!--<listener class-name="utils.listeners.AnnotationTransformer"/>-->
+    </listeners>
+    <test name="SLA" parallel="classes" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="ko-kr"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="env" value="INT2"/>
+        <parameter name="dataFile" value="data.int2.KR.properties"/>
+        <classes>
+            <class name="cases.KR.DashboardTest">
+                <methods>
+                    <include name="loginAndLogout"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
