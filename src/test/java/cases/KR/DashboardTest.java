@@ -51,10 +51,12 @@ public class DashboardTest extends TestBase {
     @Test
     public void loginBRE(Method method, ITestContext context) {
         getDriver().get(testData.getString("test_url"));
+
         TestResult result = new TestResult();
         result.setTestName(method.getName());
         result.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
         result.setCountry(context.getSuite().getName());
+        result.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
 
         //Login
         Login login = new Login();
@@ -68,6 +70,8 @@ public class DashboardTest extends TestBase {
 
         result.setTimeFinished(Instant.now());
         result.setTimeElapsed(Duration.between(result.getTimeStarted(), result.getTimeFinished()).toMillis());
+
+        UtilitiesManager.convertToJson(result);
     }
 
     @Test(description = "Create a new case from dashboard")

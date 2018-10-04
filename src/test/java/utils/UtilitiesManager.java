@@ -1,5 +1,6 @@
 package utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
@@ -173,6 +174,22 @@ public class UtilitiesManager {
 
         } catch(IOException ex){
             ex.printStackTrace();
+        }
+    }
+
+    public static void convertToJson(Object object) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        String outputFolder = System.getProperty("user.dir") + "/target/testresults/";
+        try {
+            File folder = new File(outputFolder);
+            if(!folder.exists()){
+                folder.mkdir();
+            }
+            mapper.writeValue(new File(outputFolder + "/" + getCurrentUnixTime() + ".json"), object);
+        }
+        catch (IOException e){
+            e.printStackTrace();
         }
     }
 }

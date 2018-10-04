@@ -12,7 +12,7 @@
         <classes>
             <class name="cases.KR.DashboardTest">
                 <methods>
-                    <include name="loginAndLogout"/>
+                    <include name="loginBRE"/>
                 </methods>
             </class>
         </classes>

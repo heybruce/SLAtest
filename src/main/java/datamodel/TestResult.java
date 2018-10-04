@@ -10,6 +10,15 @@ public class TestResult {
     private Instant timeStarted;
     private Instant timeFinished;
     private long timeElapsed;
+    private String env;
+
+    public String getEnv() {
+        return env;
+    }
+
+    public void setEnv(String env) {
+        this.env = env;
+    }
 
     public String getTestName() {
         return testName;
