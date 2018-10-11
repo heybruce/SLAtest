@@ -16,6 +16,7 @@ import pageobjects.processstep.claimdetails.ClaimDetailsKRPO;
 import pageobjects.standalone.DashboardPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
+import utils.RestManager;
 import utils.UtilitiesManager;
 
 import java.lang.reflect.Method;
@@ -72,6 +73,7 @@ public class DashboardTest extends TestBase {
         result.setTimeElapsed(Duration.between(result.getTimeStarted(), result.getTimeFinished()).toMillis());
 
         UtilitiesManager.convertToJson(result);
+        RestManager.sendTestResult(result);
     }
 
     @Test(description = "Create a new case from dashboard")
