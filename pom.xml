@@ -13,7 +13,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
         <skipTests>false</skipTests>
-        <spring.version>3.0.5.RELEASE</spring.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -75,28 +74,28 @@
             <artifactId>okhttp</artifactId>
             <version>3.10.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- Spring AOP + AspectJ -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-core</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<artifactId>commons-logging</artifactId>-->
+                    <!--<groupId>commons-logging</groupId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-context</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; Spring AOP + AspectJ &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-aop</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
