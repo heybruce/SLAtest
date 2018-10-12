@@ -16,12 +16,10 @@ import utils.UtilitiesManager;
 
 import utils.webdrivers.WebDriverFactory;
 
-import java.awt.*;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -29,6 +27,7 @@ import java.util.function.Function;
 public class TestBase {
 
 //    public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
+    public static TestResult testResult = new TestResult();
     protected static Configuration testData;
 
     @BeforeSuite
@@ -48,14 +47,21 @@ public class TestBase {
     @BeforeMethod
     public synchronized void beforeMethod(Method method, ITestContext context) {
         WebDriverFactory.setDriver(context);
+
+        testResult.setTestName(method.getName());
+        testResult.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
+        testResult.setCountry(context.getSuite().getName());
+        testResult.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
     }
 
     @AfterMethod
     @Parameters(value = {"browser"})
     public synchronized void afterMethod(Method method, String browser, ITestResult result) {
+        testResult.setSuccess(result.isSuccess());
 
-//        testResult.get().setSuccess(result.isSuccess());
-//        RestManager.sendTestResult(testResult.get());
+        UtilitiesManager.convertToJson(testResult);
+        RestManager.sendTestResult(testResult);
+
         WebDriverFactory.getDriver().manage().deleteAllCookies();
         WebDriverFactory.getDriver().quit();
     }

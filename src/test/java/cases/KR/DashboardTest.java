@@ -50,45 +50,26 @@ public class DashboardTest extends TestBase {
     }
 
     @Test
-    public void loginBRE(Method method, ITestContext context) {
+    public void loginBRE() {
         getDriver().get(testData.getString("test_url"));
-
-        TestResult result = new TestResult();
-        result.setTestName(method.getName());
-        result.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
-        result.setCountry(context.getSuite().getName());
-        result.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
 
         //Login
         Login login = new Login();
 
-        result.setTimeStarted(Instant.now());
-//        testResult.get().setTimeStarted(Instant.now());
+        testResult.setTimeStarted(Instant.now());
 
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         //Dashboard page
         Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
 
-
-        result.setTimeFinished(Instant.now());
-//        testResult.get().setTimeFinished(Instant.now());
-
-        result.setTimeElapsed(Duration.between(result.getTimeStarted(), result.getTimeFinished()).toMillis());
-//        testResult.get().setTimeElapsed(Duration.between(testResult.get().getTimeStarted(), testResult.get().getTimeFinished()).toMillis());
-
-        UtilitiesManager.convertToJson(result);
-        RestManager.sendTestResult(result);
+        testResult.setTimeFinished(Instant.now());
+        testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
     }
 
     @Test(description = "Create a new case from dashboard")
-    public void createNewCaseFromDashboard(Method method, ITestContext context) {
+    public void createNewCaseFromDashboard() {
         getDriver().get(testData.getString("test_url"));
-        TestResult result = new TestResult();
-        result.setTestName(method.getName());
-        result.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
-        result.setCountry(context.getSuite().getName());
-        result.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
 
         //Login page
         loginPO.enterUserName(testData.getString("ins_username"));
@@ -97,7 +78,7 @@ public class DashboardTest extends TestBase {
 
         //Work List grid Open
         dashboardPO.clickCreateCase();
-        result.setTimeStarted(Instant.now());
+        testResult.setTimeStarted(Instant.now());
 
         //Pre Intake page
         String claimNumber = Long.toString(UtilitiesManager.getCurrentUnixTime());
@@ -109,18 +90,14 @@ public class DashboardTest extends TestBase {
         //Claim Details process step
         fluentWait(By.id(ClaimDetailsKRPO.ID_CLAIM_NUMBER));
 
-        result.setTimeFinished(Instant.now());
-        result.setTimeElapsed(Duration.between(result.getTimeStarted(), result.getTimeFinished()).toMillis());
+        testResult.setTimeFinished(Instant.now());
+        testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
 
         //Check claim is in Open box
         processStepKRPO.clickClaimManagerIcon();
         workListGridOpenPO.clickOpenTab();
         workListGridOpenPO.sortCreationDate();
         Assert.assertTrue(workListGridOpenPO.isClaimNumberExist(claimNumber));
-
-
-        UtilitiesManager.convertToJson(result);
-        RestManager.sendTestResult(result);
 
         //Logout
         if (isElementPresent(By.id("logout"))) {
