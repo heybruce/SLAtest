@@ -1,5 +1,6 @@
 package cases;
 
+import datamodel.TestResult;
 import org.apache.commons.configuration2.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import utils.RestManager;
 import utils.UtilitiesManager;
 
 import utils.webdrivers.WebDriverFactory;
@@ -26,6 +28,7 @@ import java.util.function.Function;
 
 public class TestBase {
 
+//    public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
     protected static Configuration testData;
 
     @BeforeSuite
@@ -50,6 +53,9 @@ public class TestBase {
     @AfterMethod
     @Parameters(value = {"browser"})
     public synchronized void afterMethod(Method method, String browser, ITestResult result) {
+
+//        testResult.get().setSuccess(result.isSuccess());
+//        RestManager.sendTestResult(testResult.get());
         WebDriverFactory.getDriver().manage().deleteAllCookies();
         WebDriverFactory.getDriver().quit();
     }

@@ -13,6 +13,7 @@
             <class name="cases.KR.DashboardTest">
                 <methods>
                     <include name="loginBRE"/>
+                    <include name="createNewCaseFromDashboard"/>
                 </methods>
             </class>
         </classes>

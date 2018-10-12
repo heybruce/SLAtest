@@ -11,6 +11,19 @@ public class TestResult {
     private Instant timeFinished;
     private long timeElapsed;
     private String env;
+    private Boolean isSuccess;
+
+    public TestResult() {
+        this.isSuccess = true;
+    }
+
+    public Boolean getSuccess() {
+        return isSuccess;
+    }
+
+    public void setSuccess(Boolean success) {
+        isSuccess = success;
+    }
 
     public String getEnv() {
         return env;
