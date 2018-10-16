@@ -64,7 +64,6 @@ public class DashboardTest extends TestBase {
         Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
 
         testResult.setTimeFinished(Instant.now());
-        testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
     }
 
     @Test(description = "Create a new case from dashboard")
@@ -91,7 +90,6 @@ public class DashboardTest extends TestBase {
         fluentWait(By.id(ClaimDetailsKRPO.ID_CLAIM_NUMBER));
 
         testResult.setTimeFinished(Instant.now());
-        testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
 
         //Check claim is in Open box
         processStepKRPO.clickClaimManagerIcon();

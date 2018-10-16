@@ -18,6 +18,7 @@ import utils.webdrivers.WebDriverFactory;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -57,6 +58,7 @@ public class TestBase {
     @AfterMethod
     @Parameters(value = {"browser"})
     public synchronized void afterMethod(Method method, String browser, ITestResult result) {
+        testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
         testResult.setSuccess(result.isSuccess());
 
         UtilitiesManager.convertToJson(testResult);

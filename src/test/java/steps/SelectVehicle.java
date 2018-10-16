@@ -10,7 +10,7 @@ import pageobjects.processstep.claimdetails.ClaimDetailsPO;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class SelectVehicle extends TestBase {
-    private ClaimDetailsPO claimDetails;
+    private ClaimDetailsPO claimDetails = new ClaimDetailsPO();
     private WebDriverWait wait;
 
     public SelectVehicle(){

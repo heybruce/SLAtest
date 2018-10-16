@@ -13,12 +13,14 @@ import steps.CreateNewCaseKR;
 import steps.Login;
 import steps.SelectVehicle;
 import utils.UtilitiesManager;
+
+import java.time.Instant;
 import java.util.Map;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class ClaimDetailsTest extends TestBase {
-    private ClaimDetailsKRPO claimDetails;
-    private IBOSSearchPO IBOSSearchPO;
+    private ClaimDetailsKRPO claimDetails = new ClaimDetailsKRPO();
+    private IBOSSearchPO IBOSSearchPO = new IBOSSearchPO();
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -40,9 +42,13 @@ public class ClaimDetailsTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        //Create a new case
-        CreateNewCaseKR createNewCase = new CreateNewCaseKR();
-        createNewCase.createNewCaseWithVehicleIdentificationByVIN(testData.getString("plate_number"), testData.getString("vin"));
+        getDriver().get("https://www-int2.audatex.sg/breclient/ui?taskId=3ACFA27C-7BED-8CB3-3846-E90940BD6656&process=BRE&step=Claim+Details");
+
+        SelectVehicle selectVehicle = new SelectVehicle();
+
+        testResult.setTimeStarted(Instant.now());
+        selectVehicle.SearchByVIN(testData.getString("vin"));
+        testResult.setTimeFinished(Instant.now());
 
         //Vin details
         String vinManufacturerCodeExpected, vinModelCodeExpected, vinSubmodelCodeExpected;
