@@ -15,6 +15,11 @@
                     <include name="loginBRE"/>
                 </methods>
             </class>
+            <class name="cases.KR.ClaimDetailsTest">
+                <methods>
+                    <include name="searchVehicleByVin"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
