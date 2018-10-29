@@ -42,7 +42,7 @@ public class ClaimDetailsTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get("https://www-int2.audatex.sg/breclient/ui?taskId=3ACFA27C-7BED-8CB3-3846-E90940BD6656&process=BRE&step=Claim+Details");
+        getDriver().get(testData.getString("url_to_claim_details"));
 
         SelectVehicle selectVehicle = new SelectVehicle();
 
@@ -127,5 +127,20 @@ public class ClaimDetailsTest extends TestBase {
         Assert.assertEquals(claimDetails.getPlateNumber(), testData.getString("IBOS_plate_number"));
         Assert.assertEquals(claimDetails.getTaxNumber(), testData.getString("IBOS_tax_id"));
 
+    }
+
+    @Test
+    public void openExistingCase() {
+        getDriver().get(testData.getString("test_url"));
+
+        //Claim Details
+        Login login = new Login();
+        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+
+        testResult.setTimeStarted(Instant.now());
+        getDriver().get(testData.getString("url_to_claim_details"));
+        Assert.assertNotNull(claimDetails.getClaimNumber());
+
+        testResult.setTimeFinished(Instant.now());
     }
 }

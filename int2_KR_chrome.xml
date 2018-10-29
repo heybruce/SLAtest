@@ -18,6 +18,7 @@
             <class name="cases.KR.ClaimDetailsTest">
                 <methods>
                     <include name="searchVehicleByVin"/>
+                    <include name="openExistingCase"/>
                 </methods>
             </class>
         </classes>
