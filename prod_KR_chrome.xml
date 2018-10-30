@@ -1,15 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="KR" verbose="1" parallel="tests" thread-count="1">
+<suite name="KR" verbose="1" parallel="tests" thread-count="2">
     <listeners>
-        <!--<listener class-name="utils.listeners.AnnotationTransformer"/>-->
     </listeners>
-    <test name="SLA" parallel="classes" thread-count="1">
+    <test name="chrome" parallel="classes" thread-count="1">
+        <parameter name="env" value="PROD"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ko-kr"/>
         <parameter name="type" value="SLA"/>
-        <parameter name="env" value="INT2"/>
         <parameter name="country" value="KR"/>
-        <parameter name="dataFile" value="data.int2.KR.properties"/>
+        <parameter name="dataFile" value="data.prod.KR.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.KR.properties"/>
         <classes>
             <class name="cases.KR.DashboardTest">
                 <methods>

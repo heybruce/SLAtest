@@ -166,6 +166,10 @@ public class DamageCapturingPO extends PageObject {
     @FindBy(id="calc-preview-details-preformatted-text")
     private WebElement calcPreview;
 
+    //Settings
+    @FindBy(id = "box")
+    private WebElement threeDView;
+
 
     public DamageCapturingPO() {
         super();
@@ -394,4 +398,12 @@ public class DamageCapturingPO extends PageObject {
 
 
     public void clickRightSide(){ this.click(rightSide); }
+
+    public void click3dView() {
+        this.click(threeDView);
+    }
+
+    public WebElement getThreeDView() {
+        return threeDView;
+    }
 }

@@ -12,6 +12,7 @@ import utils.UtilitiesManager;
 
 import java.time.Instant;
 
+import static pageobjects.processstep.DamageCapturingPO.INSIDE_LOADING_CIRCLE;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class DamageCapturingTest extends TestBase{
@@ -31,7 +32,7 @@ public class DamageCapturingTest extends TestBase{
         damageCapturingPO.setWebDriver(getDriver());
     }
 
-    @Test(description = "Damage capturing in Qapter")
+    @Test
     public void activateQapter(){
         //Launch browser
         getDriver().get(testData.getString("test_url"));
@@ -40,7 +41,6 @@ public class DamageCapturingTest extends TestBase{
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        //Switch to Damage Capturing page
         testResult.setTimeStarted(Instant.now());
 
         getDriver().get(testData.getString("url_to_damage_capturing"));
@@ -48,5 +48,34 @@ public class DamageCapturingTest extends TestBase{
         damageCapturingPO.navigationVehicle();
 
         testResult.setTimeFinished(Instant.now());
+    }
+    @Test
+    public void switchTo3D(){
+        //Launch browser
+        getDriver().get(testData.getString("test_url"));
+
+        //Login
+        Login login = new Login();
+        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+
+        getDriver().get(testData.getString("url_to_damage_capturing"));
+        damageCapturingPO.clickQapterIcon();
+        damageCapturingPO.navigationSettings();
+
+        Boolean is3dView = !(damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("left"));
+        if (is3dView) {     //if already in 3D view, switch to non-3D view
+            damageCapturingPO.click3dView();
+        }
+
+        testResult.setTimeStarted(Instant.now());
+
+        damageCapturingPO.click3dView();
+        damageCapturingPO.navigationVehicle();
+
+        testResult.setTimeFinished(Instant.now());
+
+        //Switch back to non-3D view
+        damageCapturingPO.navigationSettings();
+        damageCapturingPO.click3dView();
     }
 }
