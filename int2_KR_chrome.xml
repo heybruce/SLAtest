@@ -21,6 +21,11 @@
                     <include name="openExistingCase"/>
                 </methods>
             </class>
+            <class name="cases.KR.DamageCapturingTest">
+                <methods>
+                    <include name="activateQapter"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

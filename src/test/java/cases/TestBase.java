@@ -19,6 +19,7 @@ import utils.webdrivers.WebDriverFactory;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -30,6 +31,7 @@ public class TestBase {
 //    public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
     public static TestResult testResult = new TestResult();
     protected static Configuration testData;
+    protected static Configuration vehicleElementData;
 
     @BeforeSuite
     public void beforeSuite() throws Exception {
@@ -58,6 +60,7 @@ public class TestBase {
     @AfterMethod
     @Parameters(value = {"browser"})
     public synchronized void afterMethod(Method method, String browser, ITestResult result) {
+        testResult.setTimeFinished(Instant.now());
         testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
         testResult.setSuccess(result.isSuccess());
 
