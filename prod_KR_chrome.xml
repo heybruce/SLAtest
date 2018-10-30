@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="KR" verbose="1" parallel="tests" thread-count="2">
+<suite name="KR" verbose="1" parallel="tests" thread-count="1">
     <listeners>
     </listeners>
     <test name="chrome" parallel="classes" thread-count="1">
