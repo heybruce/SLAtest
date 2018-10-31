@@ -81,6 +81,7 @@ public class DamageCapturingTest extends TestBase{
         is3dView = !(damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("left"));
         if (is3dView) {     //if already in 3D view, switch to non-3D view
             damageCapturingPO.click3dView();
+            damageCapturingPO.navigationVehicle();
         }
     }
 }
