@@ -83,5 +83,8 @@ public class DamageCapturingTest extends TestBase{
             damageCapturingPO.click3dView();
             damageCapturingPO.navigationVehicle();
         }
+
+        //Workaround to save 3D view setting
+        getDriver().get(testData.getString("url_to_claim_details"));
     }
 }
