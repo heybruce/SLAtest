@@ -63,8 +63,7 @@ public class DashboardTest extends TestBase {
         testResult.setTimeFinished(Instant.now());
 
         //Dashboard page
-        //Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
-        Assert.assertTrue(false);
+        Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
     }
 
     @Test(description = "Create a new case from dashboard")
