@@ -41,12 +41,11 @@ public class DamageCapturingTest extends TestBase{
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        testResult.setTimeStarted(Instant.now());
-
         getDriver().get(testData.getString("url_to_damage_capturing"));
         damageCapturingPO.clickQapterIcon();
-        damageCapturingPO.navigationVehicle();
 
+        testResult.setTimeStarted(Instant.now());
+        damageCapturingPO.navigationVehicle();
         testResult.setTimeFinished(Instant.now());
     }
     @Test

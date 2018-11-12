@@ -139,8 +139,8 @@ public class ClaimDetailsTest extends TestBase {
 
         testResult.setTimeStarted(Instant.now());
         getDriver().get(testData.getString("url_to_claim_details"));
-        Assert.assertNotNull(claimDetails.getClaimNumber());
-
         testResult.setTimeFinished(Instant.now());
+
+        Assert.assertNotNull(claimDetails.getClaimNumber());
     }
 }
