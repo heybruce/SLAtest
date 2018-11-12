@@ -53,19 +53,20 @@ public class TestBase {
 
         testResult.setTestName(method.getName());
         testResult.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
-        testResult.setCountry(context.getSuite().getName());
+        testResult.setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
         testResult.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
     }
 
     @AfterMethod
     @Parameters(value = {"browser"})
     public synchronized void afterMethod(Method method, String browser, ITestResult result) {
-        testResult.setTimeFinished(Instant.now());
         testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
         testResult.setSuccess(result.isSuccess());
 
         UtilitiesManager.convertToJson(testResult);
-        RestManager.sendTestResult(testResult);
+
+        // Send test result to Kibana server
+      //  RestManager.sendTestResult(testResult);
 
         WebDriverFactory.getDriver().manage().deleteAllCookies();
         WebDriverFactory.getDriver().quit();
@@ -107,7 +108,7 @@ public class TestBase {
 
     public WebElement fluentWait(final By locator) {
         Wait<WebDriver> wait = new FluentWait<>(WebDriverFactory.getDriver())
-                .withTimeout(30, TimeUnit.SECONDS)
+                .withTimeout(60, TimeUnit.SECONDS)
                 .pollingEvery(5, TimeUnit.SECONDS)
                 .ignoring(org.openqa.selenium.NoSuchElementException.class);
 
@@ -122,7 +123,7 @@ public class TestBase {
     public Map<String, String> getTestInfo(ITestContext context) {
         Map<String, String> testInfo = new HashMap<>();
         testInfo.put("browser", context.getCurrentXmlTest().getLocalParameters().get("browser"));
-        testInfo.put("country", context.getSuite().getName());
+        testInfo.put("country", context.getCurrentXmlTest().getLocalParameters().get("country"));
         testInfo.put("url", UtilitiesManager.setPropertiesFile(
                 context.getCurrentXmlTest().getLocalParameters().get("dataFile")).getString("test_url"));
         return testInfo;

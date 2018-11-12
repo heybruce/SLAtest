@@ -173,6 +173,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.audatex.axn.classchecker</groupId>
+            <artifactId>axn-b2b-client</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/axn-b2b-client-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
