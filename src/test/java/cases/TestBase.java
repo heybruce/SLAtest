@@ -66,7 +66,7 @@ public class TestBase {
         UtilitiesManager.convertToJson(testResult);
 
         // Send test result to Kibana server
-        RestManager.sendTestResult(testResult);
+      //  RestManager.sendTestResult(testResult);
 
         WebDriverFactory.getDriver().manage().deleteAllCookies();
         WebDriverFactory.getDriver().quit();
