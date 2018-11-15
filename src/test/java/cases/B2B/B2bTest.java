@@ -35,7 +35,9 @@ public class B2bTest extends B2bTestBase {
             logger.error("Error executing B2B request", e);
             testResult.setSuccess(false);
         }
-        testResult.setTimeFinished(Instant.now());
+        finally {
+            testResult.setTimeFinished(Instant.now());
+        }
     }
 
     @Test
@@ -51,7 +53,9 @@ public class B2bTest extends B2bTestBase {
             logger.error("Error executing B2B request", e);
             testResult.setSuccess(false);
         }
-        testResult.setTimeFinished(Instant.now());
+        finally {
+            testResult.setTimeFinished(Instant.now());
+        }
     }
 
 
