@@ -62,13 +62,12 @@ public class TestBase {
         testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
         testResult.setSuccess(result.isSuccess());
 
-        UtilitiesManager.createJsonFile(method.getName(), testResult);
-
-        //Send test result to Kibana server
-        RestManager.sendTestResult(testResult);
-
         WebDriverFactory.getDriver().manage().deleteAllCookies();
         WebDriverFactory.getDriver().quit();
+
+        UtilitiesManager.createJsonFile(method.getName(), testResult);
+        //Send test result to Kibana server
+        RestManager.sendTestResult(testResult);
     }
 
     @AfterTest
