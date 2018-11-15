@@ -186,7 +186,7 @@ public class UtilitiesManager {
         }
     }
 
-    public static void convertToJson(Object object) {
+    public static void createJsonFile(String name, Object object) {
         ObjectMapper mapper = new ObjectMapper().registerModule(new JSR310Module());
 
         String outputFolder = System.getProperty("user.dir") + "/target/testresults/";
@@ -195,7 +195,7 @@ public class UtilitiesManager {
             if(!folder.exists()){
                 folder.mkdir();
             }
-            mapper.writeValue(new File(outputFolder + "/" + getCurrentUnixTime() + ".json"), object);
+            mapper.writeValue(new File(outputFolder + "/" + getCurrentUnixTime() + "-" + name + ".json"), object);
         }
         catch (IOException e){
             e.printStackTrace();

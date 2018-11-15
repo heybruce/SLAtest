@@ -19,7 +19,6 @@ import utils.webdrivers.WebDriverFactory;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -63,9 +62,9 @@ public class TestBase {
         testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
         testResult.setSuccess(result.isSuccess());
 
-        UtilitiesManager.convertToJson(testResult);
+        UtilitiesManager.createJsonFile(method.getName(), testResult);
 
-        // Send test result to Kibana server
+        //Send test result to Kibana server
         RestManager.sendTestResult(testResult);
 
         WebDriverFactory.getDriver().manage().deleteAllCookies();

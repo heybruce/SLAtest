@@ -1,7 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="KR" verbose="1" parallel="tests" thread-count="1">
     <listeners>
-        <!--<listener class-name="utils.listeners.AnnotationTransformer"/>-->
+        <listener class-name="utils.listeners.AnnotationTransformer"/>
+        <listener class-name="utils.listeners.TestListener"/>
     </listeners>
     <test name="SLA" parallel="classes" thread-count="1">
         <parameter name="browser" value="chrome"/>
@@ -10,6 +11,7 @@
         <parameter name="env" value="INT2"/>
         <parameter name="country" value="KR"/>
         <parameter name="dataFile" value="data.int2.KR.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.KR.properties"/>
         <classes>
             <class name="cases.KR.DashboardTest">
                 <methods>
@@ -26,6 +28,21 @@
                 <methods>
                     <include name="activateQapter"/>
                     <include name="switchTo3D"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="B2B" parallel="classes" thread-count="1">
+        <parameter name="browser" value="b2b"/>
+        <parameter name="country" value="KR"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="env" value="INT2"/>
+        <parameter name="dataFile" value="data.int2.KR.properties"/>
+        <classes>
+            <class name="cases.B2B.B2bTest">
+                <methods>
+                    <include name="getTask"/>
+                    <include name="doCalculation"/>
                 </methods>
             </class>
         </classes>

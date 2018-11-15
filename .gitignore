@@ -2,3 +2,4 @@
 target
 /*.iml
 /dev-testng.xml
+/logs
