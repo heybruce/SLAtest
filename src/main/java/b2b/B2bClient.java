@@ -23,7 +23,7 @@ public class B2bClient {
         req.setTaskId(taskId);
 //        if(responseStylesheet!=null && !responseStylesheet.isEmpty()) req.setResponseStylesheet(responseStylesheet);
         Document res = b2bServiceProvider.getTaskService(url).getTask(req);
-        logger.error(res.asXML());
+        logger.debug(res.asXML());
         return res.asXML();
     }
 
@@ -33,7 +33,7 @@ public class B2bClient {
         request.setPassword(password);
         request.setXrecords(xrecord);
         Document response = b2bServiceProvider.getCalculationService(url).calculateFromXRecords(request);
-        logger.error(response.asXML());
+        logger.debug(response.asXML());
         return response.asXML();
     }
 
