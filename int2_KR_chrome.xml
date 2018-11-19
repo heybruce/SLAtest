@@ -8,7 +8,7 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ko-kr"/>
         <parameter name="type" value="SLA"/>
-        <parameter name="env" value="INT2"/>
+        <parameter name="env" value="INT2SG"/>
         <parameter name="country" value="KR"/>
         <parameter name="dataFile" value="data.int2.KR.properties"/>
         <parameter name="vehicleElement" value="vehicleElement.KR.properties"/>
@@ -43,6 +43,7 @@
                 <methods>
                     <include name="getTask"/>
                     <include name="doCalculation"/>
+                    <!--<include name="vinQuery"/>-->
                 </methods>
             </class>
         </classes>

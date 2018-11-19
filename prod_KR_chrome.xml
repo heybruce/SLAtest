@@ -5,7 +5,7 @@
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
     <test name="SLA" parallel="classes" thread-count="1">
-        <parameter name="env" value="PROD"/>
+        <parameter name="env" value="PRODSG"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ko-kr"/>
         <parameter name="type" value="SLA"/>
@@ -32,19 +32,20 @@
             </class>
         </classes>
     </test>
-    <!--<test name="B2B" parallel="classes" thread-count="1">-->
-        <!--<parameter name="browser" value="b2b"/>-->
-        <!--<parameter name="country" value="KR"/>-->
-        <!--<parameter name="type" value="SLA"/>-->
-        <!--<parameter name="env" value="PROD"/>-->
-        <!--<parameter name="dataFile" value="data.prod.KR.properties"/>-->
-        <!--<classes>-->
-            <!--<class name="cases.B2B.B2bTest">-->
-                <!--<methods>-->
-                    <!--<include name="getTask"/>-->
-                    <!--<include name="doCalculation"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="B2B" parallel="classes" thread-count="1">
+        <parameter name="browser" value="b2b"/>
+        <parameter name="country" value="KR"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="env" value="PRODSG"/>
+        <parameter name="dataFile" value="data.prod.KR.properties"/>
+        <classes>
+            <class name="cases.B2B.B2bTest">
+                <methods>
+                    <include name="getTask"/>
+                    <include name="doCalculation"/>
+                    <!--<include name="vinQuery"/>-->
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
