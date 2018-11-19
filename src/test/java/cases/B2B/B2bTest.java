@@ -45,8 +45,25 @@ public class B2bTest extends B2bTestBase {
 
         try {
             testResult.setTimeStarted(Instant.now());
-            String response = b2bClient.getCalculation(testData.getString("ins_username"), testData.getString("password")
+            String response = b2bClient.getCalculation(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , testData.getString("xrecord"), testData.getString("b2b_url"));
+            testResult.setSuccess(true);
+        }
+        catch(B2bException e) {
+            logger.error("Error executing B2B request", e);
+            testResult.setSuccess(false);
+        }
+        finally {
+            testResult.setTimeFinished(Instant.now());
+        }
+    }
+
+    @Test
+    public void vinQuery() {
+        try {
+            testResult.setTimeStarted(Instant.now());
+            String response = b2bClient.vinQuery(testData.getString("b2b_loginId"), testData.getString("b2b_password")
+                    , testData.getString("b2b_vin"), testData.getString("b2b_callingApplication"), testData.getString("b2b_url"));
             testResult.setSuccess(true);
         }
         catch(B2bException e) {
