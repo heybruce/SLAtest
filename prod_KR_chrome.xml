@@ -43,7 +43,7 @@
                 <methods>
                     <include name="getTask"/>
                     <include name="doCalculation"/>
-                    <include name="vinQuery"/>
+                    <!--<include name="vinQuery"/>-->
                 </methods>
             </class>
         </classes>
