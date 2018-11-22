@@ -1,6 +1,7 @@
 package pageobjects.processstep.claimdetails;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -113,7 +114,6 @@ public class ClaimDetailsPO extends PageObject {
     public void clickVinQuery() {
         this.click(vinQuery);
     }
-
     
     public void selectModelByValue(String value) {
         waitForElementPresent(By.name(NAME_MODEL_AXCODE));

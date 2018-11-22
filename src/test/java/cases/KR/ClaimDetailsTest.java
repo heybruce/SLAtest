@@ -1,7 +1,6 @@
 package cases.KR;
 
 import cases.TestBase;
-import com.aventstack.extentreports.Status;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -19,7 +18,7 @@ import java.util.Map;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class ClaimDetailsTest extends TestBase {
-    private ClaimDetailsKRPO claimDetails = new ClaimDetailsKRPO();
+    private ClaimDetailsKRPO claimDetailsKRPO = new ClaimDetailsKRPO();
     private IBOSSearchPO IBOSSearchPO = new IBOSSearchPO();
 
     @BeforeClass
@@ -30,7 +29,7 @@ public class ClaimDetailsTest extends TestBase {
 
     @BeforeMethod
     public void methodSetup() {
-        claimDetails.setWebDriver(getDriver());
+        claimDetailsKRPO.setWebDriver(getDriver());
         IBOSSearchPO.setWebDriver(getDriver());
     }
 
@@ -44,11 +43,12 @@ public class ClaimDetailsTest extends TestBase {
 
         getDriver().get(testData.getString("url_to_claim_details"));
 
-        SelectVehicle selectVehicle = new SelectVehicle();
+        //Reset Manufacture on purpose
+        claimDetailsKRPO.selectManufacturerByText("Audi");
 
         testResult.setTimeStarted(Instant.now());
-        selectVehicle.SearchByVIN(testData.getString("vin"));
-        testResult.setTimeFinished(Instant.now());
+        claimDetailsKRPO.enterVin(testData.getString("vin"));
+        claimDetailsKRPO.clickVinQuery();
 
         //Vin details
         String vinManufacturerCodeExpected, vinModelCodeExpected, vinSubmodelCodeExpected;
@@ -58,13 +58,14 @@ public class ClaimDetailsTest extends TestBase {
 
         //ClaimDetails - Get the VIN query information
         String vinManufacturerCodeActual, vinModelCodeActual, vinSubmodelCodeActual;
-        vinManufacturerCodeActual = claimDetails.getManufacturerCode();
-        vinModelCodeActual = claimDetails.getModelCode();
-        vinSubmodelCodeActual = claimDetails.getSubModelCode();
+        vinManufacturerCodeActual = claimDetailsKRPO.getManufacturerCode();
+        vinModelCodeActual = claimDetailsKRPO.getModelCode();
+        vinSubmodelCodeActual = claimDetailsKRPO.getSubModelCode();
 
         Assert.assertEquals(vinManufacturerCodeActual, vinManufacturerCodeExpected);
         Assert.assertEquals(vinModelCodeActual, vinModelCodeExpected);
         Assert.assertEquals(vinSubmodelCodeActual, vinSubmodelCodeExpected);
+        testResult.setTimeFinished(Instant.now());
     }
 
     @Test(description = "Search a vehicle by search tree")
@@ -85,9 +86,9 @@ public class ClaimDetailsTest extends TestBase {
         ModelCodeExpected = testData.getString("searchTree_model_code");
         SubModelCodeExpected = testData.getString("searchTree_submodel_code");
 
-        Assert.assertEquals(claimDetails.getManufacturerCode(), ManufacturerCodeExpected);
-        Assert.assertEquals(claimDetails.getModelCode(), ModelCodeExpected);
-        Assert.assertEquals(claimDetails.getSubModelCode(), SubModelCodeExpected);
+        Assert.assertEquals(claimDetailsKRPO.getManufacturerCode(), ManufacturerCodeExpected);
+        Assert.assertEquals(claimDetailsKRPO.getModelCode(), ModelCodeExpected);
+        Assert.assertEquals(claimDetailsKRPO.getSubModelCode(), SubModelCodeExpected);
     }
 
     @Test(description = "Query case via IBOS case search")
@@ -104,7 +105,7 @@ public class ClaimDetailsTest extends TestBase {
         createNewCase.createNewCase(testData.getString("plate_number"));
 
         //Search for IBOS case
-        claimDetails.clickSearchIBOSCase();
+        claimDetailsKRPO.clickSearchIBOSCase();
 
         IBOSSearchPO.enterPlateNumber(testData.getString("IBOS_plate_number"));
         IBOSSearchPO.enterTaxId(testData.getString("IBOS_tax_id"));
@@ -123,9 +124,9 @@ public class ClaimDetailsTest extends TestBase {
 
         //Choose the search result
         IBOSSearchPO.chooseTheFirstSearchResult();
-        Assert.assertEquals(claimDetails.getClaimNumber(), firstResult.get("WIP") + " " + firstResult.get("coverageTypeCode") + firstResult.get("damagedObjectSerialNo"));
-        Assert.assertEquals(claimDetails.getPlateNumber(), testData.getString("IBOS_plate_number"));
-        Assert.assertEquals(claimDetails.getTaxNumber(), testData.getString("IBOS_tax_id"));
+        Assert.assertEquals(claimDetailsKRPO.getClaimNumber(), firstResult.get("WIP") + " " + firstResult.get("coverageTypeCode") + firstResult.get("damagedObjectSerialNo"));
+        Assert.assertEquals(claimDetailsKRPO.getPlateNumber(), testData.getString("IBOS_plate_number"));
+        Assert.assertEquals(claimDetailsKRPO.getTaxNumber(), testData.getString("IBOS_tax_id"));
 
     }
 
@@ -141,6 +142,6 @@ public class ClaimDetailsTest extends TestBase {
         getDriver().get(testData.getString("url_to_claim_details"));
         testResult.setTimeFinished(Instant.now());
 
-        Assert.assertNotNull(claimDetails.getClaimNumber());
+        Assert.assertNotNull(claimDetailsKRPO.getClaimNumber());
     }
 }
