@@ -1,6 +1,7 @@
 package steps;
 
 import cases.TestBase;
+import com.aventstack.extentreports.Status;
 import org.testng.Assert;
 import pageobjects.processstep.DamageCapturingPO;
 
@@ -65,19 +66,18 @@ public class DamageCapturing extends TestBase {
         goToVehicleView();
     }
 
-    public void addBmw320PartsFromNewPictogramToRepairPainting() {
-        damageCapturingPO.clickMoreView();
-        damageCapturingPO.clickNewPictogramBodyPainting();
-        damageCapturingPO.clickNewPictogramRoofFrame();
-        damageCapturingPO.clickRPPaint();
-        damageCapturingPO.clickRPRepairPainting();
+    public void addPartsFromNewPictogramToSurfacePainting(String function, String position){
+        damageCapturingPO.clickMoreViewToOpenPictogram();
+        damageCapturingPO.clickZone(function);
+        damageCapturingPO.clickPosition(position);
+        damageCapturingPO.clickRPSurfPainting();
         goToVehicleView();
     }
 
-    public void addBenzEPartsFromNewPictogramToRepairPainting() {
-        damageCapturingPO.clickMoreView();
-        damageCapturingPO.clickNewPictogramBodyPainting();
-        damageCapturingPO.clickNewPictogramBodyShell();
+    public void addPartsFromNewPictogramToNewPartPainting(String function, String position){
+        damageCapturingPO.clickMoreViewToOpenPictogram();
+        damageCapturingPO.clickZone(function);
+        damageCapturingPO.clickPosition(position);
         damageCapturingPO.clickRPNewPartPainting();
         goToVehicleView();
     }
