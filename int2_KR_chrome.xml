@@ -28,6 +28,7 @@
                 <methods>
                     <include name="activateQapter"/>
                     <include name="switchTo3D"/>
+                    <include name="selectPart"/>
                 </methods>
             </class>
         </classes>
