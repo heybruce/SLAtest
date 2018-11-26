@@ -44,10 +44,10 @@ public class ClaimDetailsTest extends TestBase {
         getDriver().get(testData.getString("url_to_claim_details"));
 
         //Reset Manufacture on purpose
-        claimDetailsKRPO.selectManufacturerByText("Audi");
+       // claimDetailsKRPO.selectManufacturerByText("Audi");
 
-        testResult.setTimeStarted(Instant.now());
         claimDetailsKRPO.enterVin(testData.getString("vin"));
+        testResult.setTimeStarted(Instant.now());
         claimDetailsKRPO.clickVinQuery();
 
         //Vin details
@@ -56,6 +56,7 @@ public class ClaimDetailsTest extends TestBase {
         vinModelCodeExpected = testData.getString("vin_model_code");
         vinSubmodelCodeExpected = testData.getString("vin_submodel_code");
 
+        Assert.assertFalse(isTextPresent(testData.getString("error_msg")));
         //ClaimDetails - Get the VIN query information
         String vinManufacturerCodeActual, vinModelCodeActual, vinSubmodelCodeActual;
         vinManufacturerCodeActual = claimDetailsKRPO.getManufacturerCode();
