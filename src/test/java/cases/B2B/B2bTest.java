@@ -45,8 +45,9 @@ public class B2bTest extends B2bTestBase {
 
         try {
             testResult.setTimeStarted(Instant.now());
+            String newXrecord = UtilitiesManager.addTrailingSpaceToXrecord(testData.getString("b2b_xrecord"));
             String response = b2bClient.getCalculation(testData.getString("b2b_loginId"), testData.getString("b2b_password")
-                    , testData.getString("b2b_xrecord"), testData.getString("b2b_url"));
+                    , newXrecord, testData.getString("b2b_url"));
             testResult.setSuccess(true);
         }
         catch(B2bException e) {

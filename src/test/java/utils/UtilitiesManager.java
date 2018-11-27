@@ -201,4 +201,15 @@ public class UtilitiesManager {
             e.printStackTrace();
         }
     }
+
+    public static String addTrailingSpaceToXrecord(String xrecord) {
+        int numnerOfSpaceToAdd = 128 - (xrecord.length() % 128);
+        StringBuilder builder = new StringBuilder(xrecord);
+        if (numnerOfSpaceToAdd != 128) {
+            for(int i = 0; i < numnerOfSpaceToAdd; i++) {
+                builder.append(" ");
+            }
+        }
+        return builder.toString();
+    }
 }

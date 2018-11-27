@@ -13,7 +13,7 @@
         <classes>
             <class name="cases.B2B.B2bTest">
                 <methods>
-                    <!--<include name="getTask"/>-->
+                    <include name="getTask"/>
                     <!--<include name="doCalculation"/>-->
                     <include name="vinQuery"/>
                 </methods>
