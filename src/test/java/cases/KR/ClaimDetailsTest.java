@@ -43,9 +43,6 @@ public class ClaimDetailsTest extends TestBase {
 
         getDriver().get(testData.getString("url_to_claim_details"));
 
-        //Reset Manufacture on purpose
-       // claimDetailsKRPO.selectManufacturerByText("Audi");
-
         claimDetailsKRPO.enterVin(testData.getString("vin"));
         testResult.setTimeStarted(Instant.now());
         claimDetailsKRPO.clickVinQuery();
