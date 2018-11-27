@@ -67,7 +67,7 @@ public class TestBase {
 
         UtilitiesManager.createJsonFile(method.getName(), testResult);
         //Send test result to Kibana server
-        RestManager.sendTestResult(testResult);
+//        RestManager.sendTestResult(testResult);
     }
 
     @AfterTest

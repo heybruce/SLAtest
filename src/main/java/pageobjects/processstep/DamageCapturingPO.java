@@ -408,7 +408,7 @@ public class DamageCapturingPO extends PageObject {
      
     public void navigationChecklist() {
         this.click(navigationChecklist);
-        waitForQapterLoading();
+     //   waitForQapterLoading();
         new WebDriverWait(webDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.id(ID_CHECKLIST_TABLE)));
     }
 
