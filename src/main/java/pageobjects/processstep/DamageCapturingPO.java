@@ -276,6 +276,10 @@ public class DamageCapturingPO extends PageObject {
     private WebElement btnModelOptionInZone;
     @FindBy(id="multiple_parts")
     private WebElement btnFastCapturing;
+    @FindBy(id="zone-tree-navigation-arrow")
+    private WebElement zoneListDropdown;
+    @FindBy(id="navigation-vehichle-tree-navigation-arrow")
+    private WebElement zoneListDropdownCollapse;
 
     //Fast Capturing
     @FindBy(id="fast-capturing-repair-method-desription")
@@ -355,7 +359,7 @@ public class DamageCapturingPO extends PageObject {
     //Settings
     @FindBy(id="user-settings-vehicle-value-input")
     private WebElement inputVehicleValue;
-    @FindBy(id = "box")
+    @FindBy(id = "3d-view-checkbox-slide")
     private WebElement threeDView;
 
 
@@ -949,5 +953,13 @@ public class DamageCapturingPO extends PageObject {
 
     public WebElement getThreeDView() {
         return threeDView;
+    }
+
+    public void clickZoneListDropdown() {
+        this.click(zoneListDropdown);
+    }
+
+    public void clickZoneListDropdownCollapse() {
+        this.click(zoneListDropdownCollapse);
     }
 }
