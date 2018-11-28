@@ -28,11 +28,12 @@ public class B2bClient {
         return res.asXML();
     }
 
-    public String getCalculation(String loginId, String password, String xrecord, String url) {
+    public String getCalculation(String loginId, String password, String xrecord, String country, String url) {
         CalculateFromXRecordsRequest request = new CalculateFromXRecordsRequest();
         request.setLoginId(loginId);
         request.setPassword(password);
         request.setXrecords(xrecord);
+        request.setCountry(country);
         Document response = b2bServiceProvider.getCalculationService(url).calculateFromXRecords(request);
         logger.debug(response.asXML());
         return response.asXML();

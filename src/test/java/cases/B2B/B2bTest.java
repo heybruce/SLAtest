@@ -4,6 +4,7 @@ import com.audatex.axn.classchecker.b2b.exceptions.B2bException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import b2b.B2bClient;
 import utils.UtilitiesManager;
@@ -41,13 +42,13 @@ public class B2bTest extends B2bTestBase {
     }
 
     @Test
-    public void doCalculation() {
-
+    public void doCalculation(ITestContext context) {
+        String country = context.getCurrentXmlTest().getLocalParameters().get("country");
         try {
-            testResult.setTimeStarted(Instant.now());
             String newXrecord = UtilitiesManager.addTrailingSpaceToXrecord(testData.getString("b2b_xrecord"));
+            testResult.setTimeStarted(Instant.now());
             String response = b2bClient.getCalculation(testData.getString("b2b_loginId"), testData.getString("b2b_password")
-                    , newXrecord, testData.getString("b2b_url"));
+                    , newXrecord, country, testData.getString("b2b_url"));
             testResult.setSuccess(true);
         }
         catch(B2bException e) {
