@@ -27,8 +27,8 @@
             <class name="cases.KR.DamageCapturingTest">
                 <methods>
                     <include name="activateQapter"/>
-                    <include name="switchTo3D"/>
                     <include name="selectPart"/>
+                    <include name="switchTo3D"/>
                 </methods>
             </class>
             <class name="cases.KR.ChecklistTest">
