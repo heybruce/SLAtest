@@ -6,10 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import pageobjects.processstep.DamageCapturingPO;
 import pageobjects.processstep.processstep.ProcessStepKRPO;
 import steps.CreateNewCaseKR;
@@ -17,6 +15,7 @@ import steps.Login;
 import steps.Qapter.ZoneAndLayout;
 import utils.UtilitiesManager;
 
+import java.lang.reflect.Method;
 import java.time.Instant;
 
 import static pageobjects.processstep.DamageCapturingPO.INSIDE_LOADING_CIRCLE;
@@ -49,12 +48,13 @@ public class QapterTest extends TestBase{
         getDriver().get(testData.getString("url_to_damage_capturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
-        Boolean is3dView = damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("checkbox_slide active");
+        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
         while(is3dView) {
-            damageCapturingPO.click3dView();
-            is3dView = damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("checkbox_slide active");
+            damageCapturingPO.click3dViewSwitch();
+            damageCapturingPO.navigationVehicle();
+            damageCapturingPO.navigationSettings();
+            is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
         }
-        damageCapturingPO.navigationVehicle();
     }
 
     @Test
@@ -68,32 +68,32 @@ public class QapterTest extends TestBase{
 //
 //        getDriver().get(testData.getString("url_to_damage_capturing"));
 //        damageCapturingPO.clickQapterIcon();
-        damageCapturingPO.navigationSettings();
+//        damageCapturingPO.navigationSettings();
 
-        Boolean is3dView = damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("checkbox_slide active");
-        if (is3dView) {     //if already in 3D view, switch to non-3D view
-            damageCapturingPO.click3dView();
-        }
+//        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+//        if (is3dView) {     //if already in 3D view, switch to non-3D view
+//            damageCapturingPO.click3dViewSwitch();
+//        }
 
         testResult.setTimeStarted(Instant.now());
         //Switch to 3D view
-        damageCapturingPO.click3dView();
+        damageCapturingPO.click3dViewSwitch();
         damageCapturingPO.navigationVehicle();
 
         testResult.setTimeFinished(Instant.now());
 
-        //Switch back to non-3D view
-        damageCapturingPO.navigationSettings();
-        damageCapturingPO.click3dView();
-
-        is3dView = damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("checkbox_slide active");
-        if (is3dView) {     //if already in 3D view, switch to non-3D view
-            damageCapturingPO.click3dView();
-            damageCapturingPO.navigationVehicle();
-        }
-
-        //Workaround to save 3D view setting
-        getDriver().get(testData.getString("url_to_claim_details"));
+//        //Switch back to non-3D view
+//        damageCapturingPO.navigationSettings();
+//        damageCapturingPO.click3dViewSwitch();
+//
+//        is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+//        if (is3dView) {     //if already in 3D view, switch to non-3D view
+//            damageCapturingPO.click3dViewSwitch();
+//            damageCapturingPO.navigationVehicle();
+//        }
+//
+//        //Workaround to save 3D view setting
+//        getDriver().get(testData.getString("url_to_claim_details"));
     }
 
     @Test
@@ -136,12 +136,12 @@ public class QapterTest extends TestBase{
 //
 //        getDriver().get(testData.getString("url_to_damage_capturing"));
 //        damageCapturingPO.clickQapterIcon();
-        damageCapturingPO.navigationSettings();
-
-        Boolean is3dView = damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("checkbox_slide active");
-        if (!is3dView) {     //if not in 3D view, switch to 3D view
-            damageCapturingPO.click3dView();
-        }
+//        damageCapturingPO.navigationSettings();
+//
+//        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+//        if (!is3dView) {     //if not in 3D view, switch to 3D view
+//            damageCapturingPO.click3dViewSwitch();
+//        }
 
         damageCapturingPO.navigationVehicle();
         damageCapturingPO.clickZoneListDropdown();
@@ -157,13 +157,30 @@ public class QapterTest extends TestBase{
         damageCapturingPO.waitForQapterLoading();
         testResult.setTimeFinished(Instant.now());
 
-        damageCapturingPO.navigationSettings();
-        is3dView = damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("checkbox_slide active");
-        if (is3dView) {     //if in 3D view, switch to non-3D view
-            damageCapturingPO.click3dView();
-            damageCapturingPO.navigationVehicle();
-        }
-        //Workaround to save 3D view setting
-        getDriver().get(testData.getString("url_to_claim_details"));
+//        damageCapturingPO.navigationSettings();
+//        is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+//        if (is3dView) {     //if in 3D view, switch to non-3D view
+//            damageCapturingPO.click3dViewSwitch();
+//            damageCapturingPO.navigationVehicle();
+//        }
+//        //Workaround to save 3D view setting
+//        getDriver().get(testData.getString("url_to_claim_details"));
     }
+
+//    @AfterMethod
+//    @Parameters(value = {"browser"})
+//    public synchronized void afterMethod(Method method, String browser, ITestResult result) {
+//
+//        //Verify and switch to non-3D mode
+//        getDriver().get(testData.getString("url_to_damage_capturing"));
+//        damageCapturingPO.clickQapterIcon();
+//        damageCapturingPO.navigationSettings();
+//        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+//        while(is3dView) {
+//            damageCapturingPO.click3dViewSwitch();
+//            is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+//        }
+//        damageCapturingPO.navigationVehicle();
+//        getDriver().get(testData.getString("url_to_claim_details"));
+//    }
 }
