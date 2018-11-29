@@ -24,7 +24,7 @@
                     <include name="openExistingCase"/>
                 </methods>
             </class>
-            <class name="cases.KR.DamageCapturingTest">
+            <class name="cases.KR.Qapter.DamageCapturingTest">
                 <methods>
                     <include name="activateQapter"/>
                     <include name="switchTo3D"/>
@@ -32,7 +32,7 @@
                     <!--<include name="navigate3dModelFromZoneToZone"/>-->
                 </methods>
             </class>
-            <class name="cases.KR.ChecklistTest">
+            <class name="cases.KR.Qapter.ChecklistTest">
                 <methods>
                     <include name="loadChecklist"/>
                 </methods>

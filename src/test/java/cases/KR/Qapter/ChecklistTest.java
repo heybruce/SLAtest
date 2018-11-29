@@ -1,4 +1,4 @@
-package cases.KR;
+package cases.KR.Qapter;
 
 import cases.TestBase;
 import org.openqa.selenium.By;
