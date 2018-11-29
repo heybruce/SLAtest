@@ -28,8 +28,8 @@
                 <methods>
                     <include name="activateQapter"/>
                     <include name="selectPart"/>
-                    <include name="switchTo3D"/>
-                    <include name="navigate3dModelFromZoneToZone"/>
+                    <!--<include name="switchTo3D"/>-->
+                    <!--<include name="navigate3dModelFromZoneToZone"/>-->
                 </methods>
             </class>
             <class name="cases.KR.ChecklistTest">
