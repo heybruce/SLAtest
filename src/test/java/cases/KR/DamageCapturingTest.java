@@ -104,6 +104,12 @@ public class DamageCapturingTest extends TestBase{
 
         getDriver().get(testData.getString("url_to_damage_capturing"));
         damageCapturingPO.clickQapterIcon();
+        damageCapturingPO.navigationSettings();
+        Boolean is3dView = damageCapturingPO.getThreeDView().getAttribute("class").equalsIgnoreCase("checkbox_slide active");
+        if (is3dView) {     //if already in 3D view, switch to non-3D view
+            damageCapturingPO.click3dView();
+        }
+
         damageCapturingPO.navigationVehicle();
         damageCapturingPO.click(getDriver().findElement(By.id(vehicleElementData.getString("bmw320_zone_frontOuter"))));
         fluentWait(By.id(vehicleElementData.getString("bmw320_position_0471_Bonnet")));
@@ -145,7 +151,6 @@ public class DamageCapturingTest extends TestBase{
 
         testResult.setTimeStarted(Instant.now());
         damageCapturingPO.click(getDriver().findElement(By.id("an-arrow-right")));
-//        fluentWait(By.id("an-arrow-down"));
         damageCapturingPO.waitForQapterLoading();
         testResult.setTimeFinished(Instant.now());
 
