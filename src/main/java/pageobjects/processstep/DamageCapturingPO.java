@@ -360,7 +360,10 @@ public class DamageCapturingPO extends PageObject {
     @FindBy(id="user-settings-vehicle-value-input")
     private WebElement inputVehicleValue;
     @FindBy(id = "3d-view-checkbox-slide")
-    private WebElement threeDView;
+    private WebElement threeDViewIndicator;
+    @FindBy(id = "box")
+    private WebElement threeDViewSwitch;
+
 
 
     public DamageCapturingPO() {
@@ -947,12 +950,12 @@ public class DamageCapturingPO extends PageObject {
         new WebDriverWait(webDriver, 3).until(ExpectedConditions.invisibilityOfElementLocated(KR_REPAIR_ERROR_DIALOG_BLANKET));
     }
 
-    public void click3dView() {
-        this.click(threeDView);
+    public void click3dViewSwitch() {
+        this.click(threeDViewSwitch);
     }
 
-    public WebElement getThreeDView() {
-        return threeDView;
+    public WebElement getThreeDViewIndicator() {
+        return threeDViewIndicator;
     }
 
     public void clickZoneListDropdown() {

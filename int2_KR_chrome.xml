@@ -27,12 +27,19 @@
             <class name="cases.KR.DamageCapturingTest">
                 <methods>
                     <include name="activateQapter"/>
-                    <!--<include name="selectPart"/>-->
-                    <include name="switchTo3D"/>
-                    <!--<include name="navigate3dModelFromZoneToZone"/>-->
                 </methods>
             </class>
-            <class name="cases.KR.ChecklistTest">
+            <class name="cases.KR.Qapter.QapterTest">
+                <methods>
+                    <include name="switchTo3D"/>
+                    <include name="selectPart"/>
+                    <include name="navigate3dModelFromZoneToZone"/>
+                    <include name="loadZoneIn3dView"/>
+                    <include name="activateQapterIn3dView"/>
+                    <include name="switchToVehicleTabIn3dView"/>
+                </methods>
+            </class>
+            <class name="cases.KR.Qapter.ChecklistTest">
                 <methods>
                     <include name="loadChecklist"/>
                 </methods>
