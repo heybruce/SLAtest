@@ -33,7 +33,6 @@
                 <methods>
                     <include name="switchTo3D"/>
                     <include name="selectPart"/>
-                    <include name="navigate3dModelFromZoneToZone"/>
                     <include name="loadZoneIn3dView"/>
                     <include name="activateQapterIn3dView"/>
                     <include name="switchToVehicleTabIn3dView"/>
