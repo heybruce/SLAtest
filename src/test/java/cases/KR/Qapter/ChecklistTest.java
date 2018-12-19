@@ -180,4 +180,44 @@ public class ChecklistTest extends TestBase {
         int checklistNumber = damageCapturingPO.getChecklistNumber();
         Assert.assertTrue(checklistNumber > 0);
     }
+
+    @Test
+    public void loadChecklistWithOver100Parts() {
+        //Launch browser
+        getDriver().get(testData.getString("test_url"));
+
+        //Login
+        Login login = new Login();
+        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+
+        getDriver().get(testData.getString("url_checklist_over_100"));
+        damageCapturingPO.clickQapterIcon();
+
+        testResult.setTimeStarted(Instant.now());
+        damageCapturingPO.navigationChecklist();
+        testResult.setTimeFinished(Instant.now());
+
+        int checklistNumber = damageCapturingPO.getChecklistNumber();
+        Assert.assertTrue(checklistNumber > 0);
+    }
+
+    @Test
+    public void loadChecklistWithOver200Parts() {
+        //Launch browser
+        getDriver().get(testData.getString("test_url"));
+
+        //Login
+        Login login = new Login();
+        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+
+        getDriver().get(testData.getString("url_checklist_over_200"));
+        damageCapturingPO.clickQapterIcon();
+
+        testResult.setTimeStarted(Instant.now());
+        damageCapturingPO.navigationChecklist();
+        testResult.setTimeFinished(Instant.now());
+
+        int checklistNumber = damageCapturingPO.getChecklistNumber();
+        Assert.assertTrue(checklistNumber > 0);
+    }
 }
