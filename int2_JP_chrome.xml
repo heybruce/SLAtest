@@ -1,0 +1,66 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="JP" verbose="1" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="utils.listeners.AnnotationTransformer"/>
+        <listener class-name="utils.listeners.TestListener"/>
+    </listeners>
+    <test name="SLA" parallel="classes" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="en-us"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="env" value="INT2SG"/>
+        <parameter name="country" value="JP"/>
+        <parameter name="dataFile" value="data.int2.JP.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.JP.properties"/>
+        <classes>
+            <class name="cases.JP.DashboardTest">
+                <methods>
+                    <include name="loginBRE"/>
+                </methods>
+            </class>
+            <!--<class name="cases.KR.ClaimDetailsTest">-->
+                <!--<methods>-->
+                    <!--<include name="searchVehicleByVin"/>-->
+                    <!--<include name="openExistingCase"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+            <!--<class name="cases.KR.DamageCapturingTest">-->
+                <!--<methods>-->
+                    <!--<include name="activateQapter"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+            <!--<class name="cases.KR.Qapter.QapterTest">-->
+                <!--<methods>-->
+                    <!--<include name="switchTo3D"/>-->
+                    <!--<include name="selectPart"/>-->
+                    <!--<include name="loadZoneIn3dView"/>-->
+                    <!--<include name="activateQapterIn3dView"/>-->
+                    <!--<include name="switchToVehicleTabIn3dView"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+            <!--<class name="cases.KR.Qapter.ChecklistTest">-->
+                <!--<methods>-->
+                    <!--<include name="loadChecklist"/>-->
+                    <!--<include name="loadChecklistWithOver100Parts"/>-->
+                    <!--<include name="loadChecklistWithOver200Parts"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+        </classes>
+    </test>
+    <!--<test name="B2B" parallel="classes" thread-count="1">-->
+        <!--<parameter name="browser" value="b2b"/>-->
+        <!--<parameter name="country" value="JP"/>-->
+        <!--<parameter name="type" value="SLA"/>-->
+        <!--<parameter name="env" value="INT2SG"/>-->
+        <!--<parameter name="dataFile" value="data.int2.JP.properties"/>-->
+        <!--<classes>-->
+            <!--<class name="cases.B2B.B2bTest">-->
+                <!--<methods>-->
+                    <!--<include name="getTask"/>-->
+                    <!--<include name="doCalculation"/>-->
+                    <!--<include name="vinQuery"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+        <!--</classes>-->
+    <!--</test>-->
+</suite>
