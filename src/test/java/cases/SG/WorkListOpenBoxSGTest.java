@@ -19,7 +19,7 @@ import java.time.Instant;
 
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
-public class DashboardTest extends TestBase {
+public class WorkListOpenBoxSGTest extends TestBase {
     private LoginPO loginPO = new LoginPO();
     private DashboardPO dashboardPO = new DashboardPO();
     private PreIntakePO preIntakePO = new PreIntakePO();

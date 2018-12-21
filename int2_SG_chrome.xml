@@ -13,7 +13,7 @@
         <parameter name="dataFile" value="data.int2.SG.properties"/>
         <parameter name="vehicleElement" value="vehicleElement.SG.properties"/>
         <classes>
-            <class name="cases.SG.DashboardTest">
+            <class name="cases.SG.WorkListOpenBoxSGTest">
                 <methods>
                     <include name="loginBRE"/>
                 </methods>

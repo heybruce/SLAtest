@@ -1,7 +1,6 @@
-package cases.JP;
+package cases.ID;
 
 import cases.TestBase;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -9,9 +8,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageobjects.LoginPO;
 import pageobjects.PreIntakePO;
-import pageobjects.processstep.claimdetails.ClaimDetailsJPPO;
-import pageobjects.processstep.claimdetails.ClaimDetailsKRPO;
-import pageobjects.processstep.processstep.ProcessStepJPPO;
+import pageobjects.processstep.claimdetails.ClaimDetailsPO;
+import pageobjects.processstep.processstep.ProcessStepIDPO;
 import pageobjects.standalone.DashboardPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
@@ -21,13 +19,13 @@ import java.time.Instant;
 
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
-public class DashboardTest extends TestBase {
+public class WorkListOpenBoxIDTest extends TestBase {
     private LoginPO loginPO = new LoginPO();
     private DashboardPO dashboardPO = new DashboardPO();
     private PreIntakePO preIntakePO = new PreIntakePO();
-    private ClaimDetailsJPPO claimDetailsJPPO = new ClaimDetailsJPPO();
+    private ClaimDetailsPO claimDetailsPO = new ClaimDetailsPO();
     private WorkListGridOpenPO workListGridOpenPO = new WorkListGridOpenPO();
-    private ProcessStepJPPO processStepJPPO = new ProcessStepJPPO();
+    private ProcessStepIDPO processStepIDPO = new ProcessStepIDPO();
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -40,9 +38,9 @@ public class DashboardTest extends TestBase {
         loginPO.setWebDriver(getDriver());
         dashboardPO.setWebDriver(getDriver());
         preIntakePO.setWebDriver(getDriver());
-        claimDetailsJPPO.setWebDriver(getDriver());
+        claimDetailsPO.setWebDriver(getDriver());
         workListGridOpenPO.setWebDriver(getDriver());
-        processStepJPPO.setWebDriver(getDriver());
+        processStepIDPO.setWebDriver(getDriver());
     }
 
     @Test
