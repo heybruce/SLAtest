@@ -16,19 +16,19 @@
             <class name="cases.SG.WorkListOpenBoxSGTest">
                 <methods>
                     <include name="loginBRE"/>
+                    <include name="openExistingCase"/>
                 </methods>
             </class>
-            <!--<class name="cases.KR.ClaimDetailsTest">-->
-                <!--<methods>-->
-                    <!--<include name="searchVehicleByVin"/>-->
-                    <!--<include name="openExistingCase"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-            <!--<class name="cases.KR.DamageCapturingTest">-->
-                <!--<methods>-->
-                    <!--<include name="activateQapter"/>-->
-                <!--</methods>-->
-            <!--</class>-->
+            <class name="cases.SG.DamageCapturingSGTest">
+                <methods>
+                    <include name="activateQapter"/>
+                </methods>
+            </class>
+            <class name="cases.SG.GeneralDetailsSGTest">
+                <methods>
+                    <include name="searchVehicleByVin"/>
+                </methods>
+            </class>
             <!--<class name="cases.KR.Qapter.QapterTest">-->
                 <!--<methods>-->
                     <!--<include name="switchTo3D"/>-->

@@ -60,4 +60,19 @@ public class WorkListOpenBoxSGTest extends TestBase {
         Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
     }
 
+    @Test
+    public void openExistingCase() {
+        getDriver().get(testData.getString("test_url"));
+
+        //Claim Details
+        Login login = new Login();
+        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+
+        testResult.setTimeStarted(Instant.now());
+        getDriver().get(testData.getString("url_to_GeneralDetailsSG"));
+        testResult.setTimeFinished(Instant.now());
+
+        Assert.assertNotNull(claimDetailsSGPO.getClaimNumber());
+    }
+
 }
