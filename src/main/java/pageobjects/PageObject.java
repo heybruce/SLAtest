@@ -42,7 +42,7 @@ public abstract class PageObject {
         lastElem = null;
     }
 
-    protected void waitForElementInvisible(By locator) {
+    public void waitForElementInvisible(By locator) {
         try{
             // Wait for the element visible
             WebDriverWait wait = new WebDriverWait(webDriver, 5);

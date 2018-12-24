@@ -16,19 +16,19 @@
             <class name="cases.JP.WorkListOpenBoxJPTest">
                 <methods>
                     <include name="loginBRE"/>
+                    <include name="openExistingCase"/>
                 </methods>
             </class>
-            <!--<class name="cases.KR.ClaimDetailsTest">-->
-                <!--<methods>-->
-                    <!--<include name="searchVehicleByVin"/>-->
-                    <!--<include name="openExistingCase"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-            <!--<class name="cases.KR.DamageCapturingTest">-->
-                <!--<methods>-->
-                    <!--<include name="activateQapter"/>-->
-                <!--</methods>-->
-            <!--</class>-->
+            <class name="cases.JP.DamageCaptureJPTest">
+                <methods>
+                    <include name="activateQapter"/>
+                </methods>
+            </class>
+            <class name="cases.JP.ClaimInfoJPTest">
+                <methods>
+                    <include name="searchVehicleByVin"/>
+                </methods>
+            </class>
             <!--<class name="cases.KR.Qapter.QapterTest">-->
                 <!--<methods>-->
                     <!--<include name="switchTo3D"/>-->
