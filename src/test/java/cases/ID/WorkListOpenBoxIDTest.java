@@ -52,12 +52,27 @@ public class WorkListOpenBoxIDTest extends TestBase {
 
         testResult.setTimeStarted(Instant.now());
 
-        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+        login.LoginBRE(testData.getString("rep_username"), testData.getString("password"));
 
         testResult.setTimeFinished(Instant.now());
 
         //Dashboard page
-        Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
+        Assert.assertEquals(testData.getString("rep_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
+    }
+
+    @Test
+    public void openExistingCase() {
+        getDriver().get(testData.getString("test_url"));
+
+        //Claim Details
+        Login login = new Login();
+        login.LoginBRE(testData.getString("rep_username"), testData.getString("password"));
+
+        testResult.setTimeStarted(Instant.now());
+        getDriver().get(testData.getString("url_to_GeneralDetailsID"));
+        testResult.setTimeFinished(Instant.now());
+
+        Assert.assertNotNull(claimDetailsPO.getClaimNumber());
     }
 
 }
