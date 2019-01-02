@@ -16,7 +16,17 @@
             <class name="cases.ID.WorkListOpenBoxIDTest">
                 <methods>
                     <include name="loginBRE"/>
-
+                    <include name="openExistingCase"/>
+                </methods>
+            </class>
+            <class name="cases.ID.DamageCapturingIDTest">
+                <methods>
+                    <include name="activateQapter"/>
+                </methods>
+            </class>
+            <class name="cases.ID.GeneralDetailsIDTest">
+                <methods>
+                    <include name="searchVehicleByVin"/>
                 </methods>
             </class>
 
