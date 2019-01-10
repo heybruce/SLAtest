@@ -50,6 +50,7 @@ public class QapterTest extends TestBase{
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
         if (is3dView) {
+            damageCapturingPO.waitForElementPresent(By.id("box"));
             damageCapturingPO.click3dViewSwitch();
             damageCapturingPO.navigationVehicle();
             damageCapturingPO.navigationSettings();

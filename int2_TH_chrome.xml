@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TH" verbose="1" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="utils.listeners.AnnotationTransformer"/>
+        <listener class-name="utils.listeners.TestListener"/>
+    </listeners>
+    <test name="B2B" parallel="classes" thread-count="1">
+        <parameter name="browser" value="b2b"/>
+        <parameter name="country" value="TH"/>
+        <parameter name="type" value="APM"/>
+        <parameter name="env" value="INT2SG"/>
+        <parameter name="dataFile" value="data.int2.TH.properties"/>
+        <classes>
+            <class name="cases.B2B.B2bTest">
+                <methods>
+                    <include name="getTask"/>
+                    <include name="doCalculation"/>
+                    <include name="vinQuery"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
