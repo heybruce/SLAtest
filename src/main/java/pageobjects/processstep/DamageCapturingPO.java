@@ -10,6 +10,8 @@ import pageobjects.PageObject;
 import java.util.List;
 
 public class DamageCapturingPO extends PageObject {
+
+    private static final int TIME_OUT = 60;
     //Loading Circle
     public static final By PAGE_LOADING_CIRCLE = By.cssSelector(".loader-big .content .loader-circle");
     public static final By INSIDE_LOADING_CIRCLE = By.cssSelector("#content .loader-big .content .loader-circle");
@@ -376,9 +378,9 @@ public class DamageCapturingPO extends PageObject {
 
      
     public void clickQapterIcon() {
-        new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOf(qapterIcon));
-        new WebDriverWait(webDriver, 30).until(ExpectedConditions.attributeToBe(qapterIcon, "role", "presentation"));
-        new WebDriverWait(webDriver, 30).until(ExpectedConditions.elementToBeClickable(qapterIcon));
+        new WebDriverWait(webDriver, TIME_OUT).until(ExpectedConditions.visibilityOf(qapterIcon));
+        new WebDriverWait(webDriver, TIME_OUT).until(ExpectedConditions.attributeToBe(qapterIcon, "role", "presentation"));
+        new WebDriverWait(webDriver, TIME_OUT).until(ExpectedConditions.elementToBeClickable(qapterIcon));
         this.click(qapterIcon);
         switchToQapterIframe();
     }
@@ -391,9 +393,9 @@ public class DamageCapturingPO extends PageObject {
 
      
     public void switchToQapterIframe(){
-        new WebDriverWait(webDriver, 30).until(ExpectedConditions.presenceOfElementLocated(QAPTER_CONTAINER));
+        new WebDriverWait(webDriver, TIME_OUT).until(ExpectedConditions.presenceOfElementLocated(QAPTER_CONTAINER));
         webDriver.switchTo().frame(0);
-        new WebDriverWait(webDriver, 30).until(ExpectedConditions.visibilityOfElementLocated(DamageCapturingPO.PAGE_LOADING_CIRCLE));
+        new WebDriverWait(webDriver, TIME_OUT).until(ExpectedConditions.visibilityOfElementLocated(DamageCapturingPO.PAGE_LOADING_CIRCLE));
         waitForQapterLoading();
     }
 
@@ -416,7 +418,7 @@ public class DamageCapturingPO extends PageObject {
     public void navigationChecklist() {
         this.click(navigationChecklist);
      //   waitForQapterLoading();
-        new WebDriverWait(webDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.id(ID_CHECKLIST_TABLE)));
+        new WebDriverWait(webDriver, TIME_OUT).until(ExpectedConditions.presenceOfElementLocated(By.id(ID_CHECKLIST_TABLE)));
     }
 
      
@@ -430,14 +432,14 @@ public class DamageCapturingPO extends PageObject {
 
      
     public void clickZone(String webElementId) {
-        new WebDriverWait(webDriver, 10)
+        new WebDriverWait(webDriver, TIME_OUT)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id(webElementId)));
         new Actions(webDriver).moveToElement(webDriver.findElement(By.id(webElementId))).click().perform();
         waitForElementInvisible(INSIDE_LOADING_CIRCLE);
     }
      
     public void clickPosition(String webElementId)  {
-        new WebDriverWait(webDriver, 10)
+        new WebDriverWait(webDriver, TIME_OUT)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id(webElementId)));
         new Actions(webDriver).moveToElement(webDriver.findElement(By.id(webElementId))).click().perform();
     }
@@ -500,7 +502,7 @@ public class DamageCapturingPO extends PageObject {
 
      
     public void clickNonStandardTab(){
-        new WebDriverWait(webDriver, 10)
+        new WebDriverWait(webDriver, TIME_OUT)
                 .until(ExpectedConditions.visibilityOf(nonStandardPostionTab));
         new Actions(webDriver).moveToElement(nonStandardPostionTab).click().perform();
         waitForQapterLoading();
