@@ -29,7 +29,22 @@
                     <include name="searchVehicleByVin"/>
                 </methods>
             </class>
-
+        </classes>
+    </test>
+    <test name="B2B" parallel="classes" thread-count="1">
+        <parameter name="browser" value="b2b"/>
+        <parameter name="country" value="ID"/>
+        <parameter name="type" value="APM"/>
+        <parameter name="env" value="INT2SG"/>
+        <parameter name="dataFile" value="data.int2.ID.properties"/>
+        <classes>
+            <class name="cases.B2B.B2bTest">
+                <methods>
+                    <include name="getTask"/>
+                    <include name="doCalculation"/>
+                    <include name="vinQuery"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
