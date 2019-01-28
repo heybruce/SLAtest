@@ -1,29 +1,23 @@
 package cases.KR.Qapter;
 
 import cases.TestBase;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pageobjects.processstep.DamageCapturingPO;
 import pageobjects.processstep.processstep.ProcessStepKRPO;
-import steps.CreateNewCaseKR;
 import steps.Login;
-import steps.Qapter.ZoneAndLayout;
 import utils.UtilitiesManager;
 
-import java.lang.reflect.Method;
 import java.time.Instant;
-
-import static pageobjects.processstep.DamageCapturingPO.INSIDE_LOADING_CIRCLE;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class QapterTest extends TestBase{
     private ProcessStepKRPO processStepKRPO = new ProcessStepKRPO();
     private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
+
+
+    @BeforeTest
 
     @BeforeClass
     @Parameters(value = {"dataFile","vehicleElement"})
@@ -44,6 +38,22 @@ public class QapterTest extends TestBase{
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
+//        //Verify and switch to non-3D mode
+//        getDriver().get(testData.getString("url_to_damage_capturing"));
+//        damageCapturingPO.clickQapterIcon();
+//        damageCapturingPO.navigationSettings();
+//        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+//        if (is3dView) {
+//            damageCapturingPO.waitForElementPresent(By.id("box"));
+//            damageCapturingPO.click3dViewSwitch();
+//            damageCapturingPO.navigationVehicle();
+//            damageCapturingPO.navigationSettings();
+//        }
+    }
+
+    @Test
+    public void switchTo3D(){
+
         //Verify and switch to non-3D mode
         getDriver().get(testData.getString("url_to_damage_capturing"));
         damageCapturingPO.clickQapterIcon();
@@ -54,12 +64,7 @@ public class QapterTest extends TestBase{
             damageCapturingPO.click3dViewSwitch();
             damageCapturingPO.navigationVehicle();
             damageCapturingPO.navigationSettings();
-     //       is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
         }
-    }
-
-    @Test
-    public void switchTo3D(){
 
         testResult.setTimeStarted(Instant.now());
         //Switch to 3D view
@@ -71,6 +76,18 @@ public class QapterTest extends TestBase{
 
     @Test
     public void selectPart(){
+
+        //Verify and switch to non-3D mode
+        getDriver().get(testData.getString("url_to_damage_capturing"));
+        damageCapturingPO.clickQapterIcon();
+        damageCapturingPO.navigationSettings();
+        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+        if (is3dView) {
+            damageCapturingPO.waitForElementPresent(By.id("box"));
+            damageCapturingPO.click3dViewSwitch();
+            damageCapturingPO.navigationVehicle();
+            damageCapturingPO.navigationSettings();
+        }
 
         damageCapturingPO.navigationVehicle();
         damageCapturingPO.click(getDriver().findElement(By.id(vehicleElementData.getString("bmw320_zone_frontOuter"))));
@@ -88,7 +105,19 @@ public class QapterTest extends TestBase{
     @Test
     public void navigate3dModelFromZoneToZone() {
 
-        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
+        //Verify and switch to non-3D mode
+        getDriver().get(testData.getString("url_to_damage_capturing"));
+        damageCapturingPO.clickQapterIcon();
+        damageCapturingPO.navigationSettings();
+        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+        if (is3dView) {
+            damageCapturingPO.waitForElementPresent(By.id("box"));
+            damageCapturingPO.click3dViewSwitch();
+            damageCapturingPO.navigationVehicle();
+            damageCapturingPO.navigationSettings();
+        }
+
+        is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
                 .equalsIgnoreCase("checkbox_slide  active ");
         if (!is3dView) {     //if not in 3D view, switch to 3D view
             damageCapturingPO.click3dViewSwitch();
@@ -113,7 +142,19 @@ public class QapterTest extends TestBase{
     @Test
     public void loadZoneIn3dView() {
 
-        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
+        //Verify and switch to non-3D mode
+        getDriver().get(testData.getString("url_to_damage_capturing"));
+        damageCapturingPO.clickQapterIcon();
+        damageCapturingPO.navigationSettings();
+        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+        if (is3dView) {
+            damageCapturingPO.waitForElementPresent(By.id("box"));
+            damageCapturingPO.click3dViewSwitch();
+            damageCapturingPO.navigationVehicle();
+            damageCapturingPO.navigationSettings();
+        }
+
+        is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
                 .equalsIgnoreCase("checkbox_slide  active ");
         if (!is3dView) {     //if not in 3D view, switch to 3D view
             damageCapturingPO.click3dViewSwitch();
@@ -135,7 +176,19 @@ public class QapterTest extends TestBase{
     @Test
     public void activateQapterIn3dView() {
 
-        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
+        //Verify and switch to non-3D mode
+        getDriver().get(testData.getString("url_to_damage_capturing"));
+        damageCapturingPO.clickQapterIcon();
+        damageCapturingPO.navigationSettings();
+        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+        if (is3dView) {
+            damageCapturingPO.waitForElementPresent(By.id("box"));
+            damageCapturingPO.click3dViewSwitch();
+            damageCapturingPO.navigationVehicle();
+            damageCapturingPO.navigationSettings();
+        }
+
+        is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
                 .equalsIgnoreCase("checkbox_slide  active ");
         if (!is3dView) {     //if not in 3D view, switch to 3D view
             damageCapturingPO.click3dViewSwitch();
@@ -151,7 +204,19 @@ public class QapterTest extends TestBase{
     @Test
     public void switchToVehicleTabIn3dView() {
 
-        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
+        //Verify and switch to non-3D mode
+        getDriver().get(testData.getString("url_to_damage_capturing"));
+        damageCapturingPO.clickQapterIcon();
+        damageCapturingPO.navigationSettings();
+        Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
+        if (is3dView) {
+            damageCapturingPO.waitForElementPresent(By.id("box"));
+            damageCapturingPO.click3dViewSwitch();
+            damageCapturingPO.navigationVehicle();
+            damageCapturingPO.navigationSettings();
+        }
+
+        is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class")
                 .equalsIgnoreCase("checkbox_slide  active ");
         if (!is3dView) {     //if not in 3D view, switch to 3D view
             damageCapturingPO.click3dViewSwitch();
@@ -162,7 +227,5 @@ public class QapterTest extends TestBase{
         damageCapturingPO.waitForQapterLoading();
         testResult.setTimeFinished(Instant.now());
     }
-
-
 
 }

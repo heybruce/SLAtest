@@ -1,5 +1,7 @@
 package pageobjects.processstep;
 
+import org.apache.log4j.Logger;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +12,8 @@ import pageobjects.PageObject;
 import java.util.List;
 
 public class DamageCapturingPO extends PageObject {
+
+    final static Logger logger = Logger.getLogger(DamageCapturingPO.class);
 
     private static final int TIME_OUT = 60;
     //Loading Circle
@@ -953,7 +957,12 @@ public class DamageCapturingPO extends PageObject {
     }
 
     public void click3dViewSwitch() {
-        this.click(threeDViewSwitch);
+        try {
+            this.click(threeDViewSwitch);
+        }
+        catch (Exception e) {
+            logger.error("Click 3D switch failed. " + e);
+        }
     }
 
     public WebElement getThreeDViewIndicator() {
