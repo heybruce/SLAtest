@@ -1,7 +1,6 @@
 package cases.KR;
 
 import cases.TestBase;
-import datamodel.TestResult;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -16,11 +15,9 @@ import pageobjects.processstep.claimdetails.ClaimDetailsKRPO;
 import pageobjects.standalone.DashboardPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
-import utils.RestManager;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
-import java.lang.reflect.Method;
-import java.time.Duration;
 import java.time.Instant;
 
 import static utils.webdrivers.WebDriverFactory.getDriver;
@@ -32,6 +29,7 @@ public class DashboardTest extends TestBase {
     private ClaimDetailsKRPO claimDetailsKRPO = new ClaimDetailsKRPO();
     private WorkListGridOpenPO workListGridOpenPO = new WorkListGridOpenPO();
     private ProcessStepKRPO processStepKRPO = new ProcessStepKRPO();
+    String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -40,13 +38,14 @@ public class DashboardTest extends TestBase {
     }
 
     @BeforeMethod
-    public void methodSetup() {
+    public void methodSetup(ITestContext context) {
         loginPO.setWebDriver(getDriver());
         dashboardPO.setWebDriver(getDriver());
         preIntakePO.setWebDriver(getDriver());
         claimDetailsKRPO.setWebDriver(getDriver());
         workListGridOpenPO.setWebDriver(getDriver());
         processStepKRPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test
@@ -76,7 +75,8 @@ public class DashboardTest extends TestBase {
         loginPO.clickSubmit();
 
         //Work List grid Open
-        dashboardPO.clickCreateCase();
+        //dashboardPO.clickCreateCase();
+        dashboardPO.clickNewClaimButton();
         testResult.setTimeStarted(Instant.now());
 
         //Pre Intake page
@@ -90,6 +90,11 @@ public class DashboardTest extends TestBase {
         fluentWait(By.id(ClaimDetailsKRPO.ID_CLAIM_NUMBER));
 
         testResult.setTimeFinished(Instant.now());
+
+        String claimDetailUrl = getDriver().getCurrentUrl();
+        String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);
+
+        RedisManager.setValue(taskIdKey, taskId);
 
         //Check claim is in Open box
         processStepKRPO.clickClaimManagerIcon();

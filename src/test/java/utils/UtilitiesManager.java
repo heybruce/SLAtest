@@ -3,6 +3,7 @@ package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import datamodel.BreStep;
 import datamodel.TestResult;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
@@ -10,6 +11,8 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URIBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
@@ -28,6 +31,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -53,10 +58,10 @@ public class UtilitiesManager {
         return date.getTime()/1000;
     }
 
-    public static String getCurrentDataTimeString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        return dateFormat.format(date);
+    public static String getLocalDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate localDate = LocalDate.now();
+        return dtf.format(localDate);
     }
 
     public static String getSystem () {
@@ -212,4 +217,38 @@ public class UtilitiesManager {
         }
         return builder.toString();
     }
+
+    public static String getTaskIdFromUrl(String url) {
+        String taskId = "";
+        try {
+            URIBuilder uriBuilder = new URIBuilder(url);
+
+            for (NameValuePair parameter:uriBuilder.getQueryParams()
+                 ) {
+                if (parameter.getName().equalsIgnoreCase("taskId")) {
+                    taskId = parameter.getValue();
+                }
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return taskId;
+    }
+
+    public static String constructBreUrl(String url, String taskId, String step) {
+        String uri = "";
+        try {
+            URIBuilder uriBuilder = new URIBuilder(url);
+            uriBuilder.addParameter("taskId", taskId);
+            uriBuilder.addParameter("process", "BRE");
+            uriBuilder.addParameter("step", step);
+            uri = uriBuilder.toString();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return uri;
+    }
+
 }

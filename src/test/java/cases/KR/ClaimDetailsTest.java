@@ -11,6 +11,7 @@ import pageobjects.processstep.claimdetails.ClaimDetailsKRPO;
 import steps.CreateNewCaseKR;
 import steps.Login;
 import steps.SelectVehicle;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -20,6 +21,7 @@ import static utils.webdrivers.WebDriverFactory.getDriver;
 public class ClaimDetailsTest extends TestBase {
     private ClaimDetailsKRPO claimDetailsKRPO = new ClaimDetailsKRPO();
     private IBOSSearchPO IBOSSearchPO = new IBOSSearchPO();
+    String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -31,6 +33,7 @@ public class ClaimDetailsTest extends TestBase {
     public void methodSetup() {
         claimDetailsKRPO.setWebDriver(getDriver());
         IBOSSearchPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test(description = "Search vehicle by VIN query")
@@ -41,7 +44,8 @@ public class ClaimDetailsTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_claim_details"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Claim+Details"));
 
         claimDetailsKRPO.enterVin(testData.getString("vin"));
         testResult.setTimeStarted(Instant.now());
@@ -66,7 +70,23 @@ public class ClaimDetailsTest extends TestBase {
         testResult.setTimeFinished(Instant.now());
     }
 
-    @Test(description = "Search a vehicle by search tree")
+    @Test
+    public void openExistingCase() {
+        getDriver().get(testData.getString("test_url"));
+
+        //Claim Details
+        Login login = new Login();
+        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+
+        testResult.setTimeStarted(Instant.now());
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Claim+Details"));
+        testResult.setTimeFinished(Instant.now());
+
+        Assert.assertNotNull(claimDetailsKRPO.getClaimNumber());
+    }
+
+//    @Test(description = "Search a vehicle by search tree")
     public void searchVehicleBySearchTree(){
         getDriver().get(testData.getString("test_url"));
 
@@ -89,7 +109,7 @@ public class ClaimDetailsTest extends TestBase {
         Assert.assertEquals(claimDetailsKRPO.getSubModelCode(), SubModelCodeExpected);
     }
 
-    @Test(description = "Query case via IBOS case search")
+//    @Test(description = "Query case via IBOS case search")
     public void queryCaseByIBOS() {
         //Launch browser
         getDriver().get(testData.getString("test_url"));
@@ -126,20 +146,5 @@ public class ClaimDetailsTest extends TestBase {
         Assert.assertEquals(claimDetailsKRPO.getPlateNumber(), testData.getString("IBOS_plate_number"));
         Assert.assertEquals(claimDetailsKRPO.getTaxNumber(), testData.getString("IBOS_tax_id"));
 
-    }
-
-    @Test
-    public void openExistingCase() {
-        getDriver().get(testData.getString("test_url"));
-
-        //Claim Details
-        Login login = new Login();
-        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
-
-        testResult.setTimeStarted(Instant.now());
-        getDriver().get(testData.getString("url_to_claim_details"));
-        testResult.setTimeFinished(Instant.now());
-
-        Assert.assertNotNull(claimDetailsKRPO.getClaimNumber());
     }
 }

@@ -15,6 +15,8 @@ public class DashboardPO extends ProcessStepKRPO {
     private WebElement partsInfoChecker;
     @FindBy(xpath = "id(\"DashBoard\")/div[2]/div/div/div[4]")
     private WebElement csa;
+    @FindBy(id = "newCaseBtn")
+    private WebElement newClaimButton;
 
     public DashboardPO() {
         super();
@@ -25,4 +27,8 @@ public class DashboardPO extends ProcessStepKRPO {
     }
 
     public void clickCreateCase() { this.click(createCase); }
+
+    public void clickNewClaimButton() {
+        this.click(newClaimButton);
+    }
 }
