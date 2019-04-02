@@ -14,6 +14,7 @@ import pageobjects.processstep.processstep.ProcessStepKRPO;
 import steps.DamageCapturing;
 import steps.Login;
 import steps.Qapter.Checklist;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -24,6 +25,7 @@ public class ChecklistTest extends TestBase {
     private ProcessStepKRPO processStepKRPO = new ProcessStepKRPO();
     private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
     private WebDriverWait wait;
+    String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile", "vehicleElement"})
@@ -37,6 +39,7 @@ public class ChecklistTest extends TestBase {
         processStepKRPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
         wait = new WebDriverWait(getDriver(), 10);
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test(description = "Layout test for model option in checklist")
@@ -48,7 +51,8 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Qapter checklist
@@ -67,7 +71,8 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         Checklist checklist = new Checklist();
@@ -96,7 +101,8 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
@@ -122,7 +128,8 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
@@ -144,7 +151,8 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
@@ -170,7 +178,8 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         testResult.setTimeStarted(Instant.now());

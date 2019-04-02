@@ -7,6 +7,7 @@ import org.testng.annotations.*;
 import pageobjects.processstep.DamageCapturingPO;
 import pageobjects.processstep.processstep.ProcessStepKRPO;
 import steps.Login;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -15,7 +16,7 @@ import static utils.webdrivers.WebDriverFactory.getDriver;
 public class QapterTest extends TestBase{
     private ProcessStepKRPO processStepKRPO = new ProcessStepKRPO();
     private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
-
+    String taskIdKey;
 
     @BeforeTest
 
@@ -30,6 +31,7 @@ public class QapterTest extends TestBase{
     public void methodSetup() {
         processStepKRPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
 
         //Launch browser
         getDriver().get(testData.getString("test_url"));
@@ -55,7 +57,8 @@ public class QapterTest extends TestBase{
     public void switchTo3D(){
 
         //Verify and switch to non-3D mode
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -78,7 +81,8 @@ public class QapterTest extends TestBase{
     public void selectPart(){
 
         //Verify and switch to non-3D mode
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -106,7 +110,8 @@ public class QapterTest extends TestBase{
     public void navigate3dModelFromZoneToZone() {
 
         //Verify and switch to non-3D mode
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -143,7 +148,8 @@ public class QapterTest extends TestBase{
     public void loadZoneIn3dView() {
 
         //Verify and switch to non-3D mode
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -177,7 +183,8 @@ public class QapterTest extends TestBase{
     public void activateQapterIn3dView() {
 
         //Verify and switch to non-3D mode
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -194,7 +201,8 @@ public class QapterTest extends TestBase{
             damageCapturingPO.click3dViewSwitch();
         }
 
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         testResult.setTimeStarted(Instant.now());
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.waitForQapterLoading();
@@ -205,7 +213,8 @@ public class QapterTest extends TestBase{
     public void switchToVehicleTabIn3dView() {
 
         //Verify and switch to non-3D mode
-        getDriver().get(testData.getString("url_to_damage_capturing"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
