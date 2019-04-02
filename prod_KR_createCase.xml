@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="KR" verbose="1" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="utils.listeners.AnnotationTransformer"/>
+        <listener class-name="utils.listeners.TestListener"/>
+    </listeners>
+    <test name="SLA" parallel="classes" thread-count="1">
+        <parameter name="env" value="PRODSG"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="ko-kr"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="country" value="KR"/>
+        <parameter name="dataFile" value="data.prod.KR.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.KR.properties"/>
+        <classes>
+            <class name="cases.KR.DashboardTest">
+                <methods>
+                    <include name="createNewCaseFromDashboard"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
