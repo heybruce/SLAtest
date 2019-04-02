@@ -1,6 +1,8 @@
 package cases.JP;
 
 import cases.TestBase;
+import com.aventstack.extentreports.Status;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +17,7 @@ import pageobjects.processstep.processstep.ProcessStepJPPO;
 import pageobjects.standalone.DashboardPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -22,12 +25,15 @@ import java.time.Instant;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class WorkListOpenBoxJPTest extends TestBase {
+    private final static Logger logger = Logger.getLogger(WorkListOpenBoxJPTest.class);
+
     private LoginPO loginPO = new LoginPO();
     private DashboardPO dashboardPO = new DashboardPO();
     private PreIntakePO preIntakePO = new PreIntakePO();
     private ClaimDetailsJPPO claimDetailsJPPO = new ClaimDetailsJPPO();
     private WorkListGridOpenPO workListGridOpenPO = new WorkListGridOpenPO();
     private ProcessStepJPPO processStepJPPO = new ProcessStepJPPO();
+    private String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -43,6 +49,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
         claimDetailsJPPO.setWebDriver(getDriver());
         workListGridOpenPO.setWebDriver(getDriver());
         processStepJPPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test
@@ -53,9 +60,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
         Login login = new Login();
 
         testResult.setTimeStarted(Instant.now());
-
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
-
         testResult.setTimeFinished(Instant.now());
 
         //Dashboard page
@@ -71,10 +76,57 @@ public class WorkListOpenBoxJPTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         testResult.setTimeStarted(Instant.now());
-        getDriver().get(testData.getString("url_to_ClaimInfoJP"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Claim+Details"));
         testResult.setTimeFinished(Instant.now());
 
         Assert.assertNotNull(claimDetailsJPPO.getClaimNumber());
+    }
+
+    @Test(description = "Create case from header right top button")
+    public void createNewCaseFromHeader(){
+        getDriver().get(testData.getString("test_url"));
+
+        //Login
+        Login login = new Login();
+        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+
+        //Work List grid Open
+        workListGridOpenPO.clickOpenTab();
+        workListGridOpenPO.clickNewClaimButton();
+        testResult.setTimeStarted(Instant.now());
+
+        //Pre Intake page
+        String claimNumber = Long.toString(UtilitiesManager.getCurrentUnixTime());
+        preIntakePO.enterClaimNumberTextbox(claimNumber);
+        preIntakePO.clickCreateNewCaseButton();
+        fluentWait(By.id(ClaimDetailsJPPO.ID_CLAIM_NUMBER));
+        testResult.setTimeFinished(Instant.now());
+
+        String claimDetailUrl = getDriver().getCurrentUrl();
+        String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);
+        RedisManager.setValue(taskIdKey, taskId);
+        logger.debug("taskIdKey: " + taskIdKey);
+        logger.debug("taskId: " + taskId);
+
+        //Check claim is in Open box
+        processStepJPPO.clickClaimManager();
+        workListGridOpenPO.clickOpenTab();
+        workListGridOpenPO.sortCreationDate();
+        Assert.assertTrue(workListGridOpenPO.isClaimNumberExist(claimNumber));
+
+
+
+        //Logout
+        processStepJPPO.openCollapsedMenu();
+        if (isElementPresent(By.id("logout"))) {
+            workListGridOpenPO.clickLogout();
+        } else {
+            processStepJPPO.clickNavigationActions();
+            workListGridOpenPO.clickLogout();
+        }
+
+        Assert.assertFalse(isAlertPresent());
     }
 
 }

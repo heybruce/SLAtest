@@ -2,12 +2,14 @@ package cases;
 
 import datamodel.TestResult;
 import org.apache.commons.configuration2.Configuration;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -26,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class TestBase {
+    private final static Logger logger = Logger.getLogger(TestBase.class);
 
 //    public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
     public static TestResult testResult = new TestResult();

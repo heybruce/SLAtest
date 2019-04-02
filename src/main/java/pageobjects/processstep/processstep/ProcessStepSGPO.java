@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.PageObject;
 
-public class ProcessStepSGPO extends PageObject {
+public class ProcessStepSGPO extends ProcessStepPO {
     //Loading circle
     private static final By LOADING_CIRCLE = By.cssSelector(".loading-component");
 

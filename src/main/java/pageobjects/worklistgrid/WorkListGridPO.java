@@ -17,6 +17,10 @@ public class WorkListGridPO extends PageObject{
 
     protected static final By LOADING_CIRCLE = By.cssSelector(".loading-component");
     public static final String NEW_CASE_BTN_ID = "newCaseBtn";
+    private static final String ATTRIBUTE_ASC = "z-asc";
+    private static final String ATTRIBUTE_DESC = "z-desc";
+    public static final String ID_OPEN_TAB = "view-link-worklistgrid_open";
+    public static final String ID_CLOSED_TAB = "view-link-worklistgrid_closed";
 
     @FindBy(id = NEW_CASE_BTN_ID)
     private WebElement newClaim;

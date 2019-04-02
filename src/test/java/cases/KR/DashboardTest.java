@@ -1,6 +1,7 @@
 package cases.KR;
 
 import cases.TestBase;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -23,13 +24,15 @@ import java.time.Instant;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class DashboardTest extends TestBase {
+    private final static Logger logger = Logger.getLogger(DashboardTest.class);
+
     private LoginPO loginPO = new LoginPO();
     private DashboardPO dashboardPO = new DashboardPO();
     private PreIntakePO preIntakePO = new PreIntakePO();
     private ClaimDetailsKRPO claimDetailsKRPO = new ClaimDetailsKRPO();
     private WorkListGridOpenPO workListGridOpenPO = new WorkListGridOpenPO();
     private ProcessStepKRPO processStepKRPO = new ProcessStepKRPO();
-    String taskIdKey;
+    private String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -56,7 +59,6 @@ public class DashboardTest extends TestBase {
         Login login = new Login();
 
         testResult.setTimeStarted(Instant.now());
-
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         testResult.setTimeFinished(Instant.now());
@@ -95,6 +97,8 @@ public class DashboardTest extends TestBase {
         String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);
 
         RedisManager.setValue(taskIdKey, taskId);
+        logger.debug("taskIdKey: " + taskIdKey);
+        logger.debug("taskId: " + taskId);
 
         //Check claim is in Open box
         processStepKRPO.clickClaimManagerIcon();

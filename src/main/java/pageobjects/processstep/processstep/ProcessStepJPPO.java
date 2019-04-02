@@ -11,7 +11,7 @@ import pageobjects.PageObject;
 import pageobjects.processstep.LaborRatesPO;
 import pageobjects.worklistgrid.WorkListGridPO;
 
-public class ProcessStepJPPO extends PageObject {
+public class ProcessStepJPPO extends ProcessStepPO {
 
     //Loading circle
     private static final By LOADING_CIRCLE = By.cssSelector(".loading-component");

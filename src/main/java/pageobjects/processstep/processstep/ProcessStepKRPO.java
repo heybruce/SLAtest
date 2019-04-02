@@ -9,7 +9,7 @@ import pageobjects.processstep.AttachmentsRepairerPO;
 import pageobjects.processstep.LaborRatesPO;
 import pageobjects.worklistgrid.WorkListGridPO;
 
-public class ProcessStepKRPO extends PageObject {
+public class ProcessStepKRPO extends ProcessStepPO {
 
     //Loading circle
     private static final By LOADING_CIRCLE = By.cssSelector(".loading-component");
