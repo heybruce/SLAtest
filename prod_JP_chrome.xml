@@ -4,12 +4,38 @@
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
-
-    <test name="B2B" parallel="classes" thread-count="1">
-        <parameter name="browser" value="b2b"/>
-        <parameter name="country" value="JP"/>
-        <parameter name="type" value="SLA"/>
+    <test name="SLA" parallel="classes" thread-count="1">
         <parameter name="env" value="PRODSG"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="ja-jp"/>
+        <parameter name="type" value="APM"/>
+        <parameter name="country" value="JP"/>
+        <parameter name="dataFile" value="data.prod.JP.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.JP.properties"/>
+        <classes>
+            <class name="cases.JP.WorkListOpenBoxJPTest">
+                <methods>
+                    <include name="loginBRE"/>
+                    <include name="openExistingCase"/>
+                </methods>
+            </class>
+            <class name="cases.JP.ClaimInfoJPTest">
+                <methods>
+                    <include name="searchVehicleByVin"/>
+                </methods>
+            </class>
+            <class name="cases.JP.DamageCaptureJPTest">
+                <methods>
+                    <include name="activateQapter"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="B2B" parallel="classes" thread-count="1">
+        <parameter name="env" value="PRODSG"/>
+        <parameter name="browser" value="b2b"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="country" value="JP"/>
         <parameter name="dataFile" value="data.prod.JP.properties"/>
         <classes>
             <class name="cases.B2B.B2bTest">
