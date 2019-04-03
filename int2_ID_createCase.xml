@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ID" verbose="1" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="utils.listeners.AnnotationTransformer"/>
+        <listener class-name="utils.listeners.TestListener"/>
+    </listeners>
+    <test name="APM" parallel="classes" thread-count="1">
+        <parameter name="env" value="INT2SG"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="en-us"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="country" value="ID"/>
+        <parameter name="dataFile" value="data.int2.ID.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.ID.properties"/>
+        <classes>
+            <class name="cases.ID.WorkListOpenBoxIDTest">
+                <methods>
+                    <include name="createNewCaseFromHeader"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

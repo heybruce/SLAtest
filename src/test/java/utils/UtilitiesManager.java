@@ -13,6 +13,7 @@ import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
@@ -38,6 +39,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class UtilitiesManager {
+    private final static Logger logger = Logger.getLogger(UtilitiesManager.class);
 
     private static Configurations configs = new Configurations();
     private static PropertiesConfiguration propConfig = null;
@@ -231,7 +233,7 @@ public class UtilitiesManager {
             }
         }
         catch(Exception e) {
-            e.printStackTrace();
+            logger.error("Failed to get taskId from URL.", e);
         }
         return taskId;
     }

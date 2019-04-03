@@ -4,7 +4,7 @@
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
-    <test name="chrome" parallel="classes" thread-count="1">
+    <test name="APM" parallel="classes" thread-count="1">
         <parameter name="env" value="INT2SG"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="en-us"/>
@@ -19,14 +19,14 @@
                     <include name="openExistingCase"/>
                 </methods>
             </class>
-            <class name="cases.ID.DamageCapturingIDTest">
-                <methods>
-                    <include name="activateQapter"/>
-                </methods>
-            </class>
             <class name="cases.ID.GeneralDetailsIDTest">
                 <methods>
                     <include name="searchVehicleByVin"/>
+                </methods>
+            </class>
+            <class name="cases.ID.DamageCapturingIDTest">
+                <methods>
+                    <include name="activateQapter"/>
                 </methods>
             </class>
         </classes>

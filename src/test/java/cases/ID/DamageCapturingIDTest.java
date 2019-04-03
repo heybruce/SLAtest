@@ -1,6 +1,7 @@
 package cases.ID;
 
 import cases.TestBase;
+import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -8,6 +9,7 @@ import org.testng.annotations.Test;
 import pageobjects.processstep.DamageCapturingPO;
 import pageobjects.processstep.processstep.ProcessStepIDPO;
 import steps.Login;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -16,8 +18,11 @@ import static pageobjects.processstep.DamageCapturingPO.INSIDE_LOADING_CIRCLE;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class DamageCapturingIDTest extends TestBase{
+    private final static Logger logger = Logger.getLogger(DamageCapturingIDTest.class);
+
     private ProcessStepIDPO processStepIDPO = new ProcessStepIDPO();
     private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
+    private String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile","vehicleElement"})
@@ -30,6 +35,7 @@ public class DamageCapturingIDTest extends TestBase{
     public void methodSetup() {
         processStepIDPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test
@@ -43,7 +49,8 @@ public class DamageCapturingIDTest extends TestBase{
 
 
         testResult.setTimeStarted(Instant.now());
-        getDriver().get(testData.getString("url_to_DamageCaptureID"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCaptureID"));
 
         damageCapturingPO.waitForElementInvisible(INSIDE_LOADING_CIRCLE);
         testResult.setTimeFinished(Instant.now());

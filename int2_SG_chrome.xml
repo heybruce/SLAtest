@@ -19,14 +19,14 @@
                     <include name="openExistingCase"/>
                 </methods>
             </class>
-            <class name="cases.SG.DamageCapturingSGTest">
-                <methods>
-                    <include name="activateQapter"/>
-                </methods>
-            </class>
             <class name="cases.SG.GeneralDetailsSGTest">
                 <methods>
                     <include name="searchVehicleByVin"/>
+                </methods>
+            </class>
+            <class name="cases.SG.DamageCapturingSGTest">
+                <methods>
+                    <include name="activateQapter"/>
                 </methods>
             </class>
             <!--<class name="cases.KR.Qapter.QapterTest">-->

@@ -1,6 +1,5 @@
 package cases.SG;
 
-import cases.JP.WorkListOpenBoxJPTest;
 import cases.TestBase;
 import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeClass;
@@ -8,7 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageobjects.processstep.DamageCapturingPO;
-import pageobjects.processstep.processstep.ProcessStepJPPO;
 import pageobjects.processstep.processstep.ProcessStepSGPO;
 import steps.Login;
 import utils.RedisManager;
