@@ -13,7 +13,7 @@ public class PreIntakePO extends PageObject {
     @FindBy(id = "root.task.basicClaimData.vehicle.vehicleAdmin.plateNumber-plateNumber")
     private WebElement plateNumberKR;
     @FindBy(id = "root.task.basicClaimData.vehicle.vehicleAdmin.plateNumber")
-    private WebElement plateNumberSG;
+    private WebElement vehicleRegistrationNumber;
     @FindBy(id = "submitButton")
     private WebElement createNewCase;
     @FindBy(id = "root.task.displayName")
@@ -50,10 +50,11 @@ public class PreIntakePO extends PageObject {
 
      
     public void enterPlateNumberSGTextbox(String textPlateNumber) {
-        this.sendKeys(plateNumberSG, textPlateNumber);
+        this.sendKeys(vehicleRegistrationNumber, textPlateNumber);
     }
 
-     
+    public void enterVehicleRegistrationNumberTextbox(String textPlateNumber) { this.sendKeys(vehicleRegistrationNumber, textPlateNumber); }
+
     public void clickCreateNewCaseButton() {
         this.click(createNewCase);
         waitForElementInvisible(LOADING_CIRCLE);

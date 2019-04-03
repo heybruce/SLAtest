@@ -1,6 +1,8 @@
 package cases.SG;
 
+import cases.JP.WorkListOpenBoxJPTest;
 import cases.TestBase;
+import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -9,6 +11,7 @@ import pageobjects.processstep.DamageCapturingPO;
 import pageobjects.processstep.processstep.ProcessStepJPPO;
 import pageobjects.processstep.processstep.ProcessStepSGPO;
 import steps.Login;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -17,8 +20,11 @@ import static pageobjects.processstep.DamageCapturingPO.INSIDE_LOADING_CIRCLE;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class DamageCapturingSGTest extends TestBase{
+    private final static Logger logger = Logger.getLogger(DamageCapturingSGTest.class);
+
     private ProcessStepSGPO processStepSGPO = new ProcessStepSGPO();
     private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
+    private String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile","vehicleElement"})
@@ -31,6 +37,7 @@ public class DamageCapturingSGTest extends TestBase{
     public void methodSetup() {
         processStepSGPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test
@@ -40,11 +47,12 @@ public class DamageCapturingSGTest extends TestBase{
 
         //Login
         Login login = new Login();
-        login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
+        login.LoginBRE(testData.getString("rep_username"), testData.getString("password"));
 
 
         testResult.setTimeStarted(Instant.now());
-        getDriver().get(testData.getString("url_to_DamageCaptureSG"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCaptureSG"));
 
         damageCapturingPO.waitForElementInvisible(INSIDE_LOADING_CIRCLE);
         testResult.setTimeFinished(Instant.now());

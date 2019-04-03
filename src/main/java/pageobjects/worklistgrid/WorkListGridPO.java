@@ -35,7 +35,7 @@ public class WorkListGridPO extends PageObject{
     @FindBy(id = "view-link-worklistgrid_closed")
     private WebElement closedTab;
     @FindBy(id = "view-link-worklistgrid_custom_open")
-    private WebElement openTabSG;
+    private WebElement customOpenTab;
     @FindBy(id = "view-link-worklistgrid_custom_sent")
     private WebElement sentTabSG;
 
@@ -117,6 +117,10 @@ public class WorkListGridPO extends PageObject{
         waitForElementInvisible(LOADING_CIRCLE);
     }
 
+    public void clickCustomOpenTab() {
+        this.click(customOpenTab);
+        waitForElementInvisible(LOADING_CIRCLE);
+    }
     
     public void clickClaimManager() {
         new WebDriverWait(webDriver, 5).until(ExpectedConditions.visibilityOf(claimManager));
@@ -154,7 +158,7 @@ public class WorkListGridPO extends PageObject{
 
     
     public void clickOpenTabSG() {
-        this.click(openTabSG);
+        this.click(customOpenTab);
         waitForElementInvisible(LOADING_CIRCLE);
     }
 
