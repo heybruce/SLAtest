@@ -6,11 +6,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageobjects.PreIntakePO;
 import pageobjects.processstep.claimdetails.ClaimDetailsJPPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
-import steps.SelectVehicle;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -20,6 +19,7 @@ import static utils.webdrivers.WebDriverFactory.getDriver;
 public class ClaimInfoJPTest extends TestBase {
     private WorkListGridOpenPO workListGridOpenPO = new WorkListGridOpenPO();
     private ClaimDetailsJPPO claimDetailsJPPO = new ClaimDetailsJPPO();
+    private String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -31,6 +31,7 @@ public class ClaimInfoJPTest extends TestBase {
     public void methodSetup(){
         workListGridOpenPO.setWebDriver(getDriver());
         claimDetailsJPPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test(description = "Search a vehicle by vin")
@@ -41,7 +42,8 @@ public class ClaimInfoJPTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        getDriver().get(testData.getString("url_to_ClaimInfoJP"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Generic", "ClaimInfoJP"));
 
         claimDetailsJPPO.enterVin(testData.getString("vin"));
         testResult.setTimeStarted(Instant.now());

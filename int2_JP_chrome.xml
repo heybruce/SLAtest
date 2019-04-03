@@ -5,10 +5,10 @@
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
     <test name="SLA" parallel="classes" thread-count="1">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="locale" value="en-us"/>
-        <parameter name="type" value="APM"/>
         <parameter name="env" value="INT2SG"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="ja-jp"/>
+        <parameter name="type" value="APM"/>
         <parameter name="country" value="JP"/>
         <parameter name="dataFile" value="data.int2.JP.properties"/>
         <parameter name="vehicleElement" value="vehicleElement.JP.properties"/>

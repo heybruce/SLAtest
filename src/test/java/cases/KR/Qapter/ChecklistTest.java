@@ -52,7 +52,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey),"BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Qapter checklist
@@ -72,7 +72,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         Checklist checklist = new Checklist();
@@ -102,7 +102,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
@@ -129,7 +129,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
@@ -152,7 +152,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
@@ -179,7 +179,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         testResult.setTimeStarted(Instant.now());

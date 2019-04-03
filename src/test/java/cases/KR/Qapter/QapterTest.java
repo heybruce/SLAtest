@@ -58,7 +58,7 @@ public class QapterTest extends TestBase{
 
         //Verify and switch to non-3D mode
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -82,7 +82,7 @@ public class QapterTest extends TestBase{
 
         //Verify and switch to non-3D mode
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -111,7 +111,7 @@ public class QapterTest extends TestBase{
 
         //Verify and switch to non-3D mode
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -149,7 +149,7 @@ public class QapterTest extends TestBase{
 
         //Verify and switch to non-3D mode
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -184,7 +184,7 @@ public class QapterTest extends TestBase{
 
         //Verify and switch to non-3D mode
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");
@@ -202,7 +202,7 @@ public class QapterTest extends TestBase{
         }
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
         testResult.setTimeStarted(Instant.now());
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.waitForQapterLoading();
@@ -214,7 +214,7 @@ public class QapterTest extends TestBase{
 
         //Verify and switch to non-3D mode
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.navigationSettings();
         Boolean is3dView = damageCapturingPO.getThreeDViewIndicator().getAttribute("class").equalsIgnoreCase("checkbox_slide  active ");

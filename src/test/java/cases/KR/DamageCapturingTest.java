@@ -44,7 +44,7 @@ public class DamageCapturingTest extends TestBase{
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
 
         damageCapturingPO.clickQapterIcon();
 

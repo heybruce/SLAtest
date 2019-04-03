@@ -45,7 +45,7 @@ public class ClaimDetailsTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Claim+Details"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "Claim+Details"));
 
         claimDetailsKRPO.enterVin(testData.getString("vin"));
         testResult.setTimeStarted(Instant.now());
@@ -80,7 +80,7 @@ public class ClaimDetailsTest extends TestBase {
 
         testResult.setTimeStarted(Instant.now());
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Claim+Details"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "Claim+Details"));
         testResult.setTimeFinished(Instant.now());
 
         Assert.assertNotNull(claimDetailsKRPO.getClaimNumber());

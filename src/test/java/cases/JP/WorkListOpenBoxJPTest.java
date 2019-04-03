@@ -77,7 +77,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
 
         testResult.setTimeStarted(Instant.now());
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Claim+Details"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Generic", "ClaimInfoJP"));
         testResult.setTimeFinished(Instant.now());
 
         Assert.assertNotNull(claimDetailsJPPO.getClaimNumber());
@@ -114,8 +114,6 @@ public class WorkListOpenBoxJPTest extends TestBase {
         workListGridOpenPO.clickOpenTab();
         workListGridOpenPO.sortCreationDate();
         Assert.assertTrue(workListGridOpenPO.isClaimNumberExist(claimNumber));
-
-
 
         //Logout
         processStepJPPO.openCollapsedMenu();

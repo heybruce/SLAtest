@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pageobjects.processstep.DamageCapturingPO;
 import pageobjects.processstep.processstep.ProcessStepJPPO;
 import steps.Login;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import java.time.Instant;
@@ -18,6 +19,7 @@ import static utils.webdrivers.WebDriverFactory.getDriver;
 public class DamageCaptureJPTest extends TestBase{
     private ProcessStepJPPO processStepJPPO = new ProcessStepJPPO();
     private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
+    private String taskIdKey;
 
     @BeforeClass
     @Parameters(value = {"dataFile","vehicleElement"})
@@ -30,6 +32,7 @@ public class DamageCaptureJPTest extends TestBase{
     public void methodSetup() {
         processStepJPPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
+        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
     @Test
@@ -43,7 +46,8 @@ public class DamageCaptureJPTest extends TestBase{
 
 
         testResult.setTimeStarted(Instant.now());
-        getDriver().get(testData.getString("url_to_DamageCaptureJP"));
+        getDriver().get(UtilitiesManager.constructBreUrl(
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Generic", "DamageCaptureJP"));
 
         damageCapturingPO.waitForElementInvisible(INSIDE_LOADING_CIRCLE);
         testResult.setTimeFinished(Instant.now());

@@ -236,12 +236,12 @@ public class UtilitiesManager {
         return taskId;
     }
 
-    public static String constructBreUrl(String url, String taskId, String step) {
+    public static String constructBreUrl(String url, String taskId, String process, String step) {
         String uri = "";
         try {
             URIBuilder uriBuilder = new URIBuilder(url);
             uriBuilder.addParameter("taskId", taskId);
-            uriBuilder.addParameter("process", "BRE");
+            uriBuilder.addParameter("process", process);
             uriBuilder.addParameter("step", step);
             uri = uriBuilder.toString();
         }
