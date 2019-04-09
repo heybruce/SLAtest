@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SG" verbose="1" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="utils.listeners.AnnotationTransformer"/>
+        <listener class-name="utils.listeners.TestListener"/>
+    </listeners>
+    <test name="APM" parallel="classes" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="en-us"/>
+        <parameter name="type" value="APM"/>
+        <parameter name="env" value="PRODSG"/>
+        <parameter name="country" value="SG"/>
+        <parameter name="dataFile" value="data.prod.SG.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.SG.properties"/>
+        <classes>
+            <class name="cases.SG.WorkListOpenBoxSGTest">
+                <methods>
+                    <include name="createNewCaseFromHeader"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

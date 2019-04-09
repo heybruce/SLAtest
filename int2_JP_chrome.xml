@@ -29,7 +29,6 @@
                     <include name="activateQapter"/>
                 </methods>
             </class>
-
         </classes>
     </test>
     <test name="B2B" parallel="classes" thread-count="1">

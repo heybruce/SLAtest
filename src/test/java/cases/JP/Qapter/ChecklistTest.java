@@ -1,8 +1,6 @@
-package cases.KR.Qapter;
+package cases.JP.Qapter;
 
 import cases.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -10,8 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageobjects.processstep.DamageCapturingPO;
-import pageobjects.processstep.processstep.ProcessStepKRPO;
-import steps.DamageCapturing;
+import pageobjects.processstep.processstep.ProcessStepJPPO;
 import steps.Login;
 import steps.Qapter.Checklist;
 import utils.RedisManager;
@@ -22,9 +19,9 @@ import java.time.Instant;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class ChecklistTest extends TestBase {
-    private ProcessStepKRPO processStepKRPO = new ProcessStepKRPO();
-    private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
     private WebDriverWait wait;
+    private ProcessStepJPPO processstepJPPO;
+    private DamageCapturingPO damageCapturingPO;
     private String taskIdKey;
 
     @BeforeClass
@@ -36,9 +33,9 @@ public class ChecklistTest extends TestBase {
 
     @BeforeMethod
     public void methodSetup() {
-        processStepKRPO.setWebDriver(getDriver());
-        damageCapturingPO.setWebDriver(getDriver());
         wait = new WebDriverWait(getDriver(), 10);
+        processstepJPPO.setWebDriver(getDriver());
+        damageCapturingPO.setWebDriver(getDriver());
         taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
     }
 
@@ -72,21 +69,20 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey),"BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         Checklist checklist = new Checklist();
         int addedPartsNumber = checklist.consistentAfterQapterResumed(
-                vehicleElementData.getString("bmw320_zone_frontOuter"), vehicleElementData.getString("bmw320_position_0471_Bonnet"),
-                vehicleElementData.getString("bmw320_zone_rearOuter"),vehicleElementData.getString("bmw320_position_2711_rearPanelCPL"));
+                vehicleElementData.getString("benzE_zone_frontOuter"), vehicleElementData.getString("benzE_position_0471_Bonnet"),
+                vehicleElementData.getString("benzE_zone_rearDoors"),vehicleElementData.getString("benzE_position_1781And1782Door"));
         Assert.assertEquals(addedPartsNumber, 2);
 
         getDriver().switchTo().defaultContent();
-        processStepKRPO.clickReportsTab();
-        //Switch to Damage Capturing page again
-        processStepKRPO.clickDamageCapturingTab();
-        DamageCapturing damageCapturing = new DamageCapturing();
-        damageCapturing.launchQapter();
+        processstepJPPO.clickCalculationOptionsTab();
+        //Switch to Damage Capturing page
+        processstepJPPO.clickDamageCaptureTab();
+        damageCapturingPO.switchToQapterIframe();
         damageCapturingPO.navigationChecklist();
 
         Assert.assertEquals(damageCapturingPO.getChecklistNumber(), addedPartsNumber);
@@ -102,7 +98,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey),"BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
@@ -129,16 +125,16 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey),"BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
         Checklist checklist = new Checklist();
         checklist.editPositionInChecklist(
-                vehicleElementData.getString("bmw320_zone_frontOuter"), vehicleElementData.getString("bmw320_position_0471_Bonnet"));
+                vehicleElementData.getString("benzE_zone_frontOuter"), vehicleElementData.getString("benzE_position_0471_Bonnet"));
 
         //Verification
-        Assert.assertEquals(damageCapturingPO.getChecklistPartDescription(1), vehicleElementData.getString("bmw320_0471_part_description"));
+        Assert.assertEquals(damageCapturingPO.getChecklistPartDescription(1), vehicleElementData.getString("benzE_0471_part_description"));
         Assert.assertTrue(damageCapturingPO.getChecklistRepairMethod(1).contains(vehicleElementData.getString("replace_with_oem")));
     }
 
@@ -152,21 +148,21 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey),"BRE", "DamageCapturing"));
         damageCapturingPO.clickQapterIcon();
 
         //Checklist
         Checklist checklist = new Checklist();
         checklist.deletePositionInChecklist(
-                vehicleElementData.getString("bmw320_zone_frontOuter"), vehicleElementData.getString("bmw320_position_0471_Bonnet"));
+                vehicleElementData.getString("benzE_zone_frontOuter"), vehicleElementData.getString("benzE_position_0471_Bonnet"));
 
         //Verification
         int checklistNumber = damageCapturingPO.getChecklistNumber();
         Assert.assertEquals(checklistNumber, 0);
         damageCapturingPO.navigationVehicle();
-        Assert.assertFalse(damageCapturingPO.isPartSelected(vehicleElementData.getString("bmw320_zone_frontOuter")));
-        damageCapturingPO.clickZone(vehicleElementData.getString("bmw320_zone_frontOuter"));
-        Assert.assertFalse(damageCapturingPO.isPartSelected(vehicleElementData.getString("bmw320_position_0471_Bonnet")));
+        Assert.assertFalse(damageCapturingPO.isPartSelected(vehicleElementData.getString("benzE_zone_frontOuter")));
+        damageCapturingPO.clickZone(vehicleElementData.getString("benzE_zone_frontOuter"));
+        Assert.assertFalse(damageCapturingPO.isPartSelected(vehicleElementData.getString("benzE_position_0471_Bonnet")));
     }
 
     @Test
@@ -179,7 +175,7 @@ public class ChecklistTest extends TestBase {
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Generic", "DamageCaptureJP"));
         damageCapturingPO.clickQapterIcon();
 
         testResult.setTimeStarted(Instant.now());

@@ -4,7 +4,49 @@
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
-
+    <test name="APM" parallel="classes" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="locale" value="en-us"/>
+        <parameter name="type" value="APM"/>
+        <parameter name="env" value="PRODSG"/>
+        <parameter name="country" value="SG"/>
+        <parameter name="dataFile" value="data.prod.SG.properties"/>
+        <parameter name="vehicleElement" value="vehicleElement.SG.properties"/>
+        <classes>
+            <class name="cases.SG.WorkListOpenBoxSGTest">
+                <methods>
+                    <include name="loginBRE"/>
+                    <include name="openExistingCase"/>
+                </methods>
+            </class>
+            <class name="cases.SG.GeneralDetailsSGTest">
+                <methods>
+                    <include name="searchVehicleByVin"/>
+                </methods>
+            </class>
+            <class name="cases.SG.DamageCapturingSGTest">
+                <methods>
+                    <include name="activateQapter"/>
+                </methods>
+            </class>
+            <!--<class name="cases.KR.Qapter.QapterTest">-->
+            <!--<methods>-->
+            <!--<include name="switchTo3D"/>-->
+            <!--<include name="selectPart"/>-->
+            <!--<include name="loadZoneIn3dView"/>-->
+            <!--<include name="activateQapterIn3dView"/>-->
+            <!--<include name="switchToVehicleTabIn3dView"/>-->
+            <!--</methods>-->
+            <!--</class>-->
+            <!--<class name="cases.KR.Qapter.ChecklistTest">-->
+            <!--<methods>-->
+            <!--<include name="loadChecklist"/>-->
+            <!--<include name="loadChecklistWithOver100Parts"/>-->
+            <!--<include name="loadChecklistWithOver200Parts"/>-->
+            <!--</methods>-->
+            <!--</class>-->
+        </classes>
+    </test>
     <test name="B2B" parallel="classes" thread-count="1">
         <parameter name="browser" value="b2b"/>
         <parameter name="country" value="SG"/>
