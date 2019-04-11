@@ -47,15 +47,15 @@ public class GeneralDetailsIDTest extends TestBase {
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "GeneralDetailsID"));
 
-        claimDetailsPO.enterVin(testData.getString("bmw320_vin"));
+        claimDetailsPO.enterVin(testData.getString("benzS_vin"));
         testResult.setTimeStarted(Instant.now());
         claimDetailsPO.clickVinQuery();
 
         //Vin details
         String vinManufacturerCodeExpected, vinModelCodeExpected, vinSubmodelCodeExpected;
-        vinManufacturerCodeExpected = testData.getString("bmw320_manufacturer_code");
-        vinModelCodeExpected = testData.getString("bmw320_model_code");
-        vinSubmodelCodeExpected = testData.getString("bmw320_submodel_code");
+        vinManufacturerCodeExpected = testData.getString("benzS_manufacturer_code");
+        vinModelCodeExpected = testData.getString("benzS_model_code");
+        vinSubmodelCodeExpected = testData.getString("benzS_submodel_code");
 
         //ClaimDetails - Get the VIN query information
         String vinManufacturerCodeActual, vinModelCodeActual, vinSubmodelCodeActual;

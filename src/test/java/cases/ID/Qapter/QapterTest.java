@@ -98,12 +98,12 @@ public class QapterTest extends TestBase {
         }
 
         damageCapturingPO.navigationVehicle();
-        damageCapturingPO.click(getDriver().findElement(By.id(vehicleElementData.getString("bmw320_zone_frontOuter"))));
-        fluentWait(By.id(vehicleElementData.getString("bmw320_position_0471_Bonnet")));
+        damageCapturingPO.click(getDriver().findElement(By.id(vehicleElementData.getString("benzS_zone_frontOuter"))));
+        fluentWait(By.id(vehicleElementData.getString("benzS_position_0471_Bonnet")));
 
         //Select a part
         testResult.setTimeStarted(Instant.now());
-        damageCapturingPO.click(getDriver().findElement(By.id(vehicleElementData.getString("bmw320_position_0471_Bonnet"))));
+        damageCapturingPO.click(getDriver().findElement(By.id(vehicleElementData.getString("benzS_position_0471_Bonnet"))));
         fluentWait(By.id("menu-items-wrapper"));
         Assert.assertTrue(isElementPresent(By.id("menu-items-wrapper")));
 
