@@ -206,7 +206,7 @@ public class QapterTest extends TestBase {
         }
 
         getDriver().get(UtilitiesManager.constructBreUrl(
-                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCaptureSG"));
+                testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCaptureID"));
         testResult.setTimeStarted(Instant.now());
         damageCapturingPO.switchToQapterIframe();
         damageCapturingPO.waitForQapterLoading();

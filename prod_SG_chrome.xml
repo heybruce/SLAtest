@@ -7,7 +7,7 @@
     <test name="APM" parallel="classes" thread-count="1">
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="en-us"/>
-        <parameter name="type" value="APM"/>
+        <parameter name="type" value="SLA"/>
         <parameter name="env" value="PRODSG"/>
         <parameter name="country" value="SG"/>
         <parameter name="dataFile" value="data.prod.SG.properties"/>
