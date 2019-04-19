@@ -49,7 +49,7 @@ public class DamageCaptureJPTest extends TestBase{
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Generic", "DamageCaptureJP"));
 
-        damageCapturingPO.waitForQapterLoading();
+        damageCapturingPO.waitForElementInvisible(INSIDE_LOADING_CIRCLE);
         testResult.setTimeFinished(Instant.now());
     }
 }
