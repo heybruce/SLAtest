@@ -52,7 +52,7 @@ public class DamageCapturingIDTest extends TestBase{
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCaptureID"));
 
-        damageCapturingPO.waitForElementInvisible(INSIDE_LOADING_CIRCLE);
+        damageCapturingPO.waitForQapterLoading();
         testResult.setTimeFinished(Instant.now());
     }
 }
