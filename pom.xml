@@ -230,6 +230,7 @@
             <groupId>com.solera.apac1.qa</groupId>
             <artifactId>bre-web-ui-element</artifactId>
             <version>1.0-20190423.075441-1</version>
+            <scope>system</scope>
         </dependency>
     </dependencies>
     <build>
