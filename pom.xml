@@ -6,6 +6,24 @@
     <groupId>com.solera.apac1.qa</groupId>
     <artifactId>apac1.SLAHealthCheck</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <repositories>
+        <repository>
+            <id>apac1-snapshot</id>
+            <name>APAC1 Snapshots</name>
+            <releases>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <url>http://10.29.25.73/artifactory/libs-snapshot-local</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -180,13 +198,13 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/axn-b2b-client-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>com.solera.apac1.qa</groupId>
-            <artifactId>bre-web-ui-element</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/bre-web-ui-element-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.solera.apac1.qa</groupId>-->
+            <!--<artifactId>bre-web-ui-element</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/src/main/resources/bre-web-ui-element-1.0-SNAPSHOT.jar</systemPath>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -208,7 +226,11 @@
             <artifactId>lettuce-core</artifactId>
             <version>5.1.6.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.solera.apac1.qa</groupId>
+            <artifactId>bre-web-ui-element</artifactId>
+            <version>1.0-20190423.075441-1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
