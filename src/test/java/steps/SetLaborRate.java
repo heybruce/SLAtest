@@ -18,7 +18,7 @@ public class SetLaborRate extends TestBase {
     }
 
     public void SelectPartnership(){
-        laborRatesPO.selectPartnerShipByValueDropdown("1");
+        laborRatesPO.selectPartnerShipByInputValue("1");
     }
 
     public void addIDBC(String idbc, String value) {

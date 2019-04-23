@@ -180,12 +180,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/axn-b2b-client-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.solera.apac1.qa</groupId>-->
-            <!--<artifactId>bre-web-ui-element</artifactId>-->
-            <!--<version>1.0</version>-->
-            <!--<systemPath>${project.basedir}/src/main/resources/bre-web-ui-element-1.0-SNAPSHOT.jar</systemPath>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.solera.apac1.qa</groupId>
+            <artifactId>bre-web-ui-element</artifactId>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/src/main/resources/bre-web-ui-element-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
