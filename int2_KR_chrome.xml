@@ -4,7 +4,7 @@
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
-    <test name="SLA" parallel="classes" thread-count="1">
+    <test name="SLA" parallel="classes" thread-count="3">
         <parameter name="browser" value="chrome"/>
         <parameter name="os" value="any"/>
         <parameter name="locale" value="ko-kr"/>
