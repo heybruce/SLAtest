@@ -5,6 +5,7 @@
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
     <test name="SLA" parallel="classes" thread-count="1">
+        <parameter name="os" value="any"/>
         <parameter name="env" value="INT2SG"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ko-kr"/>

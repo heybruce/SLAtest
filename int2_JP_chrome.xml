@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="JP" verbose="1" parallel="tests" thread-count="1">
+<suite name="JP" verbose="1" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.TestListener"/>
     </listeners>
-    <test name="SLA" parallel="classes" thread-count="1">
+    <test name="SLA" parallel="classes" thread-count="4">
         <parameter name="env" value="INT2SG"/>
+        <parameter name="os" value="any"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ja-jp"/>
         <parameter name="type" value="APM"/>
