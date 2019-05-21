@@ -10,7 +10,7 @@ import utils.slack.WebAPIClient;
 
 import java.io.IOException;
 
-public class TestListener extends TestListenerAdapter {
+public class SlackListener extends TestListenerAdapter {
     //Slack
     public static Configuration slackProp = UtilitiesManager.setPropertiesFile("slack.tpe.server.properties");
     private static final String WEBHOOK_URL = slackProp.getString("webhook_url");

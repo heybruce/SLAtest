@@ -2,7 +2,7 @@
 <suite name="ID" verbose="1" parallel="tests" thread-count="1">
     <listeners>
         <listener class-name="utils.listeners.AnnotationTransformer"/>
-        <listener class-name="utils.listeners.TestListener"/>
+        <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
     <test name="APM" parallel="classes" thread-count="1">
         <parameter name="os" value="any"/>

@@ -2,7 +2,7 @@
 <suite name="KR" verbose="1" parallel="tests" thread-count="1">
     <listeners>
         <listener class-name="utils.listeners.AnnotationTransformer"/>
-        <listener class-name="utils.listeners.TestListener"/>
+        <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
     <test name="SLA" parallel="classes" thread-count="1">
         <parameter name="env" value="PRODSG"/>
