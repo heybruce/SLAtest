@@ -6,6 +6,7 @@
     </listeners>
     <test name="SLA" parallel="classes" thread-count="1">
         <parameter name="env" value="PRODSG"/>
+        <parameter name="os" value="any"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ko-kr"/>
         <parameter name="type" value="SLA"/>
