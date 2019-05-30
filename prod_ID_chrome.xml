@@ -1,10 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="ID" verbose="1" parallel="tests" thread-count="1">
+<suite name="ID" verbose="1" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
-    <test name="APM" parallel="classes" thread-count="1">
+    <test name="APM" parallel="classes" thread-count="4">
         <parameter name="env" value="PRODSG"/>
         <parameter name="os" value="any"/>
         <parameter name="browser" value="chrome"/>
