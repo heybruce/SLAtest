@@ -31,7 +31,6 @@ public class TestBase {
 //    private final static Logger logger = Logger.getLogger(TestBase.class);
 
     public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
-//    public static TestResult testResult = new TestResult();
     public static Configuration testData;
     public static Configuration vehicleElementData;
 
@@ -40,15 +39,13 @@ public class TestBase {
     }
 
     @BeforeTest
-    @Parameters(value = {"browser"})
-    public void beforeTest(ITestContext context, String browser) throws Exception {
+    public void beforeTest() throws Exception {
         TestResult result = new TestResult();
         testResult.set(result);
     }
 
     @BeforeClass
-    @Parameters(value = {"browser"})
-    public synchronized void beforeClass(ITestContext context, String browser) throws Exception {
+    public synchronized void beforeClass() {
     }
 
     @BeforeMethod
@@ -61,16 +58,10 @@ public class TestBase {
         result.setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
         result.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
         testResult.set(result);
-
-//        testResult.get().setTestName(method.getName());
-//        testResult.get().setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
-//        testResult.get().setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
-//        testResult.get().setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
     }
 
     @AfterMethod
-    @Parameters(value = {"browser"})
-    public synchronized void afterMethod(Method method, String browser, ITestResult result) {
+    public synchronized void afterMethod(Method method, ITestResult result) {
         testResult.get().setTimeElapsed(Duration.between(testResult.get().getTimeStarted(), testResult.get().getTimeFinished()).toMillis());
         testResult.get().setSuccess(result.isSuccess());
 
@@ -83,11 +74,10 @@ public class TestBase {
     }
 
     @AfterTest
-    @Parameters(value = {"browser"})
-    public void afterTest(String browser) { }
+    public void afterTest() { }
 
     @AfterSuite
-    public void afterSuite(ITestContext context) throws Exception { }
+    public void afterSuite() { }
 
     public boolean isElementPresent(By by) {
         try {
@@ -128,15 +118,6 @@ public class TestBase {
             }
         });
         return webElement;
-    }
-
-    public Map<String, String> getTestInfo(ITestContext context) {
-        Map<String, String> testInfo = new HashMap<>();
-        testInfo.put("browser", context.getCurrentXmlTest().getLocalParameters().get("browser"));
-        testInfo.put("country", context.getCurrentXmlTest().getLocalParameters().get("country"));
-        testInfo.put("url", UtilitiesManager.setPropertiesFile(
-                context.getCurrentXmlTest().getLocalParameters().get("dataFile")).getString("test_url"));
-        return testInfo;
     }
 
     public Callable<Boolean> isFileExisted(File downloadFile) {
