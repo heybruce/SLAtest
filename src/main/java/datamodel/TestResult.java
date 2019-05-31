@@ -11,11 +11,7 @@ public class TestResult {
     private Instant timeFinished;
     private long timeElapsed;
     private String env;
-    private Boolean isSuccess;
-
-    public TestResult() {
-        this.isSuccess = true;
-    }
+    private Boolean isSuccess = true;
 
     public Boolean getSuccess() {
         return isSuccess;

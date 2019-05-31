@@ -49,7 +49,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
         claimDetailsJPPO.setWebDriver(getDriver());
         workListGridOpenPO.setWebDriver(getDriver());
         processStepJPPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test
@@ -59,9 +59,9 @@ public class WorkListOpenBoxJPTest extends TestBase {
         //Login
         Login login = new Login();
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         //Dashboard page
         Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
@@ -75,10 +75,10 @@ public class WorkListOpenBoxJPTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Generic", "ClaimInfoJP"));
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         Assert.assertNotNull(claimDetailsJPPO.getClaimNumber());
     }
@@ -94,14 +94,14 @@ public class WorkListOpenBoxJPTest extends TestBase {
         //Work List grid Open
         workListGridOpenPO.clickOpenTab();
         workListGridOpenPO.clickNewClaimButton();
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
 
         //Pre Intake page
         String claimNumber = Long.toString(UtilitiesManager.getCurrentUnixTime());
         preIntakePO.enterClaimNumberTextbox(claimNumber);
         preIntakePO.clickCreateNewCaseButton();
         fluentWait(By.id(ClaimDetailsJPPO.ID_CLAIM_NUMBER));
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         String claimDetailUrl = getDriver().getCurrentUrl();
         String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);

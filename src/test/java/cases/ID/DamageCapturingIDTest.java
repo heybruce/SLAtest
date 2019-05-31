@@ -35,7 +35,7 @@ public class DamageCapturingIDTest extends TestBase{
     public void methodSetup() {
         processStepIDPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test
@@ -48,11 +48,11 @@ public class DamageCapturingIDTest extends TestBase{
         login.LoginBRE(testData.getString("rep_username"), testData.getString("password"));
 
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCaptureID"));
 
         damageCapturingPO.waitForQapterLoading();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 }

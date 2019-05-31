@@ -31,7 +31,7 @@ public class ClaimInfoJPTest extends TestBase {
     public void methodSetup(){
         workListGridOpenPO.setWebDriver(getDriver());
         claimDetailsJPPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test(description = "Search a vehicle by vin")
@@ -46,7 +46,7 @@ public class ClaimInfoJPTest extends TestBase {
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "Generic", "ClaimInfoJP"));
 
         claimDetailsJPPO.enterVin(testData.getString("vin"));
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         claimDetailsJPPO.clickVinQuery();
 
 
@@ -65,7 +65,7 @@ public class ClaimInfoJPTest extends TestBase {
         Assert.assertEquals(vinManufacturerCodeActual, vinManufacturerCodeExpected);
         Assert.assertEquals(vinModelCodeActual, vinModelCodeExpected);
         Assert.assertEquals(vinSubmodelCodeActual, vinSubmodelCodeExpected);
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
 }

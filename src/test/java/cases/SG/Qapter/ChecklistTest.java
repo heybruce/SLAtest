@@ -36,7 +36,7 @@ public class ChecklistTest extends TestBase {
         wait = new WebDriverWait(getDriver(), 10);
         processStepSGPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test
@@ -52,9 +52,9 @@ public class ChecklistTest extends TestBase {
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE","DamageCaptureSG"));
         damageCapturingPO.clickQapterIcon();
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.navigationChecklist();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         int checklistNumber = damageCapturingPO.getChecklistNumber();
         Assert.assertTrue(checklistNumber > 0);
@@ -72,9 +72,9 @@ public class ChecklistTest extends TestBase {
         getDriver().get(testData.getString("url_checklist_over_100"));
         damageCapturingPO.clickQapterIcon();
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.navigationChecklist();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         int checklistNumber = damageCapturingPO.getChecklistNumber();
         Assert.assertTrue(checklistNumber > 0);
@@ -92,9 +92,9 @@ public class ChecklistTest extends TestBase {
         getDriver().get(testData.getString("url_checklist_over_200"));
         damageCapturingPO.clickQapterIcon();
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.navigationChecklist();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         int checklistNumber = damageCapturingPO.getChecklistNumber();
         Assert.assertTrue(checklistNumber > 0);

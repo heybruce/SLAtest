@@ -28,12 +28,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class TestBase {
-    private final static Logger logger = Logger.getLogger(TestBase.class);
+//    private final static Logger logger = Logger.getLogger(TestBase.class);
 
-//    public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
-    public static TestResult testResult = new TestResult();
-    protected static Configuration testData;
-    protected static Configuration vehicleElementData;
+    public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
+//    public static TestResult testResult = new TestResult();
+    public static Configuration testData;
+    public static Configuration vehicleElementData;
 
     @BeforeSuite
     public void beforeSuite() throws Exception {
@@ -42,6 +42,8 @@ public class TestBase {
     @BeforeTest
     @Parameters(value = {"browser"})
     public void beforeTest(ITestContext context, String browser) throws Exception {
+        TestResult result = new TestResult();
+        testResult.set(result);
     }
 
     @BeforeClass
@@ -53,24 +55,31 @@ public class TestBase {
     public synchronized void beforeMethod(Method method, ITestContext context) {
         WebDriverFactory.setDriver(context);
 
-        testResult.setTestName(method.getName());
-        testResult.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
-        testResult.setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
-        testResult.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
+        TestResult result = new TestResult();
+        result.setTestName(method.getName());
+        result.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
+        result.setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
+        result.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
+        testResult.set(result);
+
+//        testResult.get().setTestName(method.getName());
+//        testResult.get().setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
+//        testResult.get().setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
+//        testResult.get().setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
     }
 
     @AfterMethod
     @Parameters(value = {"browser"})
     public synchronized void afterMethod(Method method, String browser, ITestResult result) {
-        testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
-        testResult.setSuccess(result.isSuccess());
+        testResult.get().setTimeElapsed(Duration.between(testResult.get().getTimeStarted(), testResult.get().getTimeFinished()).toMillis());
+        testResult.get().setSuccess(result.isSuccess());
 
         WebDriverFactory.getDriver().manage().deleteAllCookies();
         WebDriverFactory.getDriver().quit();
 
-        UtilitiesManager.createJsonFile(method.getName(), testResult);
+        UtilitiesManager.createJsonFile(method.getName(), testResult.get());
         //Send test result to Kibana server
-        RestManager.sendTestResult(testResult);
+        RestManager.sendTestResult(testResult.get());
     }
 
     @AfterTest

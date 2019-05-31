@@ -13,7 +13,6 @@ import java.net.URL;
 
 public class WebDriverFactory {
 
-//    private static OptionManager optionManager = new OptionManager();
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
     public static synchronized WebDriverWait getWait(WebDriver driver) {
@@ -25,6 +24,8 @@ public class WebDriverFactory {
     }
 
     public static synchronized void setDriver(ITestContext context) {
+        OptionManager optionManager = new OptionManager();
+
         String browser = context.getCurrentXmlTest().getLocalParameters().get("browser");
         String os = context.getCurrentXmlTest().getLocalParameters().get("os");
         String langLocale = context.getCurrentXmlTest().getLocalParameters().get("locale");
@@ -52,12 +53,14 @@ public class WebDriverFactory {
 //                e.printStackTrace();
 //            }
 
-            //Selenium Grid
             System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
+
+            //Selenium Grid
             try {
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.setCapability("language", language);
-                firefoxOptions.setCapability("locale", locale.toUpperCase());
+//                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                optionManager.setFirefoxOptions(context);
+                FirefoxOptions firefoxOptions = optionManager.getFirefoxOptions();
+
                 //default set to WINDOWS
                 firefoxOptions.setCapability("platform", Platform.WINDOWS);
 
@@ -99,9 +102,10 @@ public class WebDriverFactory {
 
             //Selenium Grid
             try {
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.setCapability("language", language);
-                chromeOptions.setCapability("locale", locale.toUpperCase());
+//                ChromeOptions chromeOptions = new ChromeOptions();
+                optionManager.setChromeOptions(context);
+                ChromeOptions chromeOptions = optionManager.getChromeOptions();
+
                 //default set to WINDOWS
                 chromeOptions.setCapability("platform", Platform.WINDOWS);
 

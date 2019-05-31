@@ -31,7 +31,7 @@ public class DamageCapturingTest extends TestBase{
     public void methodSetup() {
         processStepKRPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test
@@ -48,8 +48,8 @@ public class DamageCapturingTest extends TestBase{
 
         damageCapturingPO.clickQapterIcon();
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.navigationVehicle();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 }
