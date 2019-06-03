@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -27,8 +29,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import static utils.webdrivers.WebDriverFactory.getDriver;
+
 public class TestBase {
-//    private final static Logger logger = Logger.getLogger(TestBase.class);
+    private final static Logger logger = Logger.getLogger(TestBase.class);
 
     public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
     public static Configuration testData;
@@ -50,7 +54,11 @@ public class TestBase {
 
     @BeforeMethod
     public synchronized void beforeMethod(Method method, ITestContext context) {
+        logger.debug("Ready to start test method - " + method.getName());
         WebDriverFactory.setDriver(context);
+
+        //Enable Remote Web Driver to upload files from local machine
+        ((RemoteWebDriver)getDriver()).setFileDetector(new LocalFileDetector());
 
         TestResult result = new TestResult();
         result.setTestName(method.getName());
@@ -62,15 +70,17 @@ public class TestBase {
 
     @AfterMethod
     public synchronized void afterMethod(Method method, ITestResult result) {
+        logger.debug("Finish up test method - " + method.getName());
         testResult.get().setTimeElapsed(Duration.between(testResult.get().getTimeStarted(), testResult.get().getTimeFinished()).toMillis());
         testResult.get().setSuccess(result.isSuccess());
 
         WebDriverFactory.getDriver().manage().deleteAllCookies();
-        WebDriverFactory.getDriver().quit();
 
         UtilitiesManager.createJsonFile(method.getName(), testResult.get());
         //Send test result to Kibana server
         RestManager.sendTestResult(testResult.get());
+
+        WebDriverFactory.getDriver().quit();
     }
 
     @AfterTest

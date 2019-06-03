@@ -7,8 +7,8 @@ public class TestResult {
     private String testName;
     private String country;
     private String browser;
-    private Instant timeStarted;
-    private Instant timeFinished;
+    private Instant timeStarted = Instant.now();
+    private Instant timeFinished = Instant.now();
     private long timeElapsed;
     private String env;
     private Boolean isSuccess = true;
