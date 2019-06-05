@@ -62,7 +62,7 @@ public class WebDriverFactory {
                 FirefoxOptions firefoxOptions = optionManager.getFirefoxOptions();
 
                 //default set to WINDOWS
-                firefoxOptions.setCapability("platform", Platform.WINDOWS);
+                firefoxOptions.setCapability("platform", Platform.ANY);
 
                 if (os.equalsIgnoreCase("mac")) {
                     firefoxOptions.setCapability("platform", Platform.MAC);
@@ -107,7 +107,7 @@ public class WebDriverFactory {
                 ChromeOptions chromeOptions = optionManager.getChromeOptions();
 
                 //default set to WINDOWS
-                chromeOptions.setCapability("platform", Platform.WINDOWS);
+                chromeOptions.setCapability("platform", Platform.ANY);
 
                 if (os.equalsIgnoreCase("mac")) {
                     chromeOptions.setCapability("platform", Platform.MAC);
