@@ -37,6 +37,7 @@ public class TestBase {
     public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
     public static Configuration testData;
     public static Configuration vehicleElementData;
+    public static final boolean RUN_ON_GRID = Boolean.valueOf(System.getProperty("runOnGrid"));
 
     @BeforeSuite
     public void beforeSuite() throws Exception {
@@ -57,8 +58,11 @@ public class TestBase {
         logger.debug("Ready to start test method - " + method.getName());
         WebDriverFactory.setDriver(context);
 
-        //Enable Remote Web Driver to upload files from local machine
-        ((RemoteWebDriver)getDriver()).setFileDetector(new LocalFileDetector());
+        //Selenium grid
+        if(RUN_ON_GRID) {
+            //Enable Remote Web Driver to upload files from local machine
+            ((RemoteWebDriver) getDriver()).setFileDetector(new LocalFileDetector());
+        }
 
         TestResult result = new TestResult();
         result.setTestName(method.getName());

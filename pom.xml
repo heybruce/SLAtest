@@ -31,6 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suiteXmlFile></suiteXmlFile>
         <skipTests>false</skipTests>
+        <runOnGrid>false</runOnGrid>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -221,6 +222,9 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <runOnGrid>${runOnGrid}</runOnGrid>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin><!-- Include if you want to make an executable jar[FAT JAR which includes all  dependencies along with sprinboot loader] that you can run on commandline using java -jar NAME -->

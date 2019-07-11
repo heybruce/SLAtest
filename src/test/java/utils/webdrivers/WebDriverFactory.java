@@ -2,18 +2,23 @@ package utils.webdrivers;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
+import utils.UtilitiesManager;
 
 import java.net.URL;
+
+import static cases.TestBase.RUN_ON_GRID;
 
 public class WebDriverFactory {
 
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
+    private static OptionManager optionManager = new OptionManager();
 
     public static synchronized WebDriverWait getWait(WebDriver driver) {
         return new WebDriverWait(driver, 20);
@@ -24,44 +29,36 @@ public class WebDriverFactory {
     }
 
     public static synchronized void setDriver(ITestContext context) {
-        OptionManager optionManager = new OptionManager();
 
         String browser = context.getCurrentXmlTest().getLocalParameters().get("browser");
         String os = context.getCurrentXmlTest().getLocalParameters().get("os");
-        String langLocale = context.getCurrentXmlTest().getLocalParameters().get("locale");
-        String language = langLocale.substring(0,2);
-        String locale = langLocale.substring(3,5);
 
-        if (browser.equalsIgnoreCase("firefox")) {
-//            switch (UtilitiesManager.getSystem()) {
-//                case "Windows":
-//                    System.setProperty("webdriver.gecko.driver", OptionManager.configProp.getString("geckodriverWin"));
-//                    break;
-//                case "Mac":
-//                    System.setProperty("webdriver.gecko.driver", OptionManager.configProp.getString("geckodriverMac"));
-//                    break;
-//                case "Linux":
-//                    System.setProperty("webdriver.gecko.driver", OptionManager.configProp.getString("geckodriverLinux"));
-//                    break;
-//            }
-//            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
-//            try {
-//                optionManager.setFirefoxOptions(context);
-//                webDriverThreadLocal.set(new FirefoxDriver(optionManager.getFirefoxOptions()));
-//                webDriverThreadLocal.get().manage().window().maximize();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
+        if (browser.equalsIgnoreCase("firefox") && !RUN_ON_GRID) {
+            switch (UtilitiesManager.getSystem()) {
+                case "Windows":
+                    System.setProperty("webdriver.gecko.driver", OptionManager.configProp.getString("geckodriverWin"));
+                    break;
+                case "Mac":
+                    System.setProperty("webdriver.gecko.driver", OptionManager.configProp.getString("geckodriverMac"));
+                    break;
+                case "Linux":
+                    System.setProperty("webdriver.gecko.driver", OptionManager.configProp.getString("geckodriverLinux"));
+                    break;
+            }
             System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
-
+            try {
+                webDriverThreadLocal.set(new FirefoxDriver(optionManager.setFirefoxOptions(context)));
+                webDriverThreadLocal.get().manage().window().maximize();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (browser.equalsIgnoreCase("firefox") && RUN_ON_GRID) {
             //Selenium Grid
             try {
-//                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                optionManager.setFirefoxOptions(context);
-                FirefoxOptions firefoxOptions = optionManager.getFirefoxOptions();
+                FirefoxOptions firefoxOptions = optionManager.setFirefoxOptions(context);
 
-                //default set to WINDOWS
+                //default set to ANY
                 firefoxOptions.setCapability("platform", Platform.ANY);
 
                 if (os.equalsIgnoreCase("mac")) {
@@ -79,34 +76,31 @@ public class WebDriverFactory {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (browser.equalsIgnoreCase("chrome")) {
-
-//            switch (UtilitiesManager.getSystem()) {
-//                case "Windows":
-//                    System.setProperty("webdriver.chrome.driver", OptionManager.configProp.getString("chromedriverWin"));
-//                    break;
-//                case "Mac":
-//                    System.setProperty("webdriver.chrome.driver", OptionManager.configProp.getString("chromedriverMac"));
-//                    break;
-//                case "Linux":
-//                    System.setProperty("webdriver.chrome.driver", OptionManager.configProp.getString("chromedriverLinux"));
-//                    break;
-//            }
-//            try {
-//                optionManager.setChromeOptions(context);
-//                webDriverThreadLocal.set(new ChromeDriver(optionManager.getChromeOptions()));
-//                webDriverThreadLocal.get().manage().window().maximize();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+        } else if (browser.equalsIgnoreCase("chrome") && !RUN_ON_GRID) {
+            switch (UtilitiesManager.getSystem()) {
+                case "Windows":
+                    System.setProperty("webdriver.chrome.driver", OptionManager.configProp.getString("chromedriverWin"));
+                    break;
+                case "Mac":
+                    System.setProperty("webdriver.chrome.driver", OptionManager.configProp.getString("chromedriverMac"));
+                    break;
+                case "Linux":
+                    System.setProperty("webdriver.chrome.driver", OptionManager.configProp.getString("chromedriverLinux"));
+                    break;
+            }
+            try {
+                webDriverThreadLocal.set(new ChromeDriver(optionManager.setChromeOptions(context)));
+                webDriverThreadLocal.get().manage().window().maximize();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (browser.equalsIgnoreCase("chrome") && RUN_ON_GRID){
 
             //Selenium Grid
             try {
-//                ChromeOptions chromeOptions = new ChromeOptions();
-                optionManager.setChromeOptions(context);
-                ChromeOptions chromeOptions = optionManager.getChromeOptions();
+                ChromeOptions chromeOptions = optionManager.setChromeOptions(context);
 
-                //default set to WINDOWS
+                //default set to ANY
                 chromeOptions.setCapability("platform", Platform.ANY);
 
                 if (os.equalsIgnoreCase("mac")) {
