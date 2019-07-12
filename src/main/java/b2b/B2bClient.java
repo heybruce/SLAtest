@@ -1,13 +1,28 @@
 package b2b;
 
 import com.audatex.axn.classchecker.b2b.calc.CalculateFromXRecordsRequest;
+import com.audatex.axn.classchecker.b2b.task.CreateTaskRequest;
 import com.audatex.axn.classchecker.b2b.task.GetTaskRequest;
 import com.audatex.axn.classchecker.b2b.vehicle.VinQueryRequest;
+
+import org.dom4j.Element;
+import org.dom4j.io.DOMReader;
+import org.xml.sax.InputSource;
 import org.dom4j.Document;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.xml.sax.SAXException;
+import sun.rmi.runtime.Log;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.StringReader;
 
 @Service
 public class B2bClient {
@@ -48,6 +63,23 @@ public class B2bClient {
         Document response = b2bServiceProvider.getVehicleService(url).fullVinQuery(request);
         logger.debug(response.asXML());
         return response.asXML();
+    }
+
+    public String createTask (String loginId, String password, String task, String url) throws ParserConfigurationException, IOException, SAXException {
+        CreateTaskRequest request = new CreateTaskRequest();
+        request.setLoginId(loginId);
+        request.setPassword(password);
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(task));
+        org.w3c.dom.Document doc =  builder.parse(is);
+        org.dom4j.io.DOMReader reader = new DOMReader();
+        org.dom4j.Document document = reader.read(doc);
+        request.setTask(document);
+
+        String response = b2bServiceProvider.getTaskService(url).createTask(request);
+        logger.debug(response);
+        return response;
     }
 
 }

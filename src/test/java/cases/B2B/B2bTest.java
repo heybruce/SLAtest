@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import b2b.B2bClient;
+import org.xml.sax.SAXException;
 import utils.UtilitiesManager;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.time.Instant;
 
 public class B2bTest extends B2bTestBase {
@@ -77,5 +81,21 @@ public class B2bTest extends B2bTestBase {
         }
     }
 
+    @Test
+    public void createTask() throws SAXException, IOException, ParserConfigurationException {
+        try {
+            testResult.setTimeStarted(Instant.now());
+            String response = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
+                    , testData.getString("b2b_taskXml_200part"), testData.getString("b2b_url"));
+            testResult.setSuccess(true);
+        }
+        catch(B2bException e) {
+            logger.error("Error executing B2B request", e);
+            testResult.setSuccess(false);
+        }
+        finally {
+            testResult.setTimeFinished(Instant.now());
+        }
+    }
 
 }
