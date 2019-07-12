@@ -7,15 +7,11 @@ public class TestResult {
     private String testName;
     private String country;
     private String browser;
-    private Instant timeStarted;
-    private Instant timeFinished;
+    private Instant timeStarted = Instant.now();
+    private Instant timeFinished = Instant.now();
     private long timeElapsed;
     private String env;
-    private Boolean isSuccess;
-
-    public TestResult() {
-        this.isSuccess = true;
-    }
+    private Boolean isSuccess = true;
 
     public Boolean getSuccess() {
         return isSuccess;

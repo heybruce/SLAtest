@@ -33,7 +33,7 @@ public class ClaimDetailsTest extends TestBase {
     public void methodSetup() {
         claimDetailsKRPO.setWebDriver(getDriver());
         IBOSSearchPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test(description = "Search vehicle by VIN query")
@@ -48,7 +48,7 @@ public class ClaimDetailsTest extends TestBase {
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "Claim+Details"));
 
         claimDetailsKRPO.enterVin(testData.getString("vin"));
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         claimDetailsKRPO.clickVinQuery();
 
         //Vin details
@@ -67,7 +67,7 @@ public class ClaimDetailsTest extends TestBase {
         Assert.assertEquals(vinManufacturerCodeActual, vinManufacturerCodeExpected);
         Assert.assertEquals(vinModelCodeActual, vinModelCodeExpected);
         Assert.assertEquals(vinSubmodelCodeActual, vinSubmodelCodeExpected);
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
     @Test
@@ -78,10 +78,10 @@ public class ClaimDetailsTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "Claim+Details"));
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         Assert.assertNotNull(claimDetailsKRPO.getClaimNumber());
     }

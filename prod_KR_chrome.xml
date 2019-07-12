@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="KR" verbose="1" parallel="tests" thread-count="1">
+<suite name="KR" verbose="1" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="utils.listeners.AnnotationTransformer"/>
-        <listener class-name="utils.listeners.TestListener"/>
+        <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
-    <test name="SLA" parallel="classes" thread-count="1">
+    <test name="SLA" parallel="classes" thread-count="4">
         <parameter name="env" value="PRODSG"/>
+        <parameter name="os" value="any"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ko-kr"/>
         <parameter name="type" value="SLA"/>

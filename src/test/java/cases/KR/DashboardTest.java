@@ -48,7 +48,7 @@ public class DashboardTest extends TestBase {
         claimDetailsKRPO.setWebDriver(getDriver());
         workListGridOpenPO.setWebDriver(getDriver());
         processStepKRPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test
@@ -58,10 +58,10 @@ public class DashboardTest extends TestBase {
         //Login
         Login login = new Login();
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         //Dashboard page
         Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
@@ -79,7 +79,7 @@ public class DashboardTest extends TestBase {
         //Work List grid Open
         //dashboardPO.clickCreateCase();
         dashboardPO.clickNewClaimButton();
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
 
         //Pre Intake page
         String claimNumber = Long.toString(UtilitiesManager.getCurrentUnixTime());
@@ -91,7 +91,7 @@ public class DashboardTest extends TestBase {
         //Claim Details process step
         fluentWait(By.id(ClaimDetailsKRPO.ID_CLAIM_NUMBER));
 
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         String claimDetailUrl = getDriver().getCurrentUrl();
         String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);

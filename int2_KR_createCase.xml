@@ -2,9 +2,10 @@
 <suite name="KR" verbose="1" parallel="tests" thread-count="1">
     <listeners>
         <listener class-name="utils.listeners.AnnotationTransformer"/>
-        <listener class-name="utils.listeners.TestListener"/>
+        <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
     <test name="SLA" parallel="classes" thread-count="1">
+        <parameter name="os" value="any"/>
         <parameter name="env" value="INT2SG"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ko-kr"/>

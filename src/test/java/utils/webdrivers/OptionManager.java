@@ -14,14 +14,10 @@ import java.util.Map;
 class OptionManager {
 
     static Configuration configProp = UtilitiesManager.setPropertiesFile("driver.properties");
-    private ChromeOptions chromeOptions = new ChromeOptions();
-    private FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-    ChromeOptions getChromeOptions() {
-        return chromeOptions;
-    }
+    ChromeOptions setChromeOptions(ITestContext context) {
 
-    void setChromeOptions(ITestContext context) {
+        ChromeOptions chromeOptions = new ChromeOptions();
         Map<String, Object> preferences = new Hashtable<>();
         preferences.put("profile.default_content_settings.popups", 0);
         preferences.put("download.prompt_for_download", "false");
@@ -36,13 +32,12 @@ class OptionManager {
             chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--lang=" + context.getCurrentXmlTest().getLocalParameters().get("locale"));
         chromeOptions.setExperimentalOption("prefs", preferences);
+
+        return chromeOptions;
     }
 
-    FirefoxOptions getFirefoxOptions() {
-        return firefoxOptions;
-    }
-
-    void setFirefoxOptions(ITestContext context) {
+    FirefoxOptions setFirefoxOptions(ITestContext context) {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setHeadless(Boolean.valueOf(configProp.getString("is_headless")));
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         firefoxProfile.setPreference("intl.accept_languages", context.getCurrentXmlTest().getLocalParameters().get("locale"));
@@ -73,10 +68,7 @@ class OptionManager {
 
         // SetProfile for FirefoxOptions
         firefoxOptions.setProfile(firefoxProfile);
-    }
 
-    InternetExplorerOptions getIeOptions() {
-        InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-        return ieOptions;
+        return firefoxOptions;
     }
 }

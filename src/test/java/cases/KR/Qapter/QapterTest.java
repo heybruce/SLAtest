@@ -30,7 +30,7 @@ public class QapterTest extends TestBase{
     public void methodSetup() {
         processStepKRPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
 
         //Launch browser
         getDriver().get(testData.getString("test_url"));
@@ -68,12 +68,12 @@ public class QapterTest extends TestBase{
             damageCapturingPO.navigationSettings();
         }
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         //Switch to 3D view
         damageCapturingPO.click3dViewSwitch();
         damageCapturingPO.navigationVehicle();
 
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
     @Test
@@ -97,12 +97,12 @@ public class QapterTest extends TestBase{
         fluentWait(By.id(vehicleElementData.getString("bmw320_position_0471_Bonnet")));
 
         //Select a part
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.click(getDriver().findElement(By.id(vehicleElementData.getString("bmw320_position_0471_Bonnet"))));
         fluentWait(By.id("menu-items-wrapper"));
         Assert.assertTrue(isElementPresent(By.id("menu-items-wrapper")));
 
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
     @Test
@@ -136,11 +136,11 @@ public class QapterTest extends TestBase{
         damageCapturingPO.clickZoneListDropdownCollapse();
         fluentWait(By.id("an-arrow-right"));
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         //Moving to another zone by clicking right arrow
         damageCapturingPO.click(getDriver().findElement(By.id("an-arrow-right")));
         damageCapturingPO.waitForQapterLoading();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
     @Test
@@ -170,12 +170,12 @@ public class QapterTest extends TestBase{
         //Select the first item in the dropdown list to enter zone view
         fluentWait(By.id("tree-navigation-description-container-46"));
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         //Select a zone to load the zone view
         damageCapturingPO.click(getDriver().findElement(By.id("tree-navigation-description-container-46")));
         //fluentWait(By.id("an-arrow-right"));
         damageCapturingPO.waitForQapterLoading();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
     @Test
@@ -202,10 +202,10 @@ public class QapterTest extends TestBase{
 
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.clickQapterIcon();
         damageCapturingPO.waitForQapterLoading();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
     @Test
@@ -230,10 +230,10 @@ public class QapterTest extends TestBase{
             damageCapturingPO.click3dViewSwitch();
         }
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.navigationVehicle();
         damageCapturingPO.waitForQapterLoading();
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 
 }

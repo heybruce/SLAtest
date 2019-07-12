@@ -50,7 +50,7 @@ public class WorkListOpenBoxSGTest extends TestBase {
         claimDetailsSGPO.setWebDriver(getDriver());
         workListGridOpenPO.setWebDriver(getDriver());
         processStepSGPO.setWebDriver(getDriver());
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test
@@ -60,11 +60,11 @@ public class WorkListOpenBoxSGTest extends TestBase {
         //Login
         Login login = new Login();
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
 
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         //Dashboard page
         Assert.assertEquals(testData.getString("ins_username").toUpperCase(), workListGridOpenPO.getLoggedUsername());
@@ -78,10 +78,10 @@ public class WorkListOpenBoxSGTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("rep_username"), testData.getString("password"));
 
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "GeneralDetailsSG"));
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         Assert.assertNotNull(claimDetailsSGPO.getClaimNumber());
     }
@@ -97,7 +97,7 @@ public class WorkListOpenBoxSGTest extends TestBase {
         //Work List grid Open
         workListGridOpenPO.clickCustomOpenTab();
         workListGridOpenPO.clickNewClaimButton();
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
 
         //Pre Intake page
         String claimNumber = Long.toString(UtilitiesManager.getCurrentUnixTime());
@@ -106,7 +106,7 @@ public class WorkListOpenBoxSGTest extends TestBase {
         preIntakePO.enterVehicleRegistrationNumberTextbox(testData.getString("plate_number"));
         preIntakePO.clickCreateNewCaseButton();
         fluentWait(By.id(ClaimDetailsPO.ID_CLAIM_NUMBER));
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
 
         //set taskId once case is created
         String claimDetailUrl = getDriver().getCurrentUrl();

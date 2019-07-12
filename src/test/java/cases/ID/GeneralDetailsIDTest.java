@@ -34,7 +34,7 @@ public class GeneralDetailsIDTest extends TestBase {
     public void methodSetup(){
         workListGridOpenPO.setWebDriver(getDriver());
         claimDetailsPO.setWebDriver((getDriver()));
-        taskIdKey = testResult.getEnv() + "_" + testResult.getCountry() + "_taskId";
+        taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
     }
 
     @Test(description = "Search a vehicle by vin")
@@ -48,7 +48,7 @@ public class GeneralDetailsIDTest extends TestBase {
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "GeneralDetailsID"));
 
         claimDetailsPO.enterVin(testData.getString("benzS_vin"));
-        testResult.setTimeStarted(Instant.now());
+        testResult.get().setTimeStarted(Instant.now());
         claimDetailsPO.clickVinQuery();
 
         //Vin details
@@ -66,6 +66,6 @@ public class GeneralDetailsIDTest extends TestBase {
         Assert.assertEquals(vinManufacturerCodeActual, vinManufacturerCodeExpected);
         Assert.assertEquals(vinModelCodeActual, vinModelCodeExpected);
         Assert.assertEquals(vinSubmodelCodeActual, vinSubmodelCodeExpected);
-        testResult.setTimeFinished(Instant.now());
+        testResult.get().setTimeFinished(Instant.now());
     }
 }

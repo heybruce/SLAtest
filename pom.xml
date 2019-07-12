@@ -6,13 +6,32 @@
     <groupId>com.solera.apac1.qa</groupId>
     <artifactId>apac1.SLAHealthCheck</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <repositories>
+        <repository>
+            <id>apac1-snapshot</id>
+            <name>APAC1 Snapshots</name>
+            <releases>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <url>http://10.29.25.73/artifactory/libs-snapshot-local</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <aspectj.version>1.9.0</aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+        <suiteXmlFile></suiteXmlFile>
         <skipTests>false</skipTests>
+        <runOnGrid>false</runOnGrid>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,33 +41,13 @@
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
-            <version>2.27</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.seleniumhq.selenium</groupId>
-                    <artifactId>selenium-support</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.seleniumhq.selenium</groupId>
-                    <artifactId>selenium-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.7.1</version>
+            <version>3.141.59</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
-            <version>3.7.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-firefox-driver</artifactId>
-            <version>3.7.1</version>
+            <version>3.141.59</version>
         </dependency>
         <dependency>
             <groupId>com.aventstack</groupId>
@@ -181,13 +180,6 @@
             <systemPath>${project.basedir}/src/main/resources/axn-b2b-client-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.solera.apac1.qa</groupId>
-            <artifactId>bre-web-ui-element</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/bre-web-ui-element-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
@@ -208,7 +200,17 @@
             <artifactId>lettuce-core</artifactId>
             <version>5.1.6.RELEASE</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.1.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.solera.apac1.qa</groupId>
+            <artifactId>bre-web-ui-element</artifactId>
+            <version>1.0-20190503.061943-7</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -220,6 +222,9 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <runOnGrid>${runOnGrid}</runOnGrid>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin><!-- Include if you want to make an executable jar[FAT JAR which includes all  dependencies along with sprinboot loader] that you can run on commandline using java -jar NAME -->
@@ -228,13 +233,4 @@
             </plugin>
         </plugins>
     </build>
-    <!--<reporting>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-surefire-report-plugin</artifactId>-->
-                <!--<version>2.21.0</version>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</reporting>-->
 </project>
