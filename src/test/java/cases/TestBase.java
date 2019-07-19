@@ -12,6 +12,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -23,15 +26,15 @@ import utils.webdrivers.WebDriverFactory;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
-public class TestBase {
+@ComponentScan(basePackages = { "utils", "b2b" })
+@ContextConfiguration(classes = TestBase.class)
+public class TestBase extends AbstractTestNGSpringContextTests {
     private final static Logger logger = Logger.getLogger(TestBase.class);
 
     public static ThreadLocal<TestResult> testResult = new ThreadLocal<>();
