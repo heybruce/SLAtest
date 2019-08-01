@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import pageobjects.processstep.DamageCapturingPO;
 import pageobjects.processstep.processstep.ProcessStepKRPO;
 import steps.Login;
+import steps.Qapter.Checklist;
 import utils.RedisManager;
 import utils.UtilitiesManager;
 
@@ -82,7 +83,6 @@ public class ChecklistTest extends TestBase {
                 testData.getString("test_url"), taskId, "BRE", "DamageCapturing"));
 
         testResult.get().setTimeStarted(Instant.now());
-        damageCapturingPO.navigationVehicle();
         damageCapturingPO.navigationChecklist();
         testResult.get().setTimeFinished(Instant.now());
 

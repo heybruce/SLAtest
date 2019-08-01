@@ -12,7 +12,7 @@ import steps.DamageCapturing;
 import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class Checklist extends TestBase {
-    private DamageCapturingPO damageCapturingPO;
+    private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
 
     public Checklist() {
         damageCapturingPO.setWebDriver(getDriver());
@@ -36,9 +36,9 @@ public class Checklist extends TestBase {
         damageCapturingPO.navigationChecklist();
         damageCapturingPO.clickChecklistNewPosition();
         damageCapturingPO.inputSPGuideNumber(SPGuideNumber);
-        damageCapturingPO.clickSPSelectRepairMethod();
-        damageCapturingPO.clickSPReplaceWithOem();
-        damageCapturingPO.clickSPKeepAdding();
+        damageCapturingPO.clickRPReplaceWithOEMPart();
+        damageCapturingPO.waitForQapterLoading();
+        damageCapturingPO.clickSPAddAnotherPosition();
         Assert.assertTrue(isElementPresent(damageCapturingPO.ID_ADD_POSITION_MAIN_SECTION));
         damageCapturingPO.clickNonStandardTab();
         damageCapturingPO.clickNSPRepair();
