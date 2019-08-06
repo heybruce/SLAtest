@@ -25,20 +25,20 @@
                     <include name="openExistingCase"/>
                 </methods>
             </class>
-            <class name="cases.KR.DamageCapturingTest">
-                <methods>
-                    <include name="activateQapter"/>
-                </methods>
-            </class>
-            <class name="cases.KR.Qapter.QapterTest">
-                <methods>
-                    <include name="switchTo3D"/>
-                    <include name="selectPart"/>
-                    <include name="loadZoneIn3dView"/>
-                    <include name="activateQapterIn3dView"/>
-                    <include name="switchToVehicleTabIn3dView"/>
-                </methods>
-            </class>
+            <!--<class name="cases.KR.DamageCapturingTest">-->
+                <!--<methods>-->
+                    <!--<include name="activateQapter"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+            <!--<class name="cases.KR.Qapter.QapterTest">-->
+                <!--<methods>-->
+                    <!--<include name="switchTo3D"/>-->
+                    <!--<include name="selectPart"/>-->
+                    <!--<include name="loadZoneIn3dView"/>-->
+                    <!--<include name="activateQapterIn3dView"/>-->
+                    <!--<include name="switchToVehicleTabIn3dView"/>-->
+                <!--</methods>-->
+            <!--</class>-->
             <!--<class name="cases.KR.Qapter.ChecklistTest">-->
                 <!--<methods>-->
                     <!--<include name="loadChecklist"/>-->
