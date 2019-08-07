@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageobjects.processstep.DamageCapturingPO;
-import pageobjects.processstep.processstep.ProcessStepJPPO;
+import pageobjects.processstep.processstep.ProcessStepSGPO;
 import steps.Login;
 import utils.RedisManager;
 import utils.UtilitiesManager;
@@ -19,7 +19,7 @@ import static utils.webdrivers.WebDriverFactory.getDriver;
 
 public class QapterTest extends TestBase {
 
-    private ProcessStepJPPO processStepJPPO = new ProcessStepJPPO();
+    private ProcessStepSGPO processStepSGPO = new ProcessStepSGPO();
     private DamageCapturingPO damageCapturingPO = new DamageCapturingPO();
     String taskIdKey;
 
@@ -32,7 +32,7 @@ public class QapterTest extends TestBase {
 
     @BeforeMethod
     public void methodSetup() {
-        processStepJPPO.setWebDriver(getDriver());
+        processStepSGPO.setWebDriver(getDriver());
         damageCapturingPO.setWebDriver(getDriver());
         taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
 

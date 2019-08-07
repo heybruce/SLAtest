@@ -39,13 +39,13 @@
                     <include name="switchToVehicleTabIn3dView"/>
                 </methods>
             </class>
-            <!--<class name="cases.SG.Qapter.ChecklistTest">-->
-            <!--<methods>-->
-            <!--<include name="loadChecklist"/>-->
-            <!--<include name="loadChecklistWithOver100Parts"/>-->
-            <!--<include name="loadChecklistWithOver200Parts"/>-->
-            <!--</methods>-->
-            <!--</class>-->
+            <class name="cases.SG.Qapter.ChecklistTest">
+                <methods>
+                    <include name="loadChecklist"/>
+                    <include name="loadChecklistWithOver100Parts"/>
+                    <include name="loadChecklistWithOver200Parts"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="B2B" parallel="classes" thread-count="1">
