@@ -46,9 +46,10 @@ public class DamageCapturingTest extends TestBase{
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
 
-        damageCapturingPO.clickQapterIcon();
+      //  damageCapturingPO.clickQapterIcon();
 
         testResult.get().setTimeStarted(Instant.now());
+        damageCapturingPO.switchToQapterIframe();
         damageCapturingPO.navigationVehicle();
         testResult.get().setTimeFinished(Instant.now());
     }

@@ -20,6 +20,7 @@ public class B2bTest extends B2bTestBase {
     private static final Logger logger = LoggerFactory.getLogger(B2bTest.class);
 
     String taskIdKey;
+
     @Autowired
     B2bClient b2bClient;
 
