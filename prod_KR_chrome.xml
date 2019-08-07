@@ -48,20 +48,20 @@
             <!--</class>-->
         </classes>
     </test>
-    <!--<test name="B2B" parallel="classes" thread-count="1">-->
-        <!--<parameter name="browser" value="b2b"/>-->
-        <!--<parameter name="country" value="KR"/>-->
-        <!--<parameter name="type" value="SLA"/>-->
-        <!--<parameter name="env" value="PRODSG"/>-->
-        <!--<parameter name="dataFile" value="data.prod.KR.properties"/>-->
-        <!--<classes>-->
-            <!--<class name="cases.B2B.B2bTest">-->
-                <!--<methods>-->
-                    <!--<include name="getTask"/>-->
-                    <!--<include name="doCalculation"/>-->
-                    <!--&lt;!&ndash;<include name="vinQuery"/>&ndash;&gt;-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="B2B" parallel="classes" thread-count="1">
+        <parameter name="browser" value="b2b"/>
+        <parameter name="country" value="KR"/>
+        <parameter name="type" value="SLA"/>
+        <parameter name="env" value="PRODSG"/>
+        <parameter name="dataFile" value="data.prod.KR.properties"/>
+        <classes>
+            <class name="cases.B2B.B2bTest">
+                <methods>
+                    <include name="getTask"/>
+                    <include name="doCalculation"/>
+                    <!--<include name="vinQuery"/>-->
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

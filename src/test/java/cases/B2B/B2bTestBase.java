@@ -8,6 +8,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import utils.RestManager;
 import utils.UtilitiesManager;
 
@@ -18,24 +19,38 @@ import java.time.Duration;
 @ContextConfiguration(classes = B2bTestBase.class)
 public class B2bTestBase extends AbstractTestNGSpringContextTests {
 
-    public static TestResult testResult = new TestResult();
+    public static ThreadLocal<TestResult> testResultB2b = new ThreadLocal<>();
     protected static Configuration testData;
 
+    @BeforeTest
+    public void beforeTest() throws Exception {
+        TestResult result = new TestResult();
+        testResultB2b.set(result);
+    }
+
     @BeforeMethod
-    public void methodSetup(Method method, ITestContext context) {
-        testResult.setTestName(method.getName());
-        testResult.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
-        testResult.setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
-        testResult.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
+    public void beforeMethod(Method method, ITestContext context) {
+//        testResultB2b.setTestName(method.getName());
+//        testResultB2b.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
+//        testResultB2b.setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
+//        testResultB2b.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
+
+        TestResult result = new TestResult();
+        result.setTestName(method.getName());
+        result.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
+        result.setCountry(context.getCurrentXmlTest().getLocalParameters().get("country"));
+        result.setEnv(context.getCurrentXmlTest().getLocalParameters().get("env"));
+        testResultB2b.set(result);
     }
 
     @AfterMethod
     public synchronized void afterMethod(Method method) {
-        testResult.setTimeElapsed(Duration.between(testResult.getTimeStarted(), testResult.getTimeFinished()).toMillis());
-        UtilitiesManager.createJsonFile(method.getName(), testResult);
+//        testResultB2b.setTimeElapsed(Duration.between(testResultB2b.getTimeStarted(), testResultB2b.getTimeFinished()).toMillis());
+        testResultB2b.get().setTimeElapsed(Duration.between(testResultB2b.get().getTimeStarted(), testResultB2b.get().getTimeFinished()).toMillis());
+        UtilitiesManager.createJsonFile(method.getName(), testResultB2b);
 
         // Send test result to Kibana server
-          RestManager.sendTestResult(testResult);
+          RestManager.sendTestResult(testResultB2b.get());
     }
 
 }

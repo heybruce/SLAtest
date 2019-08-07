@@ -8,6 +8,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import b2b.B2bClient;
 import org.xml.sax.SAXException;
+import utils.RedisManager;
 import utils.UtilitiesManager;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,6 +19,7 @@ public class B2bTest extends B2bTestBase {
 
     private static final Logger logger = LoggerFactory.getLogger(B2bTest.class);
 
+    String taskIdKey;
     @Autowired
     B2bClient b2bClient;
 
@@ -27,21 +29,27 @@ public class B2bTest extends B2bTestBase {
         testData = UtilitiesManager.setPropertiesFile(dataFile);
     }
 
+    @BeforeMethod
+    public void beforeMethod() {
+        taskIdKey = testResultB2b.get().getEnv() + "_" + testResultB2b.get().getCountry() + "_taskId";
+    }
+
     @Test
     public void getTask() {
+        String taskId = RedisManager.getValue(taskIdKey);
 
         try {
-            testResult.setTimeStarted(Instant.now());
+            testResultB2b.get().setTimeStarted(Instant.now());
             String response = b2bClient.getTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
-                    , testData.getString("b2b_taskId"),testData.getString("b2b_responseStylesheet") ,testData.getString("b2b_url"));
-            testResult.setSuccess(true);
+                    , taskId,testData.getString("b2b_responseStylesheet") ,testData.getString("b2b_url"));
+            testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
             logger.error("Error executing B2B request", e);
-            testResult.setSuccess(false);
+            testResultB2b.get().setSuccess(false);
         }
         finally {
-            testResult.setTimeFinished(Instant.now());
+            testResultB2b.get().setTimeFinished(Instant.now());
         }
     }
 
@@ -50,68 +58,68 @@ public class B2bTest extends B2bTestBase {
         String country = context.getCurrentXmlTest().getLocalParameters().get("country");
         try {
             String newXrecord = UtilitiesManager.addTrailingSpaceToXrecord(testData.getString("b2b_xrecord"));
-            testResult.setTimeStarted(Instant.now());
+            testResultB2b.get().setTimeStarted(Instant.now());
             String response = b2bClient.getCalculation(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , newXrecord, country, testData.getString("b2b_url"));
-            testResult.setSuccess(true);
+            testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
             logger.error("Error executing B2B request", e);
-            testResult.setSuccess(false);
+            testResultB2b.get().setSuccess(false);
         }
         finally {
-            testResult.setTimeFinished(Instant.now());
+            testResultB2b.get().setTimeFinished(Instant.now());
         }
     }
 
     @Test
     public void vinQuery() {
         try {
-            testResult.setTimeStarted(Instant.now());
+            testResultB2b.get().setTimeStarted(Instant.now());
             String response = b2bClient.vinQuery(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , testData.getString("b2b_vin"), testData.getString("b2b_callingApplication"), testData.getString("b2b_url"));
-            testResult.setSuccess(true);
+            testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
             logger.error("Error executing B2B request", e);
-            testResult.setSuccess(false);
+            testResultB2b.get().setSuccess(false);
         }
         finally {
-            testResult.setTimeFinished(Instant.now());
+            testResultB2b.get().setTimeFinished(Instant.now());
         }
     }
 
     @Test
     public void createTaskWith200Part() throws SAXException, IOException, ParserConfigurationException {
         try {
-            testResult.setTimeStarted(Instant.now());
+            testResultB2b.get().setTimeStarted(Instant.now());
             String response = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , testData.getString("b2b_taskXml_200part"), testData.getString("b2b_url"));
-            testResult.setSuccess(true);
+            testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
             logger.error("Error executing B2B request", e);
-            testResult.setSuccess(false);
+            testResultB2b.get().setSuccess(false);
         }
         finally {
-            testResult.setTimeFinished(Instant.now());
+            testResultB2b.get().setTimeFinished(Instant.now());
         }
     }
 
     @Test
     public void createTaskWith100Part() throws SAXException, IOException, ParserConfigurationException {
         try {
-            testResult.setTimeStarted(Instant.now());
+            testResultB2b.get().setTimeStarted(Instant.now());
             String response = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , testData.getString("b2b_taskXml_100part"), testData.getString("b2b_url"));
-            testResult.setSuccess(true);
+            testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
             logger.error("Error executing B2B request", e);
-            testResult.setSuccess(false);
+            testResultB2b.get().setSuccess(false);
         }
         finally {
-            testResult.setTimeFinished(Instant.now());
+            testResultB2b.get().setTimeFinished(Instant.now());
         }
     }
 
