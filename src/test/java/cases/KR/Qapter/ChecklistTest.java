@@ -60,11 +60,9 @@ public class ChecklistTest extends TestBase {
                 testData.getString("test_url"), RedisManager.getValue(taskIdKey), "BRE", "DamageCapturing"));
 
         testResult.get().setTimeStarted(Instant.now());
+        damageCapturingPO.switchToQapterIframe();
         damageCapturingPO.navigationChecklist();
         testResult.get().setTimeFinished(Instant.now());
-
-        int checklistNumber = damageCapturingPO.getChecklistNumber();
-        Assert.assertTrue(checklistNumber > 0);
     }
 
     @Test
@@ -83,6 +81,7 @@ public class ChecklistTest extends TestBase {
                 testData.getString("test_url"), taskId, "BRE", "DamageCapturing"));
 
         testResult.get().setTimeStarted(Instant.now());
+        damageCapturingPO.switchToQapterIframe();
         damageCapturingPO.navigationChecklist();
         testResult.get().setTimeFinished(Instant.now());
 
@@ -106,6 +105,7 @@ public class ChecklistTest extends TestBase {
                 testData.getString("test_url"), taskId, "BRE", "DamageCapturing"));
 
         testResult.get().setTimeStarted(Instant.now());
+        damageCapturingPO.switchToQapterIframe();
         damageCapturingPO.navigationChecklist();
         testResult.get().setTimeFinished(Instant.now());
 
