@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.gateway.tw.audatex.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="InterfaceServiceImplService" targetNamespace="http://service.gateway.tw.audatex.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.gateway.tw.audatex.com/" elementFormDefault="unqualified" targetNamespace="http://service.gateway.tw.audatex.com/" version="1.0">
+
+            <xs:element name="getTask" type="tns:getTask"/>
+
+            <xs:element name="getTaskResponse" type="tns:getTaskResponse"/>
+
+            <xs:element name="uploadTask" type="tns:uploadTask"/>
+
+            <xs:element name="uploadTaskResponse" type="tns:uploadTaskResponse"/>
+
+            <xs:complexType name="getTask">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="loginId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="claimNumber" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="getTaskResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:task"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="task">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="checkTableList" nillable="true" type="tns:checkTable"/>
+                    <xs:element minOccurs="0" name="claimNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="estimate" type="tns:estimate"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="labourRateList" nillable="true" type="tns:labourRate"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="modelOperationList" nillable="true" type="tns:modelOperation"/>
+                    <xs:element name="resultCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vehicle" type="tns:vehicle"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="checkTable">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gid" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mutationCode1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mutationCode2" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mutationCode3" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mutationValue1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mutationValue2" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mutationValue3" type="xs:string"/>
+                    <xs:element minOccurs="0" name="repDesc" type="xs:string"/>
+                    <xs:element minOccurs="0" name="repcode" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" type="xs:string"/>
+                    <xs:element minOccurs="0" name="wu" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="estimate">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="finalTotal" type="tns:finalTotal"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="labourList" nillable="true" type="tns:labour"/>
+                    <xs:element minOccurs="0" name="painting" type="tns:painting"/>
+                    <xs:element minOccurs="0" name="partDiscountInfo" type="tns:partDiscountInfo"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="sparepartList" nillable="true" type="tns:sparepart"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="finalTotal">
+                <xs:sequence>
+                    <xs:element name="grandTotal" type="xs:float"/>
+                    <xs:element name="lbrTotal" type="xs:float"/>
+                    <xs:element name="partsTotal" type="xs:float"/>
+                    <xs:element name="pntTotal" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="labour">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element name="labourRateUsed" type="xs:float"/>
+                    <xs:element name="labourUnits" type="xs:float"/>
+                    <xs:element name="labourValue" type="xs:float"/>
+                    <xs:element minOccurs="0" name="operationNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="operationType" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="painting">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="paintingLabourList" nillable="true" type="tns:paintingLabour"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="paintingMaterialList" nillable="true" type="tns:paintingMaterial"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="paintingLabour">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element name="labourRateUsed" type="xs:float"/>
+                    <xs:element name="labourUnits" type="xs:float"/>
+                    <xs:element name="labourValue" type="xs:float"/>
+                    <xs:element minOccurs="0" name="operationNumber" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="paintingMaterial">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="paintingKey" type="xs:string"/>
+                    <xs:element name="totalValue" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="partDiscountInfo">
+                <xs:sequence>
+                    <xs:element name="partDiscountFlag" type="xs:int"/>
+                    <xs:element name="partDiscountValue" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="sparepart">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gid" type="xs:string"/>
+                    <xs:element minOccurs="0" name="partNumber" type="xs:string"/>
+                    <xs:element name="preDisUnitPrice" type="xs:float"/>
+                    <xs:element name="quantity" type="xs:int"/>
+                    <xs:element name="totalValue" type="xs:float"/>
+                    <xs:element name="undefined" type="xs:int"/>
+                    <xs:element name="unitPrice" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="labourRate">
+                <xs:sequence>
+                    <xs:element name="labourRate1" type="xs:float"/>
+                    <xs:element name="labourRate2" type="xs:float"/>
+                    <xs:element name="labourRate3" type="xs:float"/>
+                    <xs:element name="labourRate4" type="xs:float"/>
+                    <xs:element name="paintingRate" type="xs:float"/>
+                    <xs:element name="partdiscount" type="xs:float"/>
+                    <xs:element name="repairTotalDisount" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="modelOperation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="standardModFlag" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="vehicle">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="manufacturerName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="modelName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="plateNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="subModelName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vehicleOwner" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vin" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="uploadTask">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="loginId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="claimNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vin" type="xs:string"/>
+                    <xs:element minOccurs="0" name="plateNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="insuranceName" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="uploadTaskResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:message"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="message">
+                <xs:sequence>
+                    <xs:element name="resultCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="resultMsg" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="taskList" nillable="true" type="tns:taskMessage"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="taskMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="claimNumber" type="xs:string"/>
+                    <xs:element name="grandTotal" type="xs:float"/>
+                    <xs:element minOccurs="0" name="plateNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="responseLoginId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="senderCompanyName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="senderName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="taskId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vin" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="uploadTask">
+        <wsdl:part element="tns:uploadTask" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="uploadTaskResponse">
+        <wsdl:part element="tns:uploadTaskResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTaskResponse">
+        <wsdl:part element="tns:getTaskResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTask">
+        <wsdl:part element="tns:getTask" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="InterfaceService">
+        <wsdl:operation name="getTask">
+            <wsdl:documentation>通过claimNumber得到估价单</wsdl:documentation>
+            <wsdl:input message="tns:getTask" name="getTask">
+            </wsdl:input>
+            <wsdl:output message="tns:getTaskResponse" name="getTaskResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="uploadTask">
+            <wsdl:documentation>上传赔案到翱特系统</wsdl:documentation>
+            <wsdl:input message="tns:uploadTask" name="uploadTask">
+            </wsdl:input>
+            <wsdl:output message="tns:uploadTaskResponse" name="uploadTaskResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="InterfaceServiceImplServiceSoapBinding" type="tns:InterfaceService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getTask">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getTask">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getTaskResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="uploadTask">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="uploadTask">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="uploadTaskResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="InterfaceServiceImplService">
+        <wsdl:port binding="tns:InterfaceServiceImplServiceSoapBinding" name="InterfaceServiceImplPort">
+            <soap:address location="http://gw.audatex.tw/tw-volvo-gateway/services/InterfaceService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

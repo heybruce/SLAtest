@@ -5,6 +5,7 @@ import com.audatex.axn.classchecker.b2b.task.CreateTaskRequest;
 import com.audatex.axn.classchecker.b2b.task.GetTaskRequest;
 import com.audatex.axn.classchecker.b2b.vehicle.VinQueryRequest;
 
+import com.audatex.tw.gateway.service.Task;
 import org.dom4j.Element;
 import org.dom4j.io.DOMReader;
 import org.xml.sax.InputSource;
@@ -23,6 +24,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URL;
 
 @Service
 public class B2bClient {
@@ -80,6 +82,16 @@ public class B2bClient {
         String response = b2bServiceProvider.getTaskService(url).createTask(request);
         logger.debug(response);
         return response;
+    }
+
+    public void getTaskTwVolvo(String loginId, String claimNumber, String url) {
+        try {
+            URL requestUrl = new URL(url);
+            Task response = b2bServiceProvider.getTaskServiceTwVolvo(requestUrl).getTask(loginId, claimNumber);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
