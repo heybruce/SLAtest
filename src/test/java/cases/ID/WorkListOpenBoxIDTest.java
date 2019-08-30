@@ -110,11 +110,11 @@ public class WorkListOpenBoxIDTest extends TestBase {
         //set taskId once case is created
         String claimDetailUrl = getDriver().getCurrentUrl();
         String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);
+        Assert.assertNotNull(taskId);
+
         RedisManager.setValue(taskIdKey, taskId);
         logger.debug("taskIdKey: " + taskIdKey);
         logger.debug("taskId: " + taskId);
-
-        Assert.assertNotNull(taskId);
 
         //Check claim is in Open box
 //        processStepIDPO.clickClaimManager();

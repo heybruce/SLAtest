@@ -105,11 +105,11 @@ public class WorkListOpenBoxJPTest extends TestBase {
 
         String claimDetailUrl = getDriver().getCurrentUrl();
         String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);
+        Assert.assertNotNull(taskId);
+
         RedisManager.setValue(taskIdKey, taskId);
         logger.debug("taskIdKey: " + taskIdKey);
         logger.debug("taskId: " + taskId);
-
-        Assert.assertNotNull(taskId);
 
 //        //Check claim is in Open box
 //        processStepJPPO.clickClaimManager();
