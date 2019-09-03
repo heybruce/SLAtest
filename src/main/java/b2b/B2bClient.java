@@ -5,7 +5,9 @@ import com.audatex.axn.classchecker.b2b.task.CreateTaskRequest;
 import com.audatex.axn.classchecker.b2b.task.GetTaskRequest;
 import com.audatex.axn.classchecker.b2b.vehicle.VinQueryRequest;
 
+import com.audatex.tw.gateway.service.Message;
 import com.audatex.tw.gateway.service.Task;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dom4j.Element;
 import org.dom4j.io.DOMReader;
 import org.xml.sax.InputSource;
@@ -84,14 +86,29 @@ public class B2bClient {
         return response;
     }
 
-    public void getTaskTwVolvo(String loginId, String claimNumber, String url) {
+    public Task getTaskTwVolvo(String loginId, String claimNumber, String url) {
+        Task response = new Task();
         try {
             URL requestUrl = new URL(url);
-            Task response = b2bServiceProvider.getTaskServiceTwVolvo(requestUrl).getTask(loginId, claimNumber);
+            response = b2bServiceProvider.getTaskServiceTwVolvo(requestUrl).getTask(loginId, claimNumber);
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+
+        return response;
     }
 
+    public Message uploadTaskTwVolvo(String loginId, String claimNumber, String vin, String plateNumber, String insuranceName, String url) {
+        Message response = new Message();
+        try {
+            URL requestUrl = new URL(url);
+            response = b2bServiceProvider.getTaskServiceTwVolvo(requestUrl).uploadTask(loginId, claimNumber, vin, plateNumber, insuranceName);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
 }

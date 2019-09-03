@@ -1,9 +1,12 @@
 package cases.B2B;
 
 import com.audatex.axn.classchecker.b2b.exceptions.B2bException;
+import com.audatex.tw.gateway.service.Message;
+import com.audatex.tw.gateway.service.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import b2b.B2bClient;
@@ -125,9 +128,22 @@ public class B2bTest extends B2bTestBase {
     }
 
     @Test
-    public void getTaskTwVolvo() {
-        b2bClient.getTaskTwVolvo(testData.getString("qw_b2b_loginId"), testData.getString("qw_b2b_claimNumber_claimInClosedFolder")
-        , testData.getString("qw_b2b_url"));
+    public void getTaskTwVolvoClaimClosedFolderTest() {
+        Task response = b2bClient.getTaskTwVolvo(testData.getString("qw_b2b_loginId"),
+                testData.getString("qw_b2b_claimNumber_claimInClosedFolder"), testData.getString("qw_b2b_url"));
+        Assert.assertEquals(response.getResultCode(), 0);
+        Assert.assertEquals(response.getResultMsg(), "下载定损单成功");
     }
 
+    @Test
+    public void getTaskTwVolvoUploadTaskWithClaimNumberTest() {
+        Message response = b2bClient.uploadTaskTwVolvo(testData.getString("qw_b2b_loginId")
+                , testData.getString("qw_b2b_claimNumber_uploadTask")
+                , testData.getString("qw_b2b_vin")
+                , testData.getString("qw_b2b_plateNumber")
+                , testData.getString("qw_b2b_insuranceName")
+                , testData.getString("qw_b2b_url"));
+        Assert.assertEquals(response.getResultCode(), 1);
+        Assert.assertEquals(response.getResultMsg(), "上传成功");
+    }
 }
