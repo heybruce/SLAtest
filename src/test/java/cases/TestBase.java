@@ -83,7 +83,7 @@ public class TestBase extends AbstractTestNGSpringContextTests {
 
         WebDriverFactory.getDriver().manage().deleteAllCookies();
 
-        UtilitiesManager.createJsonFile(method.getName(), testResult.get());
+       // UtilitiesManager.createJsonFile(method.getName(), testResult.get());
         //Send test result to Kibana server
         RestManager.sendTestResult(testResult.get());
 
