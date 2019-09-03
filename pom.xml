@@ -165,7 +165,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.3.4</version>
+            <version>2.9.9</version>
         </dependency>
         <!-- Adds Tomcat and Spring MVC, along others, jackson-databind included transitively -->
         <dependency>
