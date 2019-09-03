@@ -4,3 +4,4 @@ target
 /dev-testng.xml
 /logs
 /src/test/resources/data.dev.KR.properties
+/*.log

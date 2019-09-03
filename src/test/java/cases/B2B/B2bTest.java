@@ -124,7 +124,7 @@ public class B2bTest extends B2bTestBase {
         }
     }
 
-
+    @Test
     public void getTaskTwVolvo() {
         b2bClient.getTaskTwVolvo(testData.getString("qw_b2b_loginId"), testData.getString("qw_b2b_claimNumber_claimInClosedFolder")
         , testData.getString("qw_b2b_url"));
