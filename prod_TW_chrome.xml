@@ -14,8 +14,7 @@
             <class name="cases.B2B.B2bTest">
                 <methods>
                     <include name="getTaskTwVolvoClaimClosedFolderTest"/>
-                    <include name="getTaskTwVolvoClaimDeletedFolderTest"/>
-                    <include name="getTaskTwVolvoClaimOpenFolderTest"/>
+                    <include name="uploadTaskTwVolvoWithClaimNumberTest"/>
                 </methods>
             </class>
         </classes>

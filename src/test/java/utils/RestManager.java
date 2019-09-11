@@ -1,6 +1,5 @@
 package utils;
 
-import cases.TestBase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import datamodel.TestResult;

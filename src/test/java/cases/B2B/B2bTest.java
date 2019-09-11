@@ -136,7 +136,7 @@ public class B2bTest extends B2bTestBase {
     }
 
     @Test
-    public void getTaskTwVolvoUploadTaskWithClaimNumberTest() {
+    public void uploadTaskTwVolvoWithClaimNumberTest() {
         Message response = b2bClient.uploadTaskTwVolvo(testData.getString("qw_b2b_loginId")
                 , testData.getString("qw_b2b_claimNumber_uploadTask")
                 , testData.getString("qw_b2b_vin")
