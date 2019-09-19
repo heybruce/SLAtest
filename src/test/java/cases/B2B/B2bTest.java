@@ -12,6 +12,7 @@ import org.testng.annotations.*;
 import b2b.B2bClient;
 import org.xml.sax.SAXException;
 import utils.RedisManager;
+import utils.SoapManager;
 import utils.UtilitiesManager;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,6 +24,7 @@ public class B2bTest extends B2bTestBase {
     private static final Logger logger = LoggerFactory.getLogger(B2bTest.class);
 
     String taskIdKey;
+    SoapManager soapManager = new SoapManager();
 
     @Autowired
     B2bClient b2bClient;
@@ -145,5 +147,12 @@ public class B2bTest extends B2bTestBase {
                 , testData.getString("qw_b2b_url"));
         Assert.assertEquals(response.getResultCode(), 1);
         Assert.assertEquals(response.getResultMsg(), "上传成功");
+    }
+
+    @Test
+    public void autolineExportTest() {
+
+        String response = soapManager.sendRequest(testData.getString("autoline_export"), testData.getString("autoline_url"));
+        System.out.println(response);
     }
 }

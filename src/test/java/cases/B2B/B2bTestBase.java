@@ -41,7 +41,7 @@ public class B2bTestBase extends AbstractTestNGSpringContextTests {
     @AfterMethod
     public synchronized void afterMethod(Method method) {
         testResultB2b.get().setTimeElapsed(Duration.between(testResultB2b.get().getTimeStarted(), testResultB2b.get().getTimeFinished()).toMillis());
-        UtilitiesManager.createJsonFile(method.getName(), testResultB2b);
+ //       UtilitiesManager.createJsonFile(method.getName(), testResultB2b);
 
         // Send test result to Kibana server
           RestManager.sendTestResult(testResultB2b.get());
