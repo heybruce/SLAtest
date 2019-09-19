@@ -151,8 +151,20 @@ public class B2bTest extends B2bTestBase {
 
     @Test
     public void autolineExportTest() {
-
         String response = soapManager.sendRequest(testData.getString("autoline_export"), testData.getString("autoline_url"));
         System.out.println(response);
     }
+
+    @Test
+    public void autolineTaskListTest() {
+        String response = soapManager.sendRequest(testData.getString("autoline_tasklist"), testData.getString("autoline_url"));
+        System.out.println(response);
+    }
+
+    @Test
+    public void autolineImportTest() {
+        String response = soapManager.sendRequest(testData.getString("autoline_import"), testData.getString("autoline_url"));
+        System.out.println(response);
+    }
+
 }
