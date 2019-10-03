@@ -71,7 +71,7 @@ public class WebDriverFactory {
                     firefoxOptions.setCapability("platform", Platform.ANY);
                 }
                 //hub
-                webDriverThreadLocal.set(new RemoteWebDriver(new URL("http://10.29.25.100:4444/wd/hub"), firefoxOptions));
+                webDriverThreadLocal.set(new RemoteWebDriver(new URL("http://10.29.26.120:30001/wd/hub"), firefoxOptions));
                 webDriverThreadLocal.get().manage().window().maximize();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -113,7 +113,7 @@ public class WebDriverFactory {
                     chromeOptions.setCapability("platform", Platform.ANY);
                 }
                 //hub
-                webDriverThreadLocal.set(new RemoteWebDriver(new URL("http://10.29.25.100:4444/wd/hub"), chromeOptions));
+                webDriverThreadLocal.set(new RemoteWebDriver(new URL("http://10.29.26.120:30001/wd/hub"), chromeOptions));
                 webDriverThreadLocal.get().manage().window().maximize();
             } catch (Exception e) {
                 e.printStackTrace();
