@@ -104,6 +104,7 @@ public class WorkListOpenBoxSGTest extends TestBase {
         preIntakePO.selectCompany("0");
         preIntakePO.enterClaimNumberTextbox(claimNumber);
         preIntakePO.enterVehicleRegistrationNumberTextbox(testData.getString("plate_number"));
+        preIntakePO.setControlQuestionAnswer();
         preIntakePO.clickCreateNewCaseButton();
         fluentWait(By.id(ClaimDetailsPO.ID_CLAIM_NUMBER));
         testResult.get().setTimeFinished(Instant.now());

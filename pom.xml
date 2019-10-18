@@ -213,7 +213,7 @@
         <dependency>
             <groupId>com.solera.apac1.qa</groupId>
             <artifactId>bre-web-ui-element</artifactId>
-            <version>1.0-20191003.095229-10</version>
+            <version>1.0-20191018.083610-13</version>
         </dependency>
         <dependency>
             <groupId>org.reficio</groupId>
