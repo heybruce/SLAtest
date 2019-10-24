@@ -14,12 +14,13 @@ import utils.UtilitiesManager;
 import java.net.URL;
 
 import static cases.TestBase.RUN_ON_GRID;
+import static cases.TestBase.SELENIUM_GRID_HUB_URL;
 
 public class WebDriverFactory {
 
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
     private static OptionManager optionManager = new OptionManager();
-    public static final boolean SELENIUM_GRID_HUB_URL = Boolean.valueOf(System.getProperty("seleniumGridHub"));
+
 
     public static synchronized WebDriverWait getWait(WebDriver driver) {
         return new WebDriverWait(driver, 20);

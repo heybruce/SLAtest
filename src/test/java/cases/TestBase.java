@@ -41,6 +41,7 @@ public class TestBase extends AbstractTestNGSpringContextTests {
     public static Configuration testData;
     public static Configuration vehicleElementData;
     public static final boolean RUN_ON_GRID = Boolean.valueOf(System.getProperty("runOnGrid"));
+    public static final String SELENIUM_GRID_HUB_URL = System.getProperty("seleniumGridHub");
 
     @BeforeSuite
     public void beforeSuite() throws Exception {
