@@ -36,6 +36,7 @@
         <suiteXmlFile></suiteXmlFile>
         <skipTests>false</skipTests>
         <runOnGrid>false</runOnGrid>
+        <seleniumGridHub>http://10.29.25.100:4444</seleniumGridHub>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -213,7 +214,7 @@
         <dependency>
             <groupId>com.solera.apac1.qa</groupId>
             <artifactId>bre-web-ui-element</artifactId>
-            <version>1.0-20190503.061943-7</version>
+            <version>1.0-20191018.083610-13</version>
         </dependency>
         <dependency>
             <groupId>org.reficio</groupId>
@@ -233,6 +234,7 @@
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <runOnGrid>${runOnGrid}</runOnGrid>
+                        <seleniumGridHub>${seleniumGridHub}</seleniumGridHub>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

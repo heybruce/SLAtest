@@ -104,6 +104,7 @@ public class WorkListOpenBoxSGTest extends TestBase {
         preIntakePO.selectCompany("0");
         preIntakePO.enterClaimNumberTextbox(claimNumber);
         preIntakePO.enterVehicleRegistrationNumberTextbox(testData.getString("plate_number"));
+        preIntakePO.setControlQuestionAnswer();
         preIntakePO.clickCreateNewCaseButton();
         fluentWait(By.id(ClaimDetailsPO.ID_CLAIM_NUMBER));
         testResult.get().setTimeFinished(Instant.now());
@@ -111,6 +112,12 @@ public class WorkListOpenBoxSGTest extends TestBase {
         //set taskId once case is created
         String claimDetailUrl = getDriver().getCurrentUrl();
         String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);
+        if (taskId != null && taskId.length() > 0) {
+            RedisManager.setValue(taskIdKey, taskId);
+        }
+        else {
+            Assert.fail("Task ID is empty");
+        }
         Assert.assertNotNull(taskId);
 
         RedisManager.setValue(taskIdKey, taskId);

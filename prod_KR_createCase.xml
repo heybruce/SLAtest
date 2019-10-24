@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="KR" verbose="1" parallel="tests" thread-count="1">
+<suite name="KR" verbose="1" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.SlackListener"/>
@@ -17,6 +17,22 @@
             <class name="cases.KR.DashboardTest">
                 <methods>
                     <include name="createNewCaseFromDashboard"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="B2B" parallel="classes" thread-count="1">
+        <parameter name="browser" value="b2b"/>
+        <parameter name="type" value="APM"/>
+        <parameter name="env" value="PRODSG"/>
+        <parameter name="locale" value="ko-kr"/>
+        <parameter name="country" value="KR"/>
+        <parameter name="dataFile" value="data.prod.KR.properties"/>
+        <classes>
+            <class name="cases.B2B.B2bTest">
+                <methods>
+                    <include name="createTaskWith200Part"/>
+                    <include name="createTaskWith100Part"/>
                 </methods>
             </class>
         </classes>
