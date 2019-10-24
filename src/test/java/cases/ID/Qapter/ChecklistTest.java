@@ -73,9 +73,7 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("rep_username"), testData.getString("password"));
 
-        //use b2b to create a claim with 100 parts
-        String taskId = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
-                , testData.getString("b2b_taskXml_100part"), testData.getString("b2b_url"));
+        String taskId = RedisManager.getValue(testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskIdWith100Part");
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), taskId, "BRE", "DamageCaptureID"));
 
@@ -97,9 +95,7 @@ public class ChecklistTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("rep_username"), testData.getString("password"));
 
-        //use b2b to create a claim with 200 parts
-        String taskId = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
-                , testData.getString("b2b_taskXml_200part"), testData.getString("b2b_url"));
+        String taskId = RedisManager.getValue(testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskIdWith200Part");
         getDriver().get(UtilitiesManager.constructBreUrl(
                 testData.getString("test_url"), taskId, "BRE", "DamageCaptureID"));
 

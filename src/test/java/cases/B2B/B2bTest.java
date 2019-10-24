@@ -98,9 +98,12 @@ public class B2bTest extends B2bTestBase {
     @Test
     public void createTaskWith200Part() throws SAXException, IOException, ParserConfigurationException {
         try {
+            String taskIdKey = testResultB2b.get().getEnv() + "_" + testResultB2b.get().getCountry() + "_taskIdWith200Part";
+
             testResultB2b.get().setTimeStarted(Instant.now());
-            String response = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
+            String taskId = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , testData.getString("b2b_taskXml_200part"), testData.getString("b2b_url"));
+            RedisManager.setValue(taskIdKey, taskId);
             testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
@@ -115,9 +118,12 @@ public class B2bTest extends B2bTestBase {
     @Test
     public void createTaskWith100Part() throws SAXException, IOException, ParserConfigurationException {
         try {
+            String taskIdKey = testResultB2b.get().getEnv() + "_" + testResultB2b.get().getCountry() + "_taskIdWith100Part";
+
             testResultB2b.get().setTimeStarted(Instant.now());
-            String response = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
+            String taskId = b2bClient.createTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , testData.getString("b2b_taskXml_100part"), testData.getString("b2b_url"));
+            RedisManager.setValue(taskIdKey, taskId);
             testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
