@@ -36,6 +36,7 @@
         <suiteXmlFile></suiteXmlFile>
         <skipTests>false</skipTests>
         <runOnGrid>false</runOnGrid>
+        <seleniumGridHub>http://10.29.25.100:4444</seleniumGridHub>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -233,6 +234,7 @@
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <runOnGrid>${runOnGrid}</runOnGrid>
+                        <seleniumGridHub>${seleniumGridHub}</seleniumGridHub>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

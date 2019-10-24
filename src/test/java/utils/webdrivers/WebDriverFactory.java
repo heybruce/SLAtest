@@ -19,6 +19,7 @@ public class WebDriverFactory {
 
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
     private static OptionManager optionManager = new OptionManager();
+    public static final boolean SELENIUM_GRID_HUB_URL = Boolean.valueOf(System.getProperty("seleniumGridHub"));
 
     public static synchronized WebDriverWait getWait(WebDriver driver) {
         return new WebDriverWait(driver, 20);
@@ -71,7 +72,7 @@ public class WebDriverFactory {
                     firefoxOptions.setCapability("platform", Platform.ANY);
                 }
                 //hub
-                webDriverThreadLocal.set(new RemoteWebDriver(new URL("http://10.29.26.120:30001/wd/hub"), firefoxOptions));
+                webDriverThreadLocal.set(new RemoteWebDriver(new URL(SELENIUM_GRID_HUB_URL + "/wd/hub"), firefoxOptions));
                 webDriverThreadLocal.get().manage().window().maximize();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -113,7 +114,7 @@ public class WebDriverFactory {
                     chromeOptions.setCapability("platform", Platform.ANY);
                 }
                 //hub
-                webDriverThreadLocal.set(new RemoteWebDriver(new URL("http://10.29.26.120:30001/wd/hub"), chromeOptions));
+                webDriverThreadLocal.set(new RemoteWebDriver(new URL(SELENIUM_GRID_HUB_URL + "/wd/hub"), chromeOptions));
                 webDriverThreadLocal.get().manage().window().maximize();
             } catch (Exception e) {
                 e.printStackTrace();
