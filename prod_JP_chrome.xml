@@ -42,8 +42,8 @@
             <class name="cases.JP.Qapter.ChecklistTest">
                 <methods>
                     <include name="loadChecklist"/>
-                    <include name="loadChecklistWithOver100Parts"/>
-                    <include name="loadChecklistWithOver200Parts"/>
+                    <!--<include name="loadChecklistWithOver100Parts"/>-->
+                    <!--<include name="loadChecklistWithOver200Parts"/>-->
                 </methods>
             </class>
         </classes>
