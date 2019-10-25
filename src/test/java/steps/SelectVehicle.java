@@ -15,7 +15,7 @@ public class SelectVehicle extends TestBase {
 
     public SelectVehicle(){
         claimDetails.setWebDriver(getDriver());
-        wait = new WebDriverWait(getDriver(), 10);
+        wait = new WebDriverWait(getDriver(), 20);
     }
 
     public void SearchBySearchTree(String manufacturer, String model, String subModel) {
@@ -27,6 +27,17 @@ public class SelectVehicle extends TestBase {
         wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_MODEL_AXCODE), testData.getString("searchTree_model_code")));
         wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_SUB_MODEL_AXCODE), testData.getString("searchTree_submodel_code")));
     }
+
+    public void SearchBySearchTree(String vehicle) {
+        claimDetails.selectManufacturerBySearching(testData.getString(vehicle+"_manufacturer_code"));
+        claimDetails.selectModelBySearching(testData.getString(vehicle+"_model_code"));
+        claimDetails.selectSubmodelBySearching(testData.getString(vehicle+"_submodel_code"));
+
+        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_MANUFACTURER_AXCODE), testData.getString(vehicle+"_manufacturer_code")));
+        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_MODEL_AXCODE), testData.getString(vehicle+"_model_code")));
+        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_SUB_MODEL_AXCODE), testData.getString(vehicle+"_submodel_code")));
+    }
+
 
     public void SearchByVIN(String vin){
         claimDetails.enterVin(vin);
