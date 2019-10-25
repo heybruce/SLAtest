@@ -4,7 +4,7 @@
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
-    <test name="SLA" parallel="classes" thread-count="4">
+    <test name="SLA" parallel="classes" thread-count="1">
         <parameter name="browser" value="chrome"/>
         <parameter name="os" value="any"/>
         <parameter name="locale" value="ko-kr"/>
