@@ -4,7 +4,7 @@
         <listener class-name="utils.listeners.AnnotationTransformer"/>
         <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
-    <test name="APM" parallel="classes" thread-count="4">
+    <test name="APM" parallel="classes" thread-count="1">
         <parameter name="env" value="INT2SG"/>
         <parameter name="os" value="any"/>
         <parameter name="browser" value="chrome"/>
