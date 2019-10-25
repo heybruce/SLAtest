@@ -17,6 +17,7 @@ import pageobjects.processstep.processstep.ProcessStepJPPO;
 import pageobjects.standalone.DashboardPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
+import steps.SelectVehicle;
 import utils.RedisManager;
 import utils.UtilitiesManager;
 
@@ -101,7 +102,13 @@ public class WorkListOpenBoxJPTest extends TestBase {
         preIntakePO.enterClaimNumberTextbox(claimNumber);
         preIntakePO.clickCreateNewCaseButton();
         fluentWait(By.id(ClaimDetailsJPPO.ID_CLAIM_NUMBER));
+
         testResult.get().setTimeFinished(Instant.now());
+
+        SelectVehicle selectVehicle = new SelectVehicle();
+
+        selectVehicle.SearchBySearchTree(testData.getString("benzE_vehicle"));
+        processStepJPPO.clickDamageCaptureTab();
 
         String claimDetailUrl = getDriver().getCurrentUrl();
         String taskId = UtilitiesManager.getTaskIdFromUrl(claimDetailUrl);
