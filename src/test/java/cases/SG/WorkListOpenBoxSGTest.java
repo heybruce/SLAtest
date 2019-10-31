@@ -118,9 +118,8 @@ public class WorkListOpenBoxSGTest extends TestBase {
         else {
             Assert.fail("Task ID is empty");
         }
-        Assert.assertNotNull(taskId);
 
-        RedisManager.setValue(taskIdKey, taskId);
+        Assert.assertNotNull(taskId);
         logger.debug("taskIdKey: " + taskIdKey);
         logger.debug("taskId: " + taskId);
 
