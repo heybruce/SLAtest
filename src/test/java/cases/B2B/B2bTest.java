@@ -105,6 +105,9 @@ public class B2bTest extends B2bTestBase {
                     , testData.getString("b2b_taskXml_200part"), testData.getString("b2b_url"));
             RedisManager.setValue(taskIdKey, taskId);
             testResultB2b.get().setSuccess(true);
+
+            logger.debug("taskIdKey: " + taskIdKey);
+            logger.debug("taskId: " + taskId);
         }
         catch(B2bException e) {
             logger.error("Error executing B2B request", e);
@@ -125,6 +128,9 @@ public class B2bTest extends B2bTestBase {
                     , testData.getString("b2b_taskXml_100part"), testData.getString("b2b_url"));
             RedisManager.setValue(taskIdKey, taskId);
             testResultB2b.get().setSuccess(true);
+
+            logger.debug("taskIdKey: " + taskIdKey);
+            logger.debug("taskId: " + taskId);
         }
         catch(B2bException e) {
             logger.error("Error executing B2B request", e);
@@ -139,6 +145,7 @@ public class B2bTest extends B2bTestBase {
     public void getTaskTwVolvoClaimClosedFolderTest() {
         Task response = b2bClient.getTaskTwVolvo(testData.getString("qw_b2b_loginId"),
                 testData.getString("qw_b2b_claimNumber_claimInClosedFolder"), testData.getString("qw_b2b_url"));
+        logger.debug(response.getResultMsg());
         Assert.assertEquals(response.getResultCode(), 0);
         Assert.assertEquals(response.getResultMsg(), "下载定损单成功");
     }
@@ -151,6 +158,7 @@ public class B2bTest extends B2bTestBase {
                 , testData.getString("qw_b2b_plateNumber")
                 , testData.getString("qw_b2b_insuranceName")
                 , testData.getString("qw_b2b_url"));
+        logger.debug(response.getResultMsg());
         Assert.assertEquals(response.getResultCode(), 1);
         Assert.assertEquals(response.getResultMsg(), "上传成功");
     }
@@ -158,19 +166,19 @@ public class B2bTest extends B2bTestBase {
     @Test
     public void autolineExportTest() {
         String response = soapManager.sendRequest(testData.getString("autoline_export"), testData.getString("autoline_url"));
-        System.out.println(response);
+        logger.debug(response);
     }
 
     @Test
     public void autolineTaskListTest() {
         String response = soapManager.sendRequest(testData.getString("autoline_tasklist"), testData.getString("autoline_url"));
-        System.out.println(response);
+        logger.debug(response);
     }
 
     @Test
     public void autolineImportTest() {
         String response = soapManager.sendRequest(testData.getString("autoline_import"), testData.getString("autoline_url"));
-        System.out.println(response);
+        logger.debug(response);
     }
 
 }
