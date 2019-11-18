@@ -59,7 +59,7 @@ public class TestBase extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public synchronized void beforeMethod(Method method, ITestContext context) {
-        logger.debug("Ready to start test method - " + method.getName());
+        logger.debug("********** Ready to start test method - " + method.getName() + " **********");
         WebDriverFactory.setDriver(context);
 
         //Selenium grid
@@ -78,7 +78,7 @@ public class TestBase extends AbstractTestNGSpringContextTests {
 
     @AfterMethod
     public synchronized void afterMethod(Method method, ITestResult result) {
-        logger.debug("Finish up test method - " + method.getName());
+        logger.debug("********** Finish up test method - " + method.getName() + " **********");
         testResult.get().setTimeElapsed(Duration.between(testResult.get().getTimeStarted(), testResult.get().getTimeFinished()).toMillis());
         testResult.get().setSuccess(result.isSuccess());
 
