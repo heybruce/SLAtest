@@ -242,28 +242,28 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.cxf</groupId>-->
-                <!--<artifactId>cxf-codegen-plugin</artifactId>-->
-                <!--<version>3.3.3</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>generate-sources</id>-->
-                        <!--<phase>generate-sources</phase>-->
-                        <!--<configuration>-->
-                            <!--<wsdlOptions>-->
-                                <!--<wsdlOption>-->
-                                    <!--<wsdl>${basedir}/src/main/resources/InterfaceService.xml</wsdl>-->
-                                    <!--<wsdlLocation>http://gw.audatex.tw/tw-volvo-gateway/services/InterfaceService?WSDL</wsdlLocation>-->
-                                <!--</wsdlOption>-->
-                            <!--</wsdlOptions>-->
-                        <!--</configuration>-->
-                        <!--<goals>-->
-                            <!--<goal>wsdl2java</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>3.3.3</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/InterfaceService.xml</wsdl>
+                                    <wsdlLocation>http://gw.audatex.tw/tw-volvo-gateway/services/InterfaceService?WSDL</wsdlLocation>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
