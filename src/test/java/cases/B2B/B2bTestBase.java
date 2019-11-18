@@ -30,6 +30,7 @@ public class B2bTestBase extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void beforeMethod(Method method, ITestContext context) {
+        logger.debug("********** Ready to start test method - " + method.getName() + " **********");
         TestResult result = new TestResult();
         result.setTestName(method.getName());
         result.setBrowser(context.getCurrentXmlTest().getLocalParameters().get("browser"));
@@ -40,6 +41,7 @@ public class B2bTestBase extends AbstractTestNGSpringContextTests {
 
     @AfterMethod
     public synchronized void afterMethod(Method method) {
+        logger.debug("********** Finish up test method - " + method.getName() + " **********");
         testResultB2b.get().setTimeElapsed(Duration.between(testResultB2b.get().getTimeStarted(), testResultB2b.get().getTimeFinished()).toMillis());
  //       UtilitiesManager.createJsonFile(method.getName(), testResultB2b);
 
