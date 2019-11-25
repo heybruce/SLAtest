@@ -5,7 +5,7 @@
         <listener class-name="utils.listeners.SlackListener"/>
     </listeners>
     <test name="APM" parallel="classes" thread-count="1">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="firefox"/>
         <parameter name="os" value="mac"/>
         <parameter name="locale" value="en-us"/>
         <parameter name="type" value="SLA"/>
