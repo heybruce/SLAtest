@@ -48,6 +48,7 @@ public class B2bTest extends B2bTestBase {
             testResultB2b.get().setTimeStarted(Instant.now());
             String response = b2bClient.getTask(testData.getString("b2b_loginId"), testData.getString("b2b_password")
                     , taskId,testData.getString("b2b_responseStylesheet") ,testData.getString("b2b_url"));
+            logger.debug(response);
             testResultB2b.get().setSuccess(true);
         }
         catch(B2bException e) {
