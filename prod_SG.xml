@@ -33,7 +33,7 @@
             <class name="cases.SG.Qapter.QapterTest">
                 <methods>
                     <include name="switchTo3D"/>
-                    <include name="selectPart"/>
+                    <!--<include name="selectPart"/>-->
                     <include name="loadZoneIn3dView"/>
                     <include name="activateQapterIn3dView"/>
                     <include name="switchToVehicleTabIn3dView"/>
