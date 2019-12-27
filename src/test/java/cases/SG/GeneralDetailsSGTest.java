@@ -50,7 +50,7 @@ public class GeneralDetailsSGTest extends TestBase {
 
         claimDetailsSGPO.enterVin(testData.getString("vin"));
         testResult.get().setTimeStarted(Instant.now());
-        claimDetailsSGPO.clickVinQuery();
+//        claimDetailsSGPO.clickVinQuery();
 
         //Vin details
         String vinManufacturerCodeExpected, vinModelCodeExpected, vinSubmodelCodeExpected;

@@ -49,7 +49,7 @@ public class GeneralDetailsIDTest extends TestBase {
 
         claimDetailsPO.enterVin(testData.getString("benzS_vin"));
         testResult.get().setTimeStarted(Instant.now());
-        claimDetailsPO.clickVinQuery();
+//        claimDetailsPO.clickVinQuery();
 
         //Vin details
         String vinManufacturerCodeExpected, vinModelCodeExpected, vinSubmodelCodeExpected;

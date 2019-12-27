@@ -49,7 +49,7 @@ public class ClaimDetailsTest extends TestBase {
 
         claimDetailsKRPO.enterVin(testData.getString("vin"));
         testResult.get().setTimeStarted(Instant.now());
-        claimDetailsKRPO.clickVinQuery();
+//        claimDetailsKRPO.clickVinQuery();
 
         //Vin details
         String vinManufacturerCodeExpected, vinModelCodeExpected, vinSubmodelCodeExpected;

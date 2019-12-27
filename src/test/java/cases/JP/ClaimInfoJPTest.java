@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import pageobjects.processstep.claimdetails.ClaimDetailsJPPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
+import steps.SelectVehicle;
 import utils.RedisManager;
 import utils.UtilitiesManager;
 
@@ -47,8 +48,7 @@ public class ClaimInfoJPTest extends TestBase {
 
         claimDetailsJPPO.enterVin(testData.getString("vin"));
         testResult.get().setTimeStarted(Instant.now());
-        claimDetailsJPPO.clickVinQuery();
-
+//        claimDetailsJPPO.clickVinQuery();
 
         //Vin details
         String vinManufacturerCodeExpected, vinModelCodeExpected, vinSubmodelCodeExpected;

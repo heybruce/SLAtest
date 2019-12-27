@@ -80,7 +80,7 @@ public class ChecklistTest extends TestBase {
 
         testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.switchToQapterIframe();
-        damageCapturingPO.navigationChecklist();
+        damageCapturingPO.navigationChecklist(200);
         testResult.get().setTimeFinished(Instant.now());
 
         int checklistNumber = damageCapturingPO.getChecklistNumber();
@@ -102,7 +102,7 @@ public class ChecklistTest extends TestBase {
 
         testResult.get().setTimeStarted(Instant.now());
         damageCapturingPO.switchToQapterIframe();
-        damageCapturingPO.navigationChecklist();
+        damageCapturingPO.navigationChecklist(200);
         testResult.get().setTimeFinished(Instant.now());
 
         int checklistNumber = damageCapturingPO.getChecklistNumber();
