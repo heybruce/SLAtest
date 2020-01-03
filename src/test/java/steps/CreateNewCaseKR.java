@@ -1,20 +1,14 @@
 package steps;
 
 import cases.TestBase;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.PreIntakePO;
 import pageobjects.processstep.AttachmentsRepairerPO;
-import pageobjects.processstep.processstep.ProcessStepKRPO;
 import pageobjects.processstep.ReportsPO;
 import pageobjects.processstep.claimdetails.ClaimDetailsKRPO;
+import pageobjects.processstep.processstep.ProcessStepKRPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import utils.UtilitiesManager;
-
-import java.io.File;
-import java.net.URISyntaxException;
 
 import static utils.webdrivers.WebDriverFactory.getDriver;
 

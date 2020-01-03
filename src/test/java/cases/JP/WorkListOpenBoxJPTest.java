@@ -1,9 +1,11 @@
 package cases.JP;
 
 import cases.TestBase;
-import com.aventstack.extentreports.Status;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -12,12 +14,10 @@ import org.testng.annotations.Test;
 import pageobjects.LoginPO;
 import pageobjects.PreIntakePO;
 import pageobjects.processstep.claimdetails.ClaimDetailsJPPO;
-import pageobjects.processstep.claimdetails.ClaimDetailsKRPO;
 import pageobjects.processstep.processstep.ProcessStepJPPO;
 import pageobjects.standalone.DashboardPO;
 import pageobjects.worklistgrid.WorkListGridOpenPO;
 import steps.Login;
-import steps.SelectVehicle;
 import utils.RedisManager;
 import utils.UtilitiesManager;
 
@@ -35,6 +35,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
     private WorkListGridOpenPO workListGridOpenPO = new WorkListGridOpenPO();
     private ProcessStepJPPO processStepJPPO = new ProcessStepJPPO();
     private String taskIdKey;
+    private WebDriverWait wait;
 
     @BeforeClass
     @Parameters(value = {"dataFile"})
@@ -51,6 +52,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
         workListGridOpenPO.setWebDriver(getDriver());
         processStepJPPO.setWebDriver(getDriver());
         taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
+        wait = new WebDriverWait(getDriver(), 20);
     }
 
     @Test
@@ -92,6 +94,8 @@ public class WorkListOpenBoxJPTest extends TestBase {
         Login login = new Login();
         login.LoginBRE(testData.getString("ins_username"), testData.getString("password"));
 
+        testResult.get().setTimeStarted(Instant.now());
+
         //Work List grid Open
         workListGridOpenPO.clickOpenTab();
         workListGridOpenPO.clickNewClaimButton();
@@ -103,11 +107,15 @@ public class WorkListOpenBoxJPTest extends TestBase {
         preIntakePO.clickCreateNewCaseButton();
         fluentWait(By.id(ClaimDetailsJPPO.ID_CLAIM_NUMBER));
 
-        testResult.get().setTimeFinished(Instant.now());
+        try {
+            claimDetailsJPPO.enterVin(testData.getString("vin"));
+            claimDetailsJPPO.clickVinQuery();
+        } catch (Exception e) {
+            wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsJPPO.NAME_MANUFACTURER_AXCODE), testData.getString("benzE_manufacturer_code")));
+            wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsJPPO.NAME_MODEL_AXCODE), testData.getString("benzE_model_code")));
+            wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsJPPO.NAME_SUB_MODEL_AXCODE), testData.getString("benzE_submodel_code")));
+        }
 
-        SelectVehicle selectVehicle = new SelectVehicle();
-
-        selectVehicle.SearchBySearchTree(testData.getString("benzE_vehicle"));
         processStepJPPO.clickDamageCaptureTab();
 
         String claimDetailUrl = getDriver().getCurrentUrl();
@@ -122,23 +130,6 @@ public class WorkListOpenBoxJPTest extends TestBase {
         Assert.assertNotNull(taskId);
         logger.debug("taskIdKey: " + taskIdKey);
         logger.debug("taskId: " + taskId);
-
-//        //Check claim is in Open box
-//        processStepJPPO.clickClaimManager();
-//        workListGridOpenPO.clickOpenTab();
-//        workListGridOpenPO.sortCreationDate();
-//        Assert.assertTrue(workListGridOpenPO.isClaimNumberExist(claimNumber));
-//
-//        //Logout
-//        processStepJPPO.openCollapsedMenu();
-//        if (isElementPresent(By.id("logout"))) {
-//            workListGridOpenPO.clickLogout();
-//        } else {
-//            processStepJPPO.clickNavigationActions();
-//            workListGridOpenPO.clickLogout();
-//        }
-//
-//        Assert.assertFalse(isAlertPresent());
     }
 
 }

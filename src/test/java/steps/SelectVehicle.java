@@ -3,6 +3,8 @@ package steps;
 import cases.TestBase;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.processstep.claimdetails.ClaimDetailsPO;
@@ -44,11 +46,9 @@ public class SelectVehicle extends TestBase {
 
         claimDetails.clickVinQuery();
 
-        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_MANUFACTURER_AXCODE), testData.getString("vin_manufacturer_code")));
-        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_MODEL_AXCODE), testData.getString("vin_model_code")));
-        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_SUB_MODEL_AXCODE), testData.getString("vin_submodel_code")));
-        wait.until(ExpectedConditions.elementToBeClickable(By.id(ClaimDetailsPO.ID_MANUFACTURER)));
-        wait.until(ExpectedConditions.elementToBeClickable(By.id(ClaimDetailsPO.ID_MODEL)));
-        wait.until(ExpectedConditions.elementToBeClickable(By.id(ClaimDetailsPO.ID_SUB_MODEL)));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(ClaimDetailsPO.ID_ERROR_NOTIFICATION));
+        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_MANUFACTURER_AXCODE), testData.getString("benzE_manufacturer_code")));
+        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_MODEL_AXCODE), testData.getString("benzE_model_code")));
+        wait.until(ExpectedConditions.textToBePresentInElementValue(By.name(ClaimDetailsPO.NAME_SUB_MODEL_AXCODE), testData.getString("benzE_submodel_code")));
     }
 }
