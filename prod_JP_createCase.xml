@@ -7,7 +7,7 @@
     <test name="SLA" parallel="classes" thread-count="1">
         <parameter name="env" value="PRODSG"/>
         <parameter name="os" value="windows"/>
-        <parameter name="browser" value="firefox"/>
+        <parameter name="browser" value="chrome"/>
         <parameter name="locale" value="ja-jp"/>
         <parameter name="type" value="APM"/>
         <parameter name="country" value="JP"/>
