@@ -82,7 +82,7 @@ public class TestBase extends AbstractTestNGSpringContextTests {
         testResult.get().setTimeElapsed(Duration.between(testResult.get().getTimeStarted(), testResult.get().getTimeFinished()).toMillis());
         testResult.get().setSuccess(result.isSuccess());
 
-        WebDriverFactory.getDriver().manage().deleteAllCookies();
+      //  WebDriverFactory.getDriver().manage().deleteAllCookies();
 
        // UtilitiesManager.createJsonFile(method.getName(), testResult.get());
         //Send test result to Kibana server
