@@ -52,7 +52,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
         workListGridOpenPO.setWebDriver(getDriver());
         processStepJPPO.setWebDriver(getDriver());
         taskIdKey = testResult.get().getEnv() + "_" + testResult.get().getCountry() + "_taskId";
-        wait = new WebDriverWait(getDriver(), 20);
+
     }
 
     @Test
@@ -89,6 +89,7 @@ public class WorkListOpenBoxJPTest extends TestBase {
     @Test(description = "Create case from header right top button")
     public void createNewCaseFromHeader(){
         getDriver().get(testData.getString("test_url"));
+        wait = new WebDriverWait(getDriver(), 20);
 
         //Login
         Login login = new Login();
